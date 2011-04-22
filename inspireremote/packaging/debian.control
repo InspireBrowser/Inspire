@@ -1,0 +1,13 @@
+Source: inspireremote
+Section: web
+Priority: extra
+Maintainer: Mike Ditum <mike@mikeditum.co.uk>
+Build-Depends: debhelper (>= 7.0.50~), libqt4-dev
+Standards-Version: 3.8.4
+Homepage: http://www.mikeditum.co.uk
+
+Package: inspireremote
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, libqt4-network
+Description: A command line remote control application for the Inspire Browser
+ Allows the ability to remote control instances of the InspireBrowser across the network

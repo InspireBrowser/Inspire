@@ -1,0 +1,13 @@
+Source: inspirebrowser
+Section: web
+Priority: extra
+Maintainer: Mike Ditum <mike@mikeditum.co.uk>
+Build-Depends: debhelper (>= 7.0.50~), libvlc-dev, libqtwebkit-dev
+Standards-Version: 3.8.4
+Homepage: http://www.mikeditum.co.uk
+
+Package: inspirebrowser
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, libvlc5, libqt4-webkit
+Description: A web browser designed for STB and Kiosk environments
+ Inspire Browser is a Webkit based browser designed for STB and Kiosk based environments. It provides a powerful javascript API for controlling the browser and displaying video and audio content from numerous sources including igmp and rtsp.

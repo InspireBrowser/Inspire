@@ -77,8 +77,8 @@ INCLUDEPATH += .
 	
 #define the win32 VLC includes and libs
 win32 {
-	INCLUDEPATH += dependencies\\win32\\vlc-1.1.8\\sdk\\include
-	LIBS += -Ldependencies\\win32\\vlc-1.1.8\\sdk\\lib
+	INCLUDEPATH += dependencies\\win32\\vlc-1.1.9\\sdk\\include
+	LIBS += -Ldependencies\\win32\\vlc-1.1.9\\sdk\\lib
 	LIBS += -lvlc
 }
 
@@ -89,8 +89,8 @@ unix {
 
 #define the OSX VLC includes and libs
 macx {
-	INCLUDEPATH += dependencies/osx/vlc-1.1.8/Contents/MacOS/include
-	LIBS += -Ldependencies/osx/vlc-1.1.8/Contents/MacOS/lib
+	INCLUDEPATH += dependencies/osx/vlc-1.1.9/Contents/MacOS/include
+	LIBS += -Ldependencies/osx/vlc-1.1.9/Contents/MacOS/lib
 	LIBS += -lvlc
 }
 

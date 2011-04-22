@@ -2,7 +2,7 @@ REM -- Batch file to download and setup the Windows Dependencies --
 @echo off
 
 set RELEASE=nightlies
-set VLC_VERSION=vlc-1.1.8
+set VLC_VERSION=vlc-1.1.9
 set LIBQXT_VERSION=libqxt-v0.6.1
 set QT_VERSION=4.7.0
 

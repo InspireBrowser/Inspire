@@ -33,10 +33,6 @@
 #include <QWebFrame>
 #include <QDesktopServices>
 
-#include "JSBinding/ISystemJSBinding.h"
-#include "JSBinding/IBrowserJSBinding.h"
-#include "JSBinding/IVideoJSBinding.h"
-
 /*! @brief Creates an InspireWebView widget
  *  @param parent The parent widget
  */
@@ -59,10 +55,7 @@ InspireWebView::InspireWebView(QWidget *parent) :
 
     connect(this->page()->mainFrame(), SIGNAL(javaScriptWindowObjectCleared()), this, SLOT(addJavascriptObjectsToFrame()));
 
-    //initialise the extra Inspire JS Subsystems
-    this->_iSystem = new ISystemJSBinding(this);
-    this->_iBrowser = new IBrowserJSBinding(this);
-    this->_iVideo = new IVideoJSBinding(this);
+    #warning TODO: Add functions for registering JavaScript plugins
 }
 
 /*! @brief Returns whether the background of the web view is transparent or not
@@ -106,9 +99,7 @@ void InspireWebView::addJavascriptObjectsToFrame()
 
         if(!match)
             return;
-    }
 
-    frame->addToJavaScriptWindowObject("ISystem", this->_iSystem);
-    frame->addToJavaScriptWindowObject("IBrowser", this->_iBrowser);
-    frame->addToJavaScriptWindowObject("IVideo", this->_iVideo);
+	#warning TODO: Add registered javascript plugins
+    }
 }

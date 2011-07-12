@@ -6,11 +6,15 @@
 bool CommandServerPlugin::InitialisePlugin()
 {
 	qxtLog->info("Initialising " + this->GetName());
+
+	#warning TODO: Start the command server listening
+	#warning TODO: Add Config check to see if we should start listening
 	return true;
 }
 
 bool CommandServerPlugin::DeInitialisePlugin()
 {
+	#warning TODO: Stop the command server listening
 	return true;
 }
 

@@ -37,7 +37,8 @@
 
 #include "RemoteCommand.h"
 #include "MainWindow.h"
-#include "JSBinding/ISystemJSBinding.h"
+#include "CommandServerPlugin.h"
+#include "../systemjs/ISystemJSBinding.h"
 
 /*! @brief Creates the CommandServer
  *  @param parent The parent object
@@ -99,9 +100,15 @@ void CommandServer::handleGetOsCommand(RemoteCommand *command)
     if(command->command() != "GET_OS")
         return;
 
-    MainWindow* window = qobject_cast<MainWindow*>(this->parent());
-    QString os = window->webView()->iSystem()->operatingSystem();
-    command->setResponse(true, os);
+    CommandServerPlugin* csPlugin = qobject_cast<CommandServerPlugin*>(this->getParent());
+    if(csPlugin) {
+	    PluginManager* manager = csPlugin->GetPluginManager();
+	    if(manager->IsPluginLoaded("systemjs")) {
+		    SystemJSPlugin* plugin = qobject_cast<SystemJSPlugin*>(manager->GetPlugin("systemjs"));
+		    QString os = plugin->GetJsBinding()->operatingSystem();
+		    command->setResponse(true, os);
+	    }
+    }
 }
 
 /*! @brief Handles the GET_MAC_ADDRESS command

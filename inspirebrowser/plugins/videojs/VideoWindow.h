@@ -34,7 +34,7 @@
 #include <QRect>
 #include <QxtLogger>
 
-#include "IJSBinding.h"
+#include "JSBinding/IJSBinding.h"
 
 class QVlcPlayer;
 

@@ -57,20 +57,7 @@ public:
      */
     void setBackgroundIsTransparent(bool value);
 
-    /*! @brief Returns the System JS Binding for this Web View
-     *  @return The System JS Binding for this Web View
-     */
-    ISystemJSBinding* iSystem() { return _iSystem; }
-
-    /*! @brief Returns the Browser JS Binding for this Web View
-     *  @return The Browser JS Binding for this Web View
-     */
-    IBrowserJSBinding* iBrowser() { return _iBrowser; }
-
-    /*! @brief Returns the Video JS Binding for this Web View
-     *  @return The Video JS Binding for this Web View
-     */
-    IVideoJSBinding* iVideo() { return _iVideo; }
+    #warning TODO: Add functions for getting and adding javascript plugins
 
 signals:
 
@@ -79,12 +66,6 @@ public slots:
 private:
     /*! @brief Whether the background of the webview is transparent or not */
     bool _transparentBackground;
-    /*! @brief The System Javascript Binding interface to be added to the web view */
-    ISystemJSBinding *_iSystem;
-    /*! @brief The Browser Javascript Binding interface to be added to the web view */
-    IBrowserJSBinding *_iBrowser;
-    /*! @brief The Video Javascript Binding interface to be added to the web view */
-    IVideoJSBinding *_iVideo;
 
 private slots:
     /*! @brief Adds the javascript binding objects to the current webview */

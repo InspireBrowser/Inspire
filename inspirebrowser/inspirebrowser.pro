@@ -5,4 +5,5 @@
 TEMPLATE = subdirs
 
 # Directories
-SUBDIRS += browser plugins 
+SUBDIRS += browser
+SUBDIRS += plugins 

@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui webkit network
+QT       += core gui webkit
 
 TARGET = inspirebrowser
 TEMPLATE = app
@@ -21,12 +21,19 @@ VERSION_MAJOR = 0
 VERSION_MINOR = 0
 VERSION_PATCH = 1
 
-REVISION = $$system(svnversion)
 VERSION = '$${VERSION_MAJOR}.$${VERSION_MINOR}.$${VERSION_PATCH}'
-VERSTR = '\\"$${VERSION}.$${REVISION}\\"'
 
-#if we are a packaged version then there is no svn revision
-equals(REVISION, exported) | equals(REVISION, ''){
+# if we are creating nightlies append the current date to the version
+CONFIG(nightlies) {
+	win32 {
+		REVISION = $$system(%date:~10%%date:~4,2%%date:~7,2%)
+	}
+	!win32 {
+		REVISION = $$system(date +%Y%m%d)
+	}
+	VERSTR = '\\"$${VERSION}.$${REVISION}\\"'
+}
+!CONFIG(nightlies) {
         VERSTR = '\\"$${VERSION}\\"'
 }
 
@@ -47,56 +54,31 @@ SOURCES += main.cpp\
     GenericLayout.cpp \
     MainWindow.cpp \
     InspireWebView.cpp \
-    JSBinding/ISystemJSBinding.cpp \
-    JSBinding/IBrowserJSBinding.cpp \
-    JSBinding/IVideoJSBinding.cpp \
     JSBinding/IJSBinding.cpp \
-    JSBinding/VideoWindow.cpp \
-    VLC/QVlcPlayer.cpp \
-    RemoteCommand.cpp \
-    CommandServer.cpp \
-    CommandSocket.cpp
+    PluginManager.cpp
 
 HEADERS  += MainWindow.h \
     GenericLayout.h \
     InspireWebView.h \
-    JSBinding/ISystemJSBinding.h \
-    JSBinding/IBrowserJSBinding.h \
-    JSBinding/IVideoJSBinding.h \
     JSBinding/IJSBinding.h \
-    JSBinding/VideoWindow.h \
-    VLC/QVlcPlayer.h \
-    RemoteCommand.h \
-    CommandServer.h \
-    CommandSocket.h
+    GenericPlugin.h \
+    PluginManager.h
 
 RESOURCES += \
     InspireBrowser.qrc
 
 INCLUDEPATH += .
-	
-#define the win32 VLC includes and libs
-win32 {
-	INCLUDEPATH += dependencies\\win32\\vlc-1.1.9\\sdk\\include
-	LIBS += -Ldependencies\\win32\\vlc-1.1.9\\sdk\\lib
-	LIBS += -lvlc
-}
-
-#define the unix VLC includes and libs
-unix {
-	LIBS += -lvlc
-}
-
-#define the OSX VLC includes and libs
-macx {
-	INCLUDEPATH += dependencies/osx/vlc-1.1.9/Contents/MacOS/include
-	LIBS += -Ldependencies/osx/vlc-1.1.9/Contents/MacOS/lib
-	LIBS += -lvlc
-}
 
 # INSTALL INFORMATION
 unix {
 	executable.path = /usr/bin/
 	executable.files = $$TARGET
 	INSTALLS += executable
+}
+
+win32 {
+	CONFIG(debug, release|debug) : DESTDIR = ../debug/
+	CONFIG(release, release|debug) : DESTDIR = ../release/
+} else {
+	DESTDIR = ../
 }

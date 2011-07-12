@@ -29,7 +29,7 @@
 #ifndef ISYSTEMJSBINDING_H
 #define ISYSTEMJSBINDING_H
 
-#include "IJSBinding.h"
+#include "JSBinding/IJSBinding.h"
 #include <QCoreApplication>
 #include <QxtLogger>
 

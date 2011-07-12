@@ -29,7 +29,7 @@
 #ifndef IBROWSERJSBINDING_H
 #define IBROWSERJSBINDING_H
 
-#include "IJSBinding.h"
+#include "JSBinding/IJSBinding.h"
 
 class RemoteCommand;
 

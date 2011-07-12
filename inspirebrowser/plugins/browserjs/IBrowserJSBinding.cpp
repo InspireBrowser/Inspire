@@ -33,8 +33,8 @@
 #include <QToolBar>
 
 #include "MainWindow.h"
-#include "CommandServer.h"
-#include "RemoteCommand.h"
+#include "../commandserver/CommandServer.h"
+#include "../commandserver/RemoteCommand.h"
 
 /*! @brief  Constructor for creating the Browser Javascript Binding
  *  @param  parent  The parent object
@@ -42,8 +42,9 @@
 IBrowserJSBinding::IBrowserJSBinding(QObject *parent) :
         IJSBinding(parent)
 {
-    connect(this->GetMainWindow()->commandServer(), SIGNAL(commandReceived(RemoteCommand*)), this, SLOT(handleDataCommand(RemoteCommand*)));
-    connect(this->GetMainWindow()->commandServer(), SIGNAL(commandReceived(RemoteCommand*)), this, SLOT(handleChangePageCommand(RemoteCommand*)));
+    #warning TODO: Connect up handling of commands if commandserver plugin is loaded
+    //connect(this->GetMainWindow()->commandServer(), SIGNAL(commandReceived(RemoteCommand*)), this, SLOT(handleDataCommand(RemoteCommand*)));
+    //connect(this->GetMainWindow()->commandServer(), SIGNAL(commandReceived(RemoteCommand*)), this, SLOT(handleChangePageCommand(RemoteCommand*)));
 }
 
 /*! @brief  Returns whether the browser has spatial navigation enabled or not

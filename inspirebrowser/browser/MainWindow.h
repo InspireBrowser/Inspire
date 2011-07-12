@@ -39,7 +39,7 @@ class QLineEdit;
 class QToolBar;
 class QWebView;
 class GenericLayout;
-class CommandServer;
+class PluginManager;
 
 /*! @brief The main window used by InspireBrowser
  *         Handles the toolbar, menubar, tab bar and status bar.
@@ -59,10 +59,7 @@ public:
          */
         QLayout* layout(){return this->_mainLayout;}
 
-        /*! @brief Returns the command server used by the application
-         *  @return The command server used by the application
-         */
-        CommandServer* commandServer() { return _commandServer; }
+	#warning TODO: Add function for getting the plugin manager
 
         /*! @brief Returns the Web View object used in the browser
          *  @return The Web View object used in the browser
@@ -89,10 +86,10 @@ private:
          */
         void updateActions(bool isLoading);
 
-        /*! @brief Handles the receiving of commands remotely */
-        CommandServer* _commandServer;
         /*! @brief The web view for the main area */
         InspireWebView* _webView;
+	/*! @brief The system for handling loading and unloading plugins */
+	PluginManager* _pluginManager;
         /*! @brief The windows layout manager */
         QLayout* _mainLayout;
 

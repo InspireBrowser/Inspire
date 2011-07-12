@@ -29,7 +29,7 @@
 #ifndef IVIDEOJSBINDING_H
 #define IVIDEOJSBINDING_H
 
-#include "IJSBinding.h"
+#include "JSBinding/IJSBinding.h"
 #include <QxtLogger>
 
 class VideoWindow;

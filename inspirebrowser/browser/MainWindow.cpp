@@ -34,7 +34,7 @@
 #include "GenericLayout.h"
 
 #include "MainWindow.h"
-#include "CommandServer.h"
+#include "PluginManager.h"
 
 /*! @brief Constructs the main window for the Inspire Browser
  *  @param parent The parent widget
@@ -42,11 +42,9 @@
 MainWindow::MainWindow(QWidget* parent) :
         QMainWindow(parent)
 {
-    //set up the command server
-    _commandServer = new CommandServer(this);
-    #warning TODO: Add Config check to see if we should start listening
-    if(true)
-        _commandServer->startListening();
+    //initialise the plugin manager and load all plugins
+    _pluginManager = new PluginManager(this);
+    _pluginManager->LoadPlugins();
 
     _webView = new InspireWebView(this);
     _webView->page()->setLinkDelegationPolicy(QWebPage::DelegateAllLinks);

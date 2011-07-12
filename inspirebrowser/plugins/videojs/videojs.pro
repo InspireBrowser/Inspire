@@ -22,7 +22,7 @@ HEADERS += IVideoJSBinding.h \
     VideoJSPlugin.h \
     VLC/QVlcPlayer.h
 
-INCLUDEPATH += ../../browser/
+INCLUDEPATH += ../../inspirelib/
 DESTDIR = ../../plugins
 	
 #define the win32 VLC includes and libs

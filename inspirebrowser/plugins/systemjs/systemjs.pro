@@ -18,7 +18,7 @@ SOURCES += SystemJSPlugin.cpp \
 HEADERS += SystemJSPlugin.h \
     ISystemJSBinding.h
 
-INCLUDEPATH += ../../browser/
+INCLUDEPATH += ../../inspirelib/
 DESTDIR = ../../plugins
 	
 # INSTALL INFORMATION

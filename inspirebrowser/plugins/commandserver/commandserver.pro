@@ -22,7 +22,7 @@ HEADERS += CommandServer.h \
     RemoteCommand.h \
     CommandServerPlugin.h
 
-INCLUDEPATH += ../../browser/
+INCLUDEPATH += ../../inspirelib/
 DESTDIR = ../../plugins
 	
 # INSTALL INFORMATION

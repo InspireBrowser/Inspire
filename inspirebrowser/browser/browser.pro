@@ -50,22 +50,14 @@ VERSION = '-$${VERSION}'
 DISTFILES += license images/*
 DISTFILES += packaging/*
 
-SOURCES += main.cpp\
-    GenericLayout.cpp \
-    MainWindow.cpp \
-    InspireWebView.cpp \
-    JSBinding/IJSBinding.cpp \
-    PluginManager.cpp
-
-HEADERS  += MainWindow.h \
-    GenericLayout.h \
-    InspireWebView.h \
-    JSBinding/IJSBinding.h \
-    GenericPlugin.h \
-    PluginManager.h
+SOURCES += main.cpp
 
 RESOURCES += \
     InspireBrowser.qrc
+
+INCLUDEPATH += ../inspirelib
+LIBS += -L../
+LIBS += -linspirelib
 
 INCLUDEPATH += .
 

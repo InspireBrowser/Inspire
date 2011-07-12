@@ -18,7 +18,7 @@ SOURCES += IBrowserJSBinding.cpp \
 HEADERS += IBrowserJSBinding.h \
     BrowserJSPlugin.h
 
-INCLUDEPATH += ../../browser/
+INCLUDEPATH += ../../inspirelib/
 DESTDIR = ../../plugins
 	
 # INSTALL INFORMATION

@@ -5,5 +5,6 @@
 TEMPLATE = subdirs
 
 # Directories
+SUBDIRS += inspirelib
 SUBDIRS += browser
 SUBDIRS += plugins 

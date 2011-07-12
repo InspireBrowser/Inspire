@@ -5,4 +5,5 @@
 TEMPLATE = subdirs
 
 # Directories
-SUBDIRS += inspirebrowser inspireremote
+SUBDIRS += inspirebrowser
+SUBDIRS += inspireremote

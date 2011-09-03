@@ -4,7 +4,7 @@
 #include <QObject>
 #include "GenericPlugin.h"
 
-class VideoJSPlugin : public QObject, GenericPlugin
+class VideoJSPlugin : public GenericPlugin
 {
 	Q_OBJECT
 	Q_INTERFACES(GenericPlugin)

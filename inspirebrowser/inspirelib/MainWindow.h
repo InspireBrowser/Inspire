@@ -59,7 +59,7 @@ public:
          */
         QLayout* layout(){return this->_mainLayout;}
 
-	#warning TODO: Add function for getting the plugin manager
+        #warning TODO: Add function for getting the plugin manager
 
         /*! @brief Returns the Web View object used in the browser
          *  @return The Web View object used in the browser

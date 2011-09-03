@@ -3,7 +3,7 @@
 
 #include "GenericPlugin.h"
 
-class CommandServerPlugin : public QObject, GenericPlugin
+class CommandServerPlugin : public GenericPlugin
 {
 	Q_OBJECT
 	Q_INTERFACES(GenericPlugin)

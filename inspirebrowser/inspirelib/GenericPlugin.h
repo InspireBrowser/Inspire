@@ -1,11 +1,19 @@
 #ifndef GENERIC_PLUGIN_H
 #define GENERIC_PLUGIN_H
 
+#include <QObject>
 #include <QString>
 
-class GenericPlugin
+#include "InspireWebView.h"
+
+class PluginManager;
+
+class GenericPlugin : public QObject
 {
+    Q_OBJECT
+
 public:
+	explicit GenericPlugin(QObject* parent = 0);
 	virtual ~GenericPlugin() {}
 
 	virtual bool InitialisePlugin() = 0;
@@ -14,6 +22,9 @@ public:
 	virtual QString GetId() = 0;
 	virtual QString GetName() = 0;
 	virtual QString GetDescription() = 0;
+
+    PluginManager* GetPluginManager();
+    InspireWebView* GetWebView();
 };
 
 Q_DECLARE_INTERFACE(GenericPlugin, "org.inspirebrowser.Plugins.GenericPlugin/1.0");

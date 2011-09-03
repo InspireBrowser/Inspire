@@ -4,7 +4,7 @@
 #include <QObject>
 #include "GenericPlugin.h"
 
-class SystemJSPlugin : public QObject, GenericPlugin
+class SystemJSPlugin : public GenericPlugin
 {
 	Q_OBJECT
 	Q_INTERFACES(GenericPlugin)

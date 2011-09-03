@@ -21,6 +21,17 @@ void PluginManager::LoadPlugins()
 	}
 }
 
+void PluginManager::InitialisePlugins()
+{
+    QHashIterator<QString, GenericPlugin*> i(_plugins);
+    while (i.hasNext()) {
+        i.next();
+        qxtLog->debug("Initialising Plugin " + i.key());
+        if(!i.value()->InitialisePlugin())
+            qxtLog->warning("Initialisation of plugin " + i.key() + "failed");
+    }
+}
+
 bool PluginManager::IsPluginLoaded(QString id)
 {
 	return _plugins.contains(id);
@@ -110,9 +121,8 @@ bool PluginManager::LoadPluginFromFile(QString fileName)
 	if (plugin) {
 		plugin->setParent(this);
 		GenericPlugin* pluginInstance = qobject_cast<GenericPlugin*>(plugin);
-		if (plugin) {
+                if (pluginInstance) {
 			QString id = pluginInstance->GetId();
-			pluginInstance->InitialisePlugin();
 			_plugins[id] = pluginInstance;
 			return true;
 		} else {

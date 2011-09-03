@@ -16,6 +16,7 @@ public:
 	explicit PluginManager(QObject* parent = 0);
 
 	void LoadPlugins();
+        void InitialisePlugins();
 
 	bool IsPluginLoaded(QString id);
 	GenericPlugin* GetPlugin(QString id);

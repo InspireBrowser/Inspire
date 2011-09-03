@@ -66,6 +66,9 @@ MainWindow::MainWindow(QWidget* parent) :
 
     loadHomePage();
     setWindowIcon(QIcon(":/images/mainIcon.png"));
+
+    //now we've created everything, initialise all the plugins
+    _pluginManager->InitialisePlugins();
 }
 
 /*! @brief Creates the actions that are used by the menus, toolbars and context menus

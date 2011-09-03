@@ -31,10 +31,9 @@
 #define INSPIREWEBVIEW_H
 
 #include <QWebView>
+#include <QHash>
 
-class ISystemJSBinding;
-class IBrowserJSBinding;
-class IVideoJSBinding;
+class IJSBinding;
 
 /*! @brief WebView widget for the Inspire Browser
  *         Contains some enhancements to the default WebView for use by Inspire
@@ -57,7 +56,31 @@ public:
      */
     void setBackgroundIsTransparent(bool value);
 
-    #warning TODO: Add functions for getting and adding javascript plugins
+    /*! @brief Adds a Javascript Binding Object to list of binding objects that 
+     *         the web view can add.
+     *  @param name The name of the binding to add
+     *  @param binding The binding object to add to the web view
+     */
+    void addJavascriptBinding(QString name, IJSBinding* binding);
+
+    /*! @brief Removes a Javascript binding object from the list of objects to add
+     *  @param name The name of the binding
+     *  @return Whether the binding existed or not and was thus removed
+     */
+    bool removeJavascriptBinding(QString name);
+
+    /*! @brief Returns whether the Javascript binding exists or not
+     *  @param name The name of the binding
+     *  @return Whether the Javascript binding exists or not
+     */
+    bool hasJavascriptBinding(QString name);
+
+    /*! @brief Returns a Javascript binding object that has been registered with 
+     *         the web view
+     *  @param name The name of the binding
+     *  @return The Javascript Binding object or a null point if it doesn't exist
+     */
+    IJSBinding* getJavascriptBinding(QString name);
 
 signals:
 
@@ -66,6 +89,9 @@ public slots:
 private:
     /*! @brief Whether the background of the webview is transparent or not */
     bool _transparentBackground;
+
+    /*! @brief stores the javascript bindings registered with the web view */
+    QHash<QString, IJSBinding*> _bindings;
 
 private slots:
     /*! @brief Adds the javascript binding objects to the current webview */

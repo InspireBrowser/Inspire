@@ -15,14 +15,17 @@ SOURCES += GenericLayout.cpp \
     MainWindow.cpp \
     InspireWebView.cpp \
     JSBinding/IJSBinding.cpp \
-    PluginManager.cpp
+    GenericPlugin.cpp \
+    PluginManager.cpp \
+    OsUtils.cpp
 
 HEADERS  += MainWindow.h \
     GenericLayout.h \
     InspireWebView.h \
     JSBinding/IJSBinding.h \
     GenericPlugin.h \
-    PluginManager.h
+    PluginManager.h \
+    OsUtils.h
 
 INCLUDEPATH += .
 
@@ -31,4 +34,11 @@ win32 {
 	CONFIG(release, release|debug) : DESTDIR = ../release/
 } else {
 	DESTDIR = ../
+}
+
+# INSTALL INFORMATION
+unix {
+	executable.path = /usr/lib/
+	executable.files = $$TARGET
+	INSTALLS += executable
 }

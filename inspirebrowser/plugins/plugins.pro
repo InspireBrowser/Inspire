@@ -8,4 +8,4 @@ TEMPLATE = subdirs
 SUBDIRS += browserjs
 SUBDIRS += systemjs
 SUBDIRS += videojs
-#SUBDIRS += commandserver
+SUBDIRS += commandserver

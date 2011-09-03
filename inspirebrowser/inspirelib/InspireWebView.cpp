@@ -32,6 +32,9 @@
 #include <QSettings>
 #include <QWebFrame>
 #include <QDesktopServices>
+#include <QxtLogger>
+
+#include "JSBinding/IJSBinding.h"
 
 /*! @brief Creates an InspireWebView widget
  *  @param parent The parent widget
@@ -50,12 +53,11 @@ InspireWebView::InspireWebView(QWidget *parent) :
 
     this->settings()->setLocalStoragePath(QDesktopServices::storageLocation(QDesktopServices::DataLocation));
 
+    settings.setValue("browser/developerModeEnabled", true);
     if(settings.value("browser/developerModeEnabled", false).toBool())
         this->settings()->setAttribute(QWebSettings::DeveloperExtrasEnabled, true);
 
     connect(this->page()->mainFrame(), SIGNAL(javaScriptWindowObjectCleared()), this, SLOT(addJavascriptObjectsToFrame()));
-
-    #warning TODO: Add functions for registering JavaScript plugins
 }
 
 /*! @brief Returns whether the background of the web view is transparent or not
@@ -75,6 +77,52 @@ void InspireWebView::setBackgroundIsTransparent(bool value)
     this->_transparentBackground = value;
 }
 
+/*! @brief Adds a Javascript Binding Object to list of binding objects that 
+*         the web view can add.
+*  @param name The name of the binding to add
+*  @param binding The binding object to add to the web view
+*/
+void InspireWebView::addJavascriptBinding(QString name, IJSBinding* binding)
+{
+    _bindings[name] = binding;
+}
+
+/*! @brief Removes a Javascript binding object from the list of objects to add
+*  @param name The name of the binding
+*  @return Whether the binding existed or not and was thus removed
+*/
+bool InspireWebView::removeJavascriptBinding(QString name)
+{
+    if(this->hasJavascriptBinding(name)) {
+        _bindings.remove(name);
+        return true;
+    }
+    else
+        return false;
+}
+
+/*! @brief Returns whether the Javascript binding exists or not
+*  @param name The name of the binding
+*  @return Whether the Javascript binding exists or not
+*/
+bool InspireWebView::hasJavascriptBinding(QString name)
+{
+    return _bindings.contains(name);
+}
+
+/*! @brief Returns a Javascript binding object that has been registered with 
+*         the web view
+*  @param name The name of the binding
+*  @return The Javascript Binding object or a null point if it doesn't exist
+*/
+IJSBinding* InspireWebView::getJavascriptBinding(QString name)
+{
+    if(this->hasJavascriptBinding(name))
+        return _bindings.value(name);
+    else
+        return 0;
+}
+
 /*! @brief Adds the javascript binding objects to the current webview */
 void InspireWebView::addJavascriptObjectsToFrame()
 {
@@ -83,23 +131,35 @@ void InspireWebView::addJavascriptObjectsToFrame()
     QSettings settings;
 
     if(settings.value("browser/restrictJavascriptApi", false).toBool()){
+        qxtLog->debug("Restrict Javascript API is enabled to check the URL");
+
         /* If we're restricting the javascript API to a list of allowed URL's then compare
            the URL using Wildcard RegExp and if it doesn't match leave the function */
 
         bool match = false;
 
+        qxtLog->debug("Looking for " + frame->url().toString() + " in list of allowed API URLs");
         QStringList allowedUrls = settings.value("browser/allowedApiUrls").toStringList();
         for(int i=0; i<allowedUrls.count(); i++){
+            qxtLog->debug("Comparing to " + allowedUrls[i]);
             QRegExp exp(allowedUrls[i], Qt::CaseInsensitive, QRegExp::Wildcard);
             if(exp.exactMatch(frame->url().toString())){
+                qxtLog->debug("URL matches, allowing JS API");
                 match = true;
                 break;
             }
         }
 
-        if(!match)
+        if(!match) {
+            qxtLog->debug("No URLs matched. Not allowing JS API");
             return;
+        }
+    }
 
-	#warning TODO: Add registered javascript plugins
+    QHashIterator<QString, IJSBinding*> i(_bindings);
+    while (i.hasNext()) {
+        i.next();
+        qxtLog->debug("Adding JS Binding " + i.key() + " to frame");
+        frame->addToJavaScriptWindowObject(i.key(), i.value());
     }
 }

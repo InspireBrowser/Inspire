@@ -7,6 +7,7 @@
 #include "InspireWebView.h"
 
 class PluginManager;
+class MainWindow;
 
 class GenericPlugin : public QObject
 {
@@ -24,6 +25,7 @@ public:
 	virtual QString GetDescription() = 0;
 
     PluginManager* GetPluginManager();
+    MainWindow* GetMainWindow();
     InspireWebView* GetWebView();
 };
 

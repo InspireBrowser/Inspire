@@ -60,40 +60,13 @@ public:
     /*! @brief Processes a RemoteCommand
      *  @param command The command to process
      */
-    void processCommand(RemoteCommand* command);
+    void processCommand(RemoteCommand *command);
 
 private:
     /*! @brief Called when the server receives an incoming connection
      *  @param handle The connection handle to use
      */
     void incomingConnection(int handle);
-
-signals:
-    /*! @brief Emitted to indicate that a command has been received
-     *  @param command The command that has been received
-     */
-    void commandReceived(RemoteCommand* command);
-
-private slots:
-    /*! @brief Handles the GET_VERSION command
-     *  @param command The command to handle
-     */
-    void handleGetVersionCommand(RemoteCommand* command);
-
-    /*! @brief Handles the GET_OS command
-     *  @param command The command to handle
-     */
-    void handleGetOsCommand(RemoteCommand* command);
-
-    /*! @brief Handles the GET_MAC_ADDRESS command
-     *  @param command The command to handle
-     */
-    void handleGetMacAddressCommand(RemoteCommand* command);
-
-    /*! @brief Handles the GET_CONFIG command
-     *  @param command The command to handle
-     */
-    void handleGetConfigCommand(RemoteCommand* command);
 };
 
 #endif // COMMANDSERVER_H

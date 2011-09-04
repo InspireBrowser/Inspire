@@ -14,12 +14,10 @@ CONFIG += plugin
 
 SOURCES += CommandServer.cpp \
     CommandSocket.cpp \
-    RemoteCommand.cpp \
     CommandServerPlugin.cpp
 
 HEADERS += CommandServer.h \
     CommandSocket.h \
-    RemoteCommand.h \
     CommandServerPlugin.h
 
 INCLUDEPATH += ../../inspirelib/

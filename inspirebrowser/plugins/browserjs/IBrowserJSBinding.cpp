@@ -33,8 +33,8 @@
 #include <QToolBar>
 
 #include "MainWindow.h"
-#include "../commandserver/CommandServer.h"
-#include "../commandserver/RemoteCommand.h"
+#include "CommandSystem.h"
+#include "RemoteCommand.h"
 
 /*! @brief  Constructor for creating the Browser Javascript Binding
  *  @param  parent  The parent object
@@ -43,8 +43,8 @@ IBrowserJSBinding::IBrowserJSBinding(QObject *parent) :
         IJSBinding(parent)
 {
     #warning TODO: Connect up handling of commands if commandserver plugin is loaded
-    //connect(this->GetMainWindow()->commandServer(), SIGNAL(commandReceived(RemoteCommand*)), this, SLOT(handleDataCommand(RemoteCommand*)));
-    //connect(this->GetMainWindow()->commandServer(), SIGNAL(commandReceived(RemoteCommand*)), this, SLOT(handleChangePageCommand(RemoteCommand*)));
+    connect(this->GetMainWindow()->commandSystem(), SIGNAL(commandReceived(RemoteCommand*)), this, SLOT(handleDataCommand(RemoteCommand*)));
+    connect(this->GetMainWindow()->commandSystem(), SIGNAL(commandReceived(RemoteCommand*)), this, SLOT(handleChangePageCommand(RemoteCommand*)));
 }
 
 /*! @brief  Returns whether the browser has spatial navigation enabled or not
@@ -328,6 +328,7 @@ void IBrowserJSBinding::handleDataCommand(RemoteCommand *command)
         return command->setResponse(false, "Too many parameters");
 
     emit onReceivedData(command->parameter(0));
+    command->setResponse(true, "Sent");
 }
 
 /*! @brief Handles the CHANGE_PAGE command from inspireremote

@@ -11,7 +11,16 @@ GenericPlugin::GenericPlugin(QObject* parent) :
 
 PluginManager* GenericPlugin::GetPluginManager()
 {
-	return qobject_cast<PluginManager*>(this->parent());
+    return qobject_cast<PluginManager*>(this->parent());
+}
+
+MainWindow* GenericPlugin::GetMainWindow()
+{
+    PluginManager* manager = this->GetPluginManager();
+    if(!manager)
+        return 0;
+
+    return manager->GetMainWindow();
 }
 
 InspireWebView* GenericPlugin::GetWebView()

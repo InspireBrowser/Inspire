@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui webkit
+QT       += core gui webkit network
 
 TARGET = inspirelib
 TEMPLATE = lib
@@ -17,7 +17,9 @@ SOURCES += GenericLayout.cpp \
     JSBinding/IJSBinding.cpp \
     GenericPlugin.cpp \
     PluginManager.cpp \
-    OsUtils.cpp
+    RemoteCommand.cpp \
+    OsUtils.cpp \
+    CommandSystem.cpp
 
 HEADERS  += MainWindow.h \
     GenericLayout.h \
@@ -25,7 +27,9 @@ HEADERS  += MainWindow.h \
     JSBinding/IJSBinding.h \
     GenericPlugin.h \
     PluginManager.h \
-    OsUtils.h
+    RemoteCommand.h \
+    OsUtils.h \
+    CommandSystem.h
 
 INCLUDEPATH += .
 

@@ -46,14 +46,16 @@ DISTFILES += license
 DISTFILES += packaging/*
 
 SOURCES += main.cpp \
-    RemoteCommand.cpp \
     CommandSendingSocket.cpp \
     CommandSender.cpp
 
 HEADERS += \
-    RemoteCommand.h \
     CommandSendingSocket.h \
     CommandSender.h
+
+INCLUDEPATH += ../inspirebrowser/inspirelib
+LIBS += -L../inspirebrowser/
+LIBS += -linspirelib
 
 # INSTALL INFORMATION
 unix {

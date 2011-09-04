@@ -31,10 +31,11 @@
 #include <QWebFrame>
 #include <QWebHistory>
 #include <QUrl>
-#include "GenericLayout.h"
 
+#include "GenericLayout.h"
 #include "MainWindow.h"
 #include "PluginManager.h"
+#include "CommandSystem.h"
 
 /*! @brief Constructs the main window for the Inspire Browser
  *  @param parent The parent widget
@@ -42,7 +43,10 @@
 MainWindow::MainWindow(QWidget* parent) :
         QMainWindow(parent)
 {
-    //initialise the plugin manager and load all plugins
+    //initialise the command system
+    _commandSystem = new CommandSystem(this);
+
+    //create the plugin manager and load all plugins
     _pluginManager = new PluginManager(this);
     _pluginManager->LoadPlugins();
 

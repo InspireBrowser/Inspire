@@ -40,6 +40,7 @@ class QToolBar;
 class QWebView;
 class GenericLayout;
 class PluginManager;
+class CommandSystem;
 
 /*! @brief The main window used by InspireBrowser
  *         Handles the toolbar, menubar, tab bar and status bar.
@@ -71,6 +72,11 @@ public:
          */
         QToolBar* navigationBar() { return _navigationToolBar; }
 
+        /*! @brief Returns the command system
+         *  @return The command system
+         */
+        CommandSystem* commandSystem() { return _commandSystem; }
+
 private:
         /*! @brief Creates the actions that are used by the menus, toolbars and context menus */
         void createActions();
@@ -90,6 +96,8 @@ private:
         InspireWebView* _webView;
 	/*! @brief The system for handling loading and unloading plugins */
 	PluginManager* _pluginManager;
+        /*! @brief Handles dispatching of commands to command listeners */
+        CommandSystem* _commandSystem;
         /*! @brief The windows layout manager */
         QLayout* _mainLayout;
 

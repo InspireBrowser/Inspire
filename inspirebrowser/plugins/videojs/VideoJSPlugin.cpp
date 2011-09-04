@@ -1,11 +1,16 @@
-#include <QtPlugin>
 #include "VideoJSPlugin.h"
 
+#include <QtPlugin>
 #include <QxtLogger>
+
+#include "IVideoJSBinding.h"
 
 bool VideoJSPlugin::InitialisePlugin()
 {
 	qxtLog->info("Initialising " + this->GetName());
+
+        this->GetWebView()->addJavascriptBinding("IVideo", new IVideoJSBinding(this));
+
 	return true;
 }
 

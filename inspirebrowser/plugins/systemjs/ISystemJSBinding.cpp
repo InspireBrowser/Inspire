@@ -34,6 +34,8 @@
 #include <QProcess>
 #include <QxtLogger>
 
+#include "OsUtils.h"
+
 /*! @brief Constructor for creating the System Javascript Binding
  *  @param  parent  The parent object
  */
@@ -48,70 +50,7 @@ ISystemJSBinding::ISystemJSBinding(QObject *parent) :
 QString ISystemJSBinding::operatingSystem() const
 {
     qxtLog->trace(Q_FUNC_INFO);
-
-#if defined(Q_OS_WIN)
-    switch(QSysInfo::WindowsVersion){
-        case QSysInfo::WV_NT:
-            return "Windows NT 4.0";
-        case QSysInfo::WV_2000:
-            return "Windows 2000";
-        case QSysInfo::WV_XP:
-            return "Windows XP";
-        case QSysInfo::WV_2003:
-            return "Windows XP Professional x64 Edition";
-        case QSysInfo::WV_VISTA:
-            return "Windows Vista";
-        case QSysInfo::WV_WINDOWS7:
-            return "Windows 7";
-        default:
-            return "Unknown Windows OS";
-    }
-#elif defined(Q_OS_MAC)
-    switch(QSysInfo::MacintoshVersion){
-        case QSysInfo::MV_10_3:
-            return "Mac OS X 10.3 Panther";
-        case QSysInfo::MV_10_4:
-            return "Mac OS X 10.4 Tiger";
-        case QSysInfo::MV_10_5:
-            return "Mac OS X 10.5 Leopard";
-        case QSysInfo::MV_10_6:
-            return "Mac OS X 10.6 Snow Leopard";
-        default:
-            return "Unknown Mac OS";
-    }
-#elif defined(Q_OS_LINUX)
-    QProcess process;
-    process.start("lsb_release", QStringList("-cirs"), QIODevice::ReadOnly);
-    qxtLog->error(process.error());
-
-    QByteArray output;
-    while (process.waitForReadyRead()) {
-        output += process.readAll();
-    }
-
-    QString contents(output);
-    QStringList lines = contents.split("\n", QString::SkipEmptyParts);
-
-    QString distro = "";
-    if(lines.length() > 0) {
-        distro = lines.at(0);
-    }
-    else {
-        qxtLog->error("No output from command lsb_release");
-        return "Unknown Linux OS";
-    }
-
-    if(lines.length() > 1)
-        distro += " " + lines.at(1);
-
-    if(lines.length() > 2)
-        distro += " (" + lines.at(2) + ")";
-
-    return distro;
-#else
-    #warning TODO: Implement ISystemJSBinding::operatingSystem does not support this OS
-    return "Unknown OS";
-#endif
+    return OsUtils::operatingSystemName();
 }
 
 /*! @brief Returns the number of network adapters the system has

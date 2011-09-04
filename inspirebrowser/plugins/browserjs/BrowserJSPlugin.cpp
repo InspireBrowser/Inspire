@@ -1,11 +1,16 @@
-#include <QtPlugin>
 #include "BrowserJSPlugin.h"
 
+#include <QtPlugin>
 #include <QxtLogger>
+
+#include "IBrowserJSBinding.h"
 
 bool BrowserJSPlugin::InitialisePlugin()
 {
 	qxtLog->info("Initialising " + this->GetName());
+
+        this->GetWebView()->addJavascriptBinding("IBrowser", new IBrowserJSBinding(this));
+
 	return true;
 }
 

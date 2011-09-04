@@ -1,11 +1,16 @@
-#include <QtPlugin>
 #include "SystemJSPlugin.h"
 
+#include <QtPlugin>
 #include <QxtLogger>
+
+#include "ISystemJSBinding.h"
 
 bool SystemJSPlugin::InitialisePlugin()
 {
 	qxtLog->info("Initialising " + this->GetName());
+
+        this->GetWebView()->addJavascriptBinding("ISystem", new ISystemJSBinding(this));
+
 	return true;
 }
 

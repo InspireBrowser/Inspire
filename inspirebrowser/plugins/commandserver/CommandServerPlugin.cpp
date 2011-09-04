@@ -1,20 +1,25 @@
-#include <QtPlugin>
 #include "CommandServerPlugin.h"
 
+#include <QtPlugin>
 #include <QxtLogger>
+
+#include "CommandServer.h"
 
 bool CommandServerPlugin::InitialisePlugin()
 {
 	qxtLog->info("Initialising " + this->GetName());
 
-	#warning TODO: Start the command server listening
 	#warning TODO: Add Config check to see if we should start listening
+
+        _server = new CommandServer(this);
+        _server->startListening();
+
 	return true;
 }
 
 bool CommandServerPlugin::DeInitialisePlugin()
 {
-	#warning TODO: Stop the command server listening
+        _server->stopListening();
 	return true;
 }
 

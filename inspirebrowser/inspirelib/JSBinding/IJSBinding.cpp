@@ -15,8 +15,7 @@ IJSBinding::IJSBinding(QObject *parent) :
  */
 QWebView* IJSBinding::GetParentWebView() const
 {
-    QWebView *parentView = qobject_cast<QWebView*>(this->parent());
-    return parentView;
+    return this->GetMainWindow()->webView();
 }
 
 /*! @brief Returns the MainWindow of the application

@@ -3,6 +3,8 @@
 
 #include "GenericPlugin.h"
 
+class CommandServer;
+
 class CommandServerPlugin : public GenericPlugin
 {
 	Q_OBJECT
@@ -15,6 +17,9 @@ public:
 	QString GetId();	
 	QString GetName();
 	QString GetDescription();
+
+private:
+        CommandServer* _server;
 };
 
 #endif //COMMAND_SERVER_PLUGIN

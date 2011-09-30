@@ -90,7 +90,7 @@ if [ ! -e ${SPECS_PATH}/features/qxt.prf ]; then
 	echo Configuring and compiling libQXT...
 	echo
 	cd osx/libqxt
-	./configure -release -qmake-bin ${QMAKE_EXE}
+	./configure -release -qmake-bin ${QMAKE_EXE} -nomake berkeley -nomake designer -nomake gui -nomake network -nomake sql -nomake web -nomake zeroconf
 	make
 	sudo make install
 	echo

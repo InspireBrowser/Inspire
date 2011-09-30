@@ -107,7 +107,7 @@ IF NOT EXIST %SPECS_PATH%\features\qxt.prf (
 	echo Configuring libQXT...
 	echo.
 	cd win32\libqxt
-	call configure.bat -debug_and_release
+	call configure.bat -debug_and_release -nomake berkeley -nomake designer -nomake gui -nomake network -nomake sql -nomake web -nomake zeroconf
 	
 	echo Compiling libQXT...
 	echo.

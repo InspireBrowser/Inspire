@@ -23,6 +23,7 @@ HEADERS += IVideoJSBinding.h \
     VLC/QVlcPlayer.h
 
 INCLUDEPATH += ../../inspirelib/
+LIBS += -linspirelib
 DESTDIR = ../../plugins
 	
 #define the win32 VLC includes and libs
@@ -30,6 +31,13 @@ win32 {
 	INCLUDEPATH += ../../dependencies\\win32\\vlc-1.1.9\\sdk\\include
 	LIBS += -L../../dependencies\\win32\\vlc-1.1.9\\sdk\\lib
 	LIBS += -lvlc
+	
+	CONFIG(debug, release|debug) {
+		LIBS += -L../../debug/
+	}
+	CONFIG(release, release|debug) {
+		LIBS += -L../../release/
+	}
 }
 
 #define the unix VLC includes and libs

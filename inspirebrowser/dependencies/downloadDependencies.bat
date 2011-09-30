@@ -107,7 +107,7 @@ IF NOT EXIST %SPECS_PATH%\features\qxt.prf (
 	echo Configuring libQXT...
 	echo.
 	cd win32\libqxt
-	call configure.bat -debug_and_release -static
+	call configure.bat -debug_and_release
 	
 	echo Compiling libQXT...
 	echo.

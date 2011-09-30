@@ -63,3 +63,12 @@ unix {
 	executable.files = $$TARGET
 	INSTALLS += executable
 }
+
+win32 {
+	CONFIG(debug, release|debug) {
+		LIBS += -L../inspirebrowser/debug/
+	}
+	CONFIG(release, release|debug) {
+		LIBS += -L../inspirebrowser/release/
+	}
+}

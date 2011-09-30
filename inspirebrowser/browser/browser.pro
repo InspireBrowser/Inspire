@@ -69,8 +69,14 @@ unix {
 }
 
 win32 {
-	CONFIG(debug, release|debug) : DESTDIR = ../debug/
-	CONFIG(release, release|debug) : DESTDIR = ../release/
+	CONFIG(debug, release|debug) {
+		DESTDIR = ../debug/
+		LIBS += -L../debug/
+	}
+	CONFIG(release, release|debug) {
+		DESTDIR = ../release/
+		LIBS += -L../release/
+	}
 } else {
 	DESTDIR = ../
 }

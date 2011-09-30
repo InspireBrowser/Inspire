@@ -39,7 +39,7 @@ QVlcPlayer::QVlcPlayer(QWidget* parent) :
     const char * const vlc_args[] = {
               "-I", "dummy",
               "--ignore-config",
-              "--plugin-path=plugins",
+              "--plugin-path=vlc_plugins",
               "--no-osd"
     };
 

@@ -23,6 +23,9 @@
 									WorkingDirectory='INSTALLDIR' Icon="inspirebrowser.exe" IconIndex="0" Advertise="yes" />
 							</File>
 						</Component>
+						<Component Id='InspireLib' Guid='6902302C-5AEB-46FA-AD45-BC079A7F6586'>
+							<File Id='InspireLibDLL' Name='inspirelib.dll' DiskId='1' Source='inspirelib.dll' KeyPath='yes' />
+						</Component>
 						<Component Id='RemoteExecutable' Guid='CB97735B-F253-4A3B-8B8F-5C1F92973142'>
 							<File Id='InspireRemoteEXE' Name='inspireremote.exe' DiskId='1' Source='inspireremote.exe' KeyPath='yes' />
 						</Component>
@@ -36,6 +39,9 @@
 							<File Id='QtNetworkDLL' Name='QtNetwork4.dll' DiskId='1' Source='QtNetwork4.dll' KeyPath='no' />
 							<File Id='QtWebkitDLL' Name='QtWebKit4.dll' DiskId='1' Source='QtWebKit4.dll' KeyPath='no' />
 							<File Id='PhononDLL' Name='phonon4.dll' DiskId='1' Source='phonon4.dll' KeyPath='no' />
+						</Component>
+						<Component Id='QxtLibrary' Guid='B78106C9-221C-4F59-B109-2139AB7CECC2'>
+							<File Id='QxtCoreDLL' Name='QxtCore.dll' DiskId='1' Source='QxtCore.dll' KeyPath='yes' />
 						</Component>
 						<Directory Id='PluginDir' Name='plugins'>
 							<Component Id='Plugin_SystemJs' Guid='4A08D8CC-5DDF-4D07-9BCA-C2835367A97B'>
@@ -348,9 +354,11 @@
 			Display='expand' Level='1' ConfigurableDirectory='INSTALLDIR'  AllowAdvertise='no' InstallDefault='local'>
 			<Feature Id='MainProgram' Title='Inspire Browser' Description='The Inspire Browser and support files' 
 				Level='1' Absent='disallow' AllowAdvertise='no' InstallDefault='local'>
+				<ComponentRef Id='InspireLib' />
 				<ComponentRef Id='MainExecutable' />
 				<ComponentRef Id='MingWmLibrary' />
 				<ComponentRef Id='QtLibrary' />
+				<ComponentRef Id='QxtLibrary' />
 				<ComponentRef Id='ProgramMenuDir' />
 			</Feature>
 			<Feature Id='Plugins' Title='Plugins' Description='The Inspire Browser Plugins' 

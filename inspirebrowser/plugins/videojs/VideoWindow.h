@@ -34,7 +34,7 @@
 #include <QRect>
 #include <QxtLogger>
 
-#include "JSBinding/IJSBinding.h"
+#include "JavascriptBinding.h"
 
 class QVlcPlayer;
 
@@ -42,7 +42,7 @@ class QVlcPlayer;
  *          Class that interacts witha video window with functions for manipulating
  *          the window's position and size and the media that's playing.
  */
-class VideoWindow : public IJSBinding
+class VideoWindow : public QObject, public JavascriptBinding
 {
     Q_OBJECT
 private:

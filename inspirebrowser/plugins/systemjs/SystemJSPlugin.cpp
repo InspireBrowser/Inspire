@@ -4,34 +4,37 @@
 #include <QxtLogger>
 
 #include "ISystemJSBinding.h"
+#include "PluginManager.h"
 
 bool SystemJSPlugin::InitialisePlugin()
 {
-	qxtLog->info("Initialising " + this->GetName());
+    qxtLog->info("Initialising " + this->GetName());
 
-        this->GetWebView()->addJavascriptBinding("ISystem", new ISystemJSBinding(this));
+    ISystemJSBinding* javascriptBinding = new ISystemJSBinding(this);
+    javascriptBinding->setMainWindow(this->pluginManager()->GetMainWindow());
+    this->pluginManager()->GetWebView()->addJavascriptBinding("ISystem", javascriptBinding);
 
-	return true;
+    return true;
 }
 
 bool SystemJSPlugin::DeInitialisePlugin()
 {
-	return true;
+    return true;
 }
 
 QString SystemJSPlugin::GetId()
 {
-	return "systemjs";
+    return "systemjs";
 }
 
 QString SystemJSPlugin::GetName()
 {
-	return "System JS Binding";
+    return "System JS Binding";
 }
 
 QString SystemJSPlugin::GetDescription()
 {
-	return "Plugin that provides the iSystem JavaScript Binding";
+    return "Plugin that provides the iSystem JavaScript Binding";
 }
 
 Q_EXPORT_PLUGIN2(systemjs, SystemJSPlugin);

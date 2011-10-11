@@ -33,8 +33,6 @@
 #include <QWebView>
 #include <QHash>
 
-class IJSBinding;
-
 /*! @brief WebView widget for the Inspire Browser
  *         Contains some enhancements to the default WebView for use by Inspire
  */
@@ -61,7 +59,7 @@ public:
      *  @param name The name of the binding to add
      *  @param binding The binding object to add to the web view
      */
-    void addJavascriptBinding(QString name, IJSBinding* binding);
+    void addJavascriptBinding(QString name, QObject* binding);
 
     /*! @brief Removes a Javascript binding object from the list of objects to add
      *  @param name The name of the binding
@@ -80,7 +78,7 @@ public:
      *  @param name The name of the binding
      *  @return The Javascript Binding object or a null point if it doesn't exist
      */
-    IJSBinding* getJavascriptBinding(QString name);
+    QObject* getJavascriptBinding(QString name);
 
 signals:
 
@@ -91,7 +89,7 @@ private:
     bool _transparentBackground;
 
     /*! @brief stores the javascript bindings registered with the web view */
-    QHash<QString, IJSBinding*> _bindings;
+    QHash<QString, QObject*> _bindings;
 
 private slots:
     /*! @brief Adds the javascript binding objects to the current webview */

@@ -7,6 +7,7 @@
 
 class GenericPlugin;
 class MainWindow;
+class InspireWebView;
 
 class PluginManager : public QObject
 {
@@ -16,7 +17,7 @@ public:
 	explicit PluginManager(QObject* parent = 0);
 
 	void LoadPlugins();
-        void InitialisePlugins();
+	void InitialisePlugins();
 
 	bool IsPluginLoaded(QString id);
 	GenericPlugin* GetPlugin(QString id);
@@ -24,6 +25,7 @@ public:
 	bool UnloadPlugin(QString id);
 
 	MainWindow* GetMainWindow();
+	InspireWebView* GetWebView();
 private:
 	QHash<QString, GenericPlugin*> _plugins;
 

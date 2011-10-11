@@ -35,9 +35,9 @@
  *  @param parent The parent object
  */
 VideoWindow::VideoWindow(QObject* parent) :
-        IJSBinding(parent)
+		QObject(parent)
 {
-    MainWindow* window = this->GetMainWindow();
+	MainWindow* window = this->mainWindow();
     _player = new QVlcPlayer();
     window->layout()->addWidget(_player);
 }

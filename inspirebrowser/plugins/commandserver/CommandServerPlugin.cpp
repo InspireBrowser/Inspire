@@ -11,8 +11,8 @@ bool CommandServerPlugin::InitialisePlugin()
 
 	#warning TODO: Add Config check to see if we should start listening
 
-        _server = new CommandServer(this);
-        _server->startListening();
+	_server = new CommandServer(this);
+	_server->startListening();
 
 	return true;
 }

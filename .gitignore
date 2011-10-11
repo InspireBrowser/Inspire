@@ -44,3 +44,4 @@
 /inspirebrowser/plugins/Makefile
 /inspirebrowser/release
 /inspirebrowser/debug
+/packaging/*

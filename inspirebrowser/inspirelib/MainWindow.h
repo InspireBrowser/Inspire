@@ -94,8 +94,8 @@ private:
 
         /*! @brief The web view for the main area */
         InspireWebView* _webView;
-	/*! @brief The system for handling loading and unloading plugins */
-	PluginManager* _pluginManager;
+		/*! @brief The system for handling loading and unloading plugins */
+		PluginManager* _pluginManager;
         /*! @brief Handles dispatching of commands to command listeners */
         CommandSystem* _commandSystem;
         /*! @brief The windows layout manager */

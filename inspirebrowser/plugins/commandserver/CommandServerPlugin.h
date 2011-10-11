@@ -5,7 +5,7 @@
 
 class CommandServer;
 
-class CommandServerPlugin : public GenericPlugin
+class CommandServerPlugin : public QObject, public GenericPlugin
 {
 	Q_OBJECT
 	Q_INTERFACES(GenericPlugin)

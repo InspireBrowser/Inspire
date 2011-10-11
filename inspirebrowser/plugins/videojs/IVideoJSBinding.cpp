@@ -35,7 +35,7 @@
  *  @param  parent  The parent object
  */
 IVideoJSBinding::IVideoJSBinding(QObject *parent) :
-        IJSBinding(parent),
+		QObject(parent),
         windows()
 {
 }
@@ -52,7 +52,8 @@ QVariant IVideoJSBinding::GetVideoWindow(int index)
         throw "Invalid video window index";
 
     if(!windows[index]) {
-        windows[index] = new VideoWindow(this);
+		windows[index] = new VideoWindow(this);
+		windows[index]->setMainWindow(this->mainWindow());
     }
 
     QVariant var(QMetaType::QObjectStar);

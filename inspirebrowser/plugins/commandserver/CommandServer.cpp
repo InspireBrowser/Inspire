@@ -35,6 +35,7 @@
 #include "CommandSystem.h"
 #include "GenericPlugin.h"
 #include "MainWindow.h"
+#include "PluginManager.h"
 
 /*! @brief Creates the CommandServer
  *  @param parent The parent object
@@ -64,7 +65,7 @@ void CommandServer::stopListening()
 void CommandServer::processCommand(RemoteCommand *command)
 {
     GenericPlugin* plugin = qobject_cast<GenericPlugin*>(this->parent());
-    plugin->GetMainWindow()->commandSystem()->processCommand(command);
+	plugin->pluginManager()->GetMainWindow()->commandSystem()->processCommand(command);
 }
 
 /*! @brief Called when the server receives an incoming connection

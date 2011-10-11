@@ -4,18 +4,18 @@
 #include <QObject>
 #include "GenericPlugin.h"
 
-class SystemJSPlugin : public GenericPlugin
+class SystemJSPlugin : public QObject, public GenericPlugin
 {
-	Q_OBJECT
-	Q_INTERFACES(GenericPlugin)
+    Q_OBJECT
+    Q_INTERFACES(GenericPlugin)
 
 public:
-	bool InitialisePlugin();
-	bool DeInitialisePlugin();
+    bool InitialisePlugin();
+    bool DeInitialisePlugin();
 
-	QString GetId();	
-	QString GetName();
-	QString GetDescription();
+    QString GetId();
+    QString GetName();
+    QString GetDescription();
 };
 
 #endif //SYSTEM_JS_PLUGIN

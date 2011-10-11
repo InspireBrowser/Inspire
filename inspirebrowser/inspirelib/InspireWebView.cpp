@@ -34,8 +34,6 @@
 #include <QDesktopServices>
 #include <QxtLogger>
 
-#include "JSBinding/IJSBinding.h"
-
 /*! @brief Creates an InspireWebView widget
  *  @param parent The parent widget
  */
@@ -82,7 +80,7 @@ void InspireWebView::setBackgroundIsTransparent(bool value)
 *  @param name The name of the binding to add
 *  @param binding The binding object to add to the web view
 */
-void InspireWebView::addJavascriptBinding(QString name, IJSBinding* binding)
+void InspireWebView::addJavascriptBinding(QString name, QObject* binding)
 {
     _bindings[name] = binding;
 }
@@ -115,7 +113,7 @@ bool InspireWebView::hasJavascriptBinding(QString name)
 *  @param name The name of the binding
 *  @return The Javascript Binding object or a null point if it doesn't exist
 */
-IJSBinding* InspireWebView::getJavascriptBinding(QString name)
+QObject* InspireWebView::getJavascriptBinding(QString name)
 {
     if(this->hasJavascriptBinding(name))
         return _bindings.value(name);
@@ -156,7 +154,7 @@ void InspireWebView::addJavascriptObjectsToFrame()
         }
     }
 
-    QHashIterator<QString, IJSBinding*> i(_bindings);
+    QHashIterator<QString, QObject*> i(_bindings);
     while (i.hasNext()) {
         i.next();
         qxtLog->debug("Adding JS Binding " + i.key() + " to frame");

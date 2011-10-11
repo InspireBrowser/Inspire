@@ -4,12 +4,16 @@
 #include <QxtLogger>
 
 #include "IBrowserJSBinding.h"
+#include "PluginManager.h"
 
 bool BrowserJSPlugin::InitialisePlugin()
 {
 	qxtLog->info("Initialising " + this->GetName());
 
-        this->GetWebView()->addJavascriptBinding("IBrowser", new IBrowserJSBinding(this));
+	IBrowserJSBinding* javascriptBinding = new IBrowserJSBinding(this);
+	javascriptBinding->setMainWindow(this->pluginManager()->GetMainWindow());
+	javascriptBinding->Initialise();
+	this->pluginManager()->GetWebView()->addJavascriptBinding("IBrowser", javascriptBinding);
 
 	return true;
 }

@@ -29,7 +29,7 @@
 #ifndef ISYSTEMJSBINDING_H
 #define ISYSTEMJSBINDING_H
 
-#include "JSBinding/IJSBinding.h"
+#include "JavascriptBinding.h"
 #include <QCoreApplication>
 #include <QxtLogger>
 
@@ -37,7 +37,7 @@
  *          Class that provides the JavaScript Binding for interfacing with the System
  *          it provides methods for querying the network adapters in the computer
  */
-class ISystemJSBinding : public IJSBinding
+class ISystemJSBinding : public QObject, public JavascriptBinding
 {
     Q_OBJECT
 
@@ -111,14 +111,6 @@ public slots:
      *  @return The Hardware Address of the adapter
      */
     QString GetHardwareAddress(const int adapterNumber);
-
-    /*! @brief  Utility function to convert a variable into a JSON string,
-     *          should only be used for debug
-     *  @param  var The variable to dump
-     *  @param  format Whether to format the output
-     *  @return A JSON representation of the variable
-     */
-    QString DumpVariable(QVariant var, bool format = false);
 
     /*! @brief Closes Inspire Browser
      *  @param returnCode The value to return as the return code

@@ -29,7 +29,7 @@
 #ifndef IVIDEOJSBINDING_H
 #define IVIDEOJSBINDING_H
 
-#include "JSBinding/IJSBinding.h"
+#include "JavascriptBinding.h"
 #include <QxtLogger>
 
 class VideoWindow;
@@ -39,7 +39,7 @@ class VideoWindow;
 /*! @brief  Provides the JavaScript Binding for interfacing with Video
  *          Class that manages the video windows that are available to be used.
  */
-class IVideoJSBinding : public IJSBinding
+class IVideoJSBinding : public QObject, public JavascriptBinding
 {
     Q_OBJECT
 private:

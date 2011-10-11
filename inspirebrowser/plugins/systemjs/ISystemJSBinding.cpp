@@ -40,7 +40,7 @@
  *  @param  parent  The parent object
  */
 ISystemJSBinding::ISystemJSBinding(QObject *parent) :
-        IJSBinding(parent)
+        QObject(parent)
 {
 }
 
@@ -200,19 +200,6 @@ QString ISystemJSBinding::GetHardwareAddress(const int adapterNumber)
     }
 
     return "";
-}
-
-/*! @brief  Utility function to convert a variable into a JSON string,
- *          should only be used for debug
- *  @param  var The variable to dump
- *  @param  format Whether to format the output
- *  @return A JSON representation of the variable
- */
-QString ISystemJSBinding::DumpVariable(QVariant var, bool format)
-{
-    qxtLog->trace(Q_FUNC_INFO);
-
-    return IJSBinding::DumpVariable(var, format ? "\n" : "", format ? 2 : 0);
 }
 
 /*! @brief Closes Inspire Browser

@@ -29,7 +29,8 @@
 #ifndef IBROWSERJSBINDING_H
 #define IBROWSERJSBINDING_H
 
-#include "JSBinding/IJSBinding.h"
+#include "JavascriptBinding.h"
+#include <QObject>
 
 class RemoteCommand;
 
@@ -38,14 +39,19 @@ class RemoteCommand;
  *          functions for chaing the state of the window (minimizing, maximizing, going fullscreen) and
  *          controlling which widgets are displayed in the browser window.
  */
-class IBrowserJSBinding : public IJSBinding
+class IBrowserJSBinding : public QObject, public JavascriptBinding
 {
     Q_OBJECT
+
 public:
     /*! @brief  Constructor for creating the Browser Javascript Binding
      *  @param  parent  The parent object
      */
     explicit IBrowserJSBinding(QObject *parent = 0);
+
+	/*! @brief Initialises the binding once everything has been set
+	 */
+	void Initialise();
 
     /*! @brief  Returns whether the browser has spatial navigation enabled or not
      *  @return Whether spatial navigation is enabled or not

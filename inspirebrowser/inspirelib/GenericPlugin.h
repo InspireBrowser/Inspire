@@ -9,12 +9,12 @@
 class PluginManager;
 class MainWindow;
 
-class GenericPlugin : public QObject
-{
-    Q_OBJECT
+class GenericPlugin
+{    
+private:
+	PluginManager* _pluginManager;
 
 public:
-	explicit GenericPlugin(QObject* parent = 0);
 	virtual ~GenericPlugin() {}
 
 	virtual bool InitialisePlugin() = 0;
@@ -24,11 +24,10 @@ public:
 	virtual QString GetName() = 0;
 	virtual QString GetDescription() = 0;
 
-    PluginManager* GetPluginManager();
-    MainWindow* GetMainWindow();
-    InspireWebView* GetWebView();
+	PluginManager* pluginManager() { return _pluginManager; }
+	void setPluginManager(PluginManager *pluginManager) { _pluginManager = pluginManager; }
 };
 
-Q_DECLARE_INTERFACE(GenericPlugin, "org.inspirebrowser.Plugins.GenericPlugin/1.0");
+Q_DECLARE_INTERFACE(GenericPlugin, "org.inspirebrowser.Plugins.GenericPlugin/1.0")
 
 #endif

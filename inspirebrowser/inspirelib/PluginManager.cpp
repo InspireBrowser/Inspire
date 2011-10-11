@@ -6,6 +6,7 @@
 
 #include "GenericPlugin.h"
 #include "MainWindow.h"
+#include "InspireWebView.h"
 
 PluginManager::PluginManager(QObject* parent) :
         QObject(parent)
@@ -23,13 +24,13 @@ void PluginManager::LoadPlugins()
 
 void PluginManager::InitialisePlugins()
 {
-    QHashIterator<QString, GenericPlugin*> i(_plugins);
-    while (i.hasNext()) {
-        i.next();
-        qxtLog->debug("Initialising Plugin " + i.key());
-        if(!i.value()->InitialisePlugin())
-            qxtLog->warning("Initialisation of plugin " + i.key() + "failed");
-    }
+	QHashIterator<QString, GenericPlugin*> i(_plugins);
+	while (i.hasNext()) {
+		i.next();
+		qxtLog->debug("Initialising Plugin " + i.key());
+		if(!i.value()->InitialisePlugin())
+			qxtLog->warning("Initialisation of plugin " + i.key() + "failed");
+	}
 }
 
 bool PluginManager::IsPluginLoaded(QString id)
@@ -67,18 +68,27 @@ bool PluginManager::UnloadPlugin(QString id)
 
 MainWindow* PluginManager::GetMainWindow()
 {
-    MainWindow *window;
-    QObject* item = (QObject*)this;
-    do
-    {
-        item = item->parent();
-        window = qobject_cast<MainWindow*>(item);
-        if(window)
-            return window;
-    }
-    while(item->parent() != 0);
+	MainWindow *window;
+	QObject* item = (QObject*)this;
+	do
+	{
+		item = item->parent();
+		window = qobject_cast<MainWindow*>(item);
+		if(window)
+			return window;
+	}
+	while(item->parent() != 0);
 
-    return 0;
+	return 0;
+}
+
+InspireWebView* PluginManager::GetWebView()
+{
+	MainWindow* window = this->GetMainWindow();
+	if(!window)
+		return 0;
+
+	return window->webView();
 }
 
 QDir PluginManager::GetPluginsDir()
@@ -121,7 +131,8 @@ bool PluginManager::LoadPluginFromFile(QString fileName)
 	if (plugin) {
 		plugin->setParent(this);
 		GenericPlugin* pluginInstance = qobject_cast<GenericPlugin*>(plugin);
-                if (pluginInstance) {
+		pluginInstance->setPluginManager(this);
+		if (pluginInstance) {
 			QString id = pluginInstance->GetId();
 			_plugins[id] = pluginInstance;
 			return true;

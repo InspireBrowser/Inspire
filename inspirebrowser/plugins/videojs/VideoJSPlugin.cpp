@@ -4,12 +4,15 @@
 #include <QxtLogger>
 
 #include "IVideoJSBinding.h"
+#include "PluginManager.h"
 
 bool VideoJSPlugin::InitialisePlugin()
 {
 	qxtLog->info("Initialising " + this->GetName());
 
-        this->GetWebView()->addJavascriptBinding("IVideo", new IVideoJSBinding(this));
+	IVideoJSBinding* javascriptBinding = new IVideoJSBinding(this);
+	javascriptBinding->setMainWindow(this->pluginManager()->GetMainWindow());
+	this->pluginManager()->GetWebView()->addJavascriptBinding("IVideo", javascriptBinding);
 
 	return true;
 }

@@ -14,8 +14,6 @@ QXT += core
 SOURCES += GenericLayout.cpp \
     MainWindow.cpp \
     InspireWebView.cpp \
-    JSBinding/IJSBinding.cpp \
-    GenericPlugin.cpp \
     PluginManager.cpp \
     RemoteCommand.cpp \
     OsUtils.cpp \
@@ -24,12 +22,12 @@ SOURCES += GenericLayout.cpp \
 HEADERS  += MainWindow.h \
     GenericLayout.h \
     InspireWebView.h \
-    JSBinding/IJSBinding.h \
     GenericPlugin.h \
     PluginManager.h \
     RemoteCommand.h \
     OsUtils.h \
-    CommandSystem.h
+    CommandSystem.h \
+    JavascriptBinding.h
 
 INCLUDEPATH += .
 

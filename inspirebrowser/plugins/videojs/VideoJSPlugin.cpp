@@ -12,6 +12,7 @@ bool VideoJSPlugin::InitialisePlugin()
 
 	IVideoJSBinding* javascriptBinding = new IVideoJSBinding(this);
 	javascriptBinding->setMainWindow(this->pluginManager()->GetMainWindow());
+	javascriptBinding->Initialise();
 	this->pluginManager()->GetWebView()->addJavascriptBinding("IVideo", javascriptBinding);
 
 	return true;

@@ -12,6 +12,7 @@ bool SystemJSPlugin::InitialisePlugin()
 
     ISystemJSBinding* javascriptBinding = new ISystemJSBinding(this);
     javascriptBinding->setMainWindow(this->pluginManager()->GetMainWindow());
+	javascriptBinding->Initialise();
     this->pluginManager()->GetWebView()->addJavascriptBinding("ISystem", javascriptBinding);
 
     return true;

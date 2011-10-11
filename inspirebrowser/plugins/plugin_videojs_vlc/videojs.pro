@@ -9,7 +9,7 @@ CONFIG   += warn_on silent qxt
 QXT      += core
 
 TEMPLATE = lib
-TARGET = $$qtLibraryTarget(videojs)
+TARGET = $$qtLibraryTarget(videojs_vlc)
 CONFIG += plugin
 
 SOURCES += IVideoJSBinding.cpp \

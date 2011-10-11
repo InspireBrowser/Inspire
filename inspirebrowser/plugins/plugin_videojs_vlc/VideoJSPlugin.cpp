@@ -38,4 +38,4 @@ QString VideoJSPlugin::GetDescription()
 	return "Plugin that provides the iVideo JavaScript Binding";
 }
 
-Q_EXPORT_PLUGIN2(videojs, VideoJSPlugin);
+Q_EXPORT_PLUGIN2(videojs_vlc, VideoJSPlugin);

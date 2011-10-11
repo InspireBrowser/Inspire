@@ -5,7 +5,7 @@
 TEMPLATE = subdirs
 
 # Directories
-SUBDIRS += browserjs
-SUBDIRS += systemjs
-SUBDIRS += videojs
-SUBDIRS += commandserver
+SUBDIRS += plugin_browserjs
+SUBDIRS += plugin_systemjs
+SUBDIRS += plugin_videojs_vlc
+SUBDIRS += plugin_commandserver

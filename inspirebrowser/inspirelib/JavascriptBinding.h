@@ -11,6 +11,8 @@ private:
 public:
     virtual ~JavascriptBinding() {}
 
+	void Initialise() {}
+
 	MainWindow* mainWindow() const { return this->_mainWindow; }
     void setMainWindow(MainWindow* mainWindow) { this->_mainWindow = mainWindow; }
 };

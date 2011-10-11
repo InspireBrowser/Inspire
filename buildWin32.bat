@@ -72,10 +72,10 @@ xcopy /Y inspirebrowser\plugins\videojs.dll packaging\plugins
 xcopy /Y inspirebrowser\plugins\commandserver.dll packaging\plugins
 
 REM -- Copy in the VLC dependencies
-xcopy /Y inspirebrowser\dependencies\win32\%VLC_VERSION%\libvlc.dll packaging\plugins
-xcopy /Y inspirebrowser\dependencies\win32\%VLC_VERSION%\libvlccore.dll packaging\plugins
+xcopy /Y inspirebrowser\dependencies\win32\%VLC_VERSION%\libvlc.dll packaging
+xcopy /Y inspirebrowser\dependencies\win32\%VLC_VERSION%\libvlccore.dll packaging
 mkdir packaging\plugins\vlc_plugins
-xcopy /S /Y inspirebrowser\dependencies\win32\%VLC_VERSION%\plugins packaging\plugins\vlc_plugins
+xcopy /S /Y /I inspirebrowser\dependencies\win32\%VLC_VERSION%\plugins packaging\vlc_plugins
 
 REM -- Copy in the Ming dependencies
 xcopy /Y %QTDIR%\bin\libgcc_s_dw2-1.dll packaging

@@ -37,15 +37,19 @@
 VideoWindow::VideoWindow(QObject* parent) :
 		QObject(parent)
 {
-	MainWindow* window = this->mainWindow();
-    _player = new QVlcPlayer();
-    window->layout()->addWidget(_player);
 }
 
 /*! @brief Destructor for tidying up the video window */
 VideoWindow::~VideoWindow()
 {
     delete _player;
+}
+
+void VideoWindow::Initialise()
+{
+	MainWindow* window = this->mainWindow();
+	_player = new QVlcPlayer();
+	window->layout()->addWidget(_player);
 }
 
 /*! @brief Returns whether any media is currently being played

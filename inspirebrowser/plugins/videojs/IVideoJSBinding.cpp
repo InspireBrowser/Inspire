@@ -54,6 +54,7 @@ QVariant IVideoJSBinding::GetVideoWindow(int index)
     if(!windows[index]) {
 		windows[index] = new VideoWindow(this);
 		windows[index]->setMainWindow(this->mainWindow());
+		windows[index]->Initialise();
     }
 
     QVariant var(QMetaType::QObjectStar);

@@ -60,6 +60,10 @@ public:
     /*! @brief Destructor for tidying up the video window */
     ~VideoWindow();
 
+	/*! @brief Initialises the binding once everything has been set
+	 */
+	void Initialise();
+
     /*! @brief Returns the current URL being played, blank if nothing is playing
      *  @return The current URL being played
      */

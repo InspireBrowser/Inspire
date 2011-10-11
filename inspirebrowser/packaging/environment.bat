@@ -5,6 +5,7 @@ set RELEASE=nightlies
 set VLC_VERSION=vlc-1.1.9
 set LIBQXT_VERSION=libqxt-v0.6.1
 set QT_VERSION=4.7.0
+set BUILD_DIRECTORY=build
 
 REM -- Check QTDIR Environment variable is set
 if not defined QTDIR (

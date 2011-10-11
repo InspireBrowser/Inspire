@@ -44,12 +44,12 @@ if [ $? != 0 ]; then
 fi
 
 # Clear out any old dir and create the new one
-rm -rf packaging
-mkdir packaging
+rm -rf ${BUILD_DIRECTORY}
+mkdir ${BUILD_DIRECTORY}
 
-# Move the compiled app into the packaging dir
-echo -n "Copying executable to packaging directory... "
-mv inspirebrowser/inspirebrowser.app packaging/
+# Move the compiled app into the build dir
+echo -n "Copying executable to ${BUILD_DIRECTORY} directory... "
+mv inspirebrowser/inspirebrowser.app ${BUILD_DIRECTORY}/
 if [ $? != 0 ]; then
 	exit 1;
 else
@@ -57,11 +57,11 @@ else
 fi
 
 # Now copy all the needed frameworks in
-echo -n "Copying frameworks to packaging directory... "
-mkdir -p packaging/inspirebrowser.app/Contents/Frameworks
+echo -n "Copying frameworks to ${BUILD_DIRECTORY} directory... "
+mkdir -p ${BUILD_DIRECTORY}/inspirebrowser.app/Contents/Frameworks
 LIB_DIR=`${QMAKE_EXE} -query QT_INSTALL_LIBS`
 for i in QtCore QtGui QtWebkit QtNetwork phonon; do
-	cp -R ${LIB_DIR}/${i}.framework packaging/inspirebrowser.app/Contents/Frameworks/
+	cp -R ${LIB_DIR}/${i}.framework ${BUILD_DIRECTORY}/inspirebrowser.app/Contents/Frameworks/
 	if [ $? != 0 ]; then
 		exit 1;
 	fi
@@ -69,24 +69,24 @@ done
 
 # Also copy in the Qxt frameworks
 for i in QxtCore; do
-	cp -R /Library/Frameworks/${i}.framework packaging/inspirebrowser.app/Contents/Frameworks/
+	cp -R /Library/Frameworks/${i}.framework ${BUILD_DIRECTORY}/inspirebrowser.app/Contents/Frameworks/
 	if [ $? != 0 ]; then
 		exit 1;
 	fi
 done
 
 # Now remove all of the debug frameworks
-rm -rf packaging/inspirebrowser.app/Contents/Frameworks/Qt*.framework/Qt*debug
+rm -rf ${BUILD_DIRECTORY}/inspirebrowser.app/Contents/Frameworks/Qt*.framework/Qt*debug
 echo "OK"
 
 echo -n "Updating references in frameworks... "
-LIBRARIES=`otool -L packaging/inspirebrowser.app/Contents/MacOS/inspirebrowser | grep Q | awk '{print $1}'`;
+LIBRARIES=`otool -L ${BUILD_DIRECTORY}/inspirebrowser.app/Contents/MacOS/inspirebrowser | grep Q | awk '{print $1}'`;
 for i in ${LIBRARIES}; do
 	FRAMEWORK=`basename $i`
 
 	# Change where the dynamic linker will look for the library
 	install_name_tool -id @executable_path/../Frameworks/${FRAMEWORK}.framework/Versions/Current/${FRAMEWORK} \
-		packaging/inspirebrowser.app/Contents/MacOS/inspirebrowser
+		${BUILD_DIRECTORY}/inspirebrowser.app/Contents/MacOS/inspirebrowser
 	if [ $? != 0 ]; then
 		exit 1;
 	fi
@@ -94,13 +94,13 @@ for i in ${LIBRARIES}; do
 	# Change where the application looks for the framework
 	install_name_tool -change ${i} \
 		@executable_path/../Frameworks/${FRAMEWORK}.framework/Versions/Current/${FRAMEWORK} \
-		packaging/inspirebrowser.app/Contents/MacOS/inspirebrowser
+		${BUILD_DIRECTORY}/inspirebrowser.app/Contents/MacOS/inspirebrowser
 	if [ $? != 0 ]; then
 		exit 1;
 	fi
 
 	# Now update the references for the frameworks dependencies
-	FRAMEWORK_PATH="packaging/inspirebrowser.app/Contents/Frameworks/${FRAMEWORK}.framework/Versions/Current/${FRAMEWORK}"
+	FRAMEWORK_PATH="${BUILD_DIRECTORY}/inspirebrowser.app/Contents/Frameworks/${FRAMEWORK}.framework/Versions/Current/${FRAMEWORK}"
 	FRAMEWORK_LIBRARIES=`otool -L ${FRAMEWORK_PATH} | grep Q | grep -v ${FRAMEWORK} | awk '{print $1}'`;
 	for j in ${FRAMEWORK_LIBRARIES}; do
 		INNER_FRAMEWORK=`basename $j`
@@ -114,12 +114,12 @@ for i in ${LIBRARIES}; do
 done
 echo "OK"
 
-echo -n "Copying VLC libraries to packaging directory... "
-cp -R inspirebrowser/dependencies/osx/${VLC_VERSION}/Contents/MacOS/lib packaging/inspirebrowser.app/Contents/MacOS/
+echo -n "Copying VLC libraries to ${BUILD_DIRECTORY} directory... "
+cp -R inspirebrowser/dependencies/osx/${VLC_VERSION}/Contents/MacOS/lib ${BUILD_DIRECTORY}/inspirebrowser.app/Contents/MacOS/
 if [ $? != 0 ]; then
 	exit 1;
 fi
-cp -R inspirebrowser/dependencies/osx/${VLC_VERSION}/Contents/MacOS/plugins packaging/inspirebrowser.app/Contents/MacOS
+cp -R inspirebrowser/dependencies/osx/${VLC_VERSION}/Contents/MacOS/plugins ${BUILD_DIRECTORY}/inspirebrowser.app/Contents/MacOS
 if [ $? != 0 ]; then
 	exit 1;
 fi
@@ -127,21 +127,21 @@ echo "OK"
 
 # Now create the dmg package
 echo -n "Creating Inspire Browser DMG... "
-${MAC_DEPLOY_EXE} packaging/inspirebrowser.app -no-plugins -dmg
+${MAC_DEPLOY_EXE} ${BUILD_DIRECTORY}/inspirebrowser.app -no-plugins -dmg
 if [ $? != 0 ]; then
 	exit 1;
 fi
-mv packaging/inspirebrowser.dmg .
+mv ${BUILD_DIRECTORY}/inspirebrowser.dmg .
 echo "OK"
 
 echo -n "Tidying up.... "
-rm -rf packaging
+rm -rf ${BUILD_DIRECTORY}
 echo "OK"
 
 echo ""
 echo "****************************************************************"
 echo "*                                                              *"
-echo "*  Inspire Browser and tools successfully build and packaged   *"
+echo "*  Inspire Browser and tools successfully built and packaged   *"
 echo "*                                                              *"
 echo "****************************************************************"
 echo ""

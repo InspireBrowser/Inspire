@@ -51,42 +51,42 @@ if ERRORLEVEL 1 (
 	goto End
 )
 
-REM -- Remove an old packaging dir if it's there
-if exist packaging (
-	rmdir /Q /S packaging
+REM -- Remove an old %BUILD_DIRECTORY% dir if it's there
+if exist %BUILD_DIRECTORY% (
+	rmdir /Q /S %BUILD_DIRECTORY%
 )
 
-REM -- Create the packaging dir and copy the created executables in
-mkdir packaging
-xcopy /Y inspirebrowser\release\inspirebrowser.exe packaging
-xcopy /Y inspirebrowser\release\inspirelib.dll packaging
-xcopy /Y inspireremote\release\inspireremote.exe packaging
-xcopy /Y inspirebrowser\packaging\InspireBrowser.wxs packaging
-xcopy /Y inspirebrowser\packaging\InspireLicense.rtf packaging
+REM -- Create the %BUILD_DIRECTORY% dir and copy the created executables in
+mkdir %BUILD_DIRECTORY%
+xcopy /Y inspirebrowser\release\inspirebrowser.exe %BUILD_DIRECTORY%
+xcopy /Y inspirebrowser\release\inspirelib.dll %BUILD_DIRECTORY%
+xcopy /Y inspireremote\release\inspireremote.exe %BUILD_DIRECTORY%
+xcopy /Y inspirebrowser\packaging\InspireBrowser.wxs %BUILD_DIRECTORY%
+xcopy /Y inspirebrowser\packaging\InspireLicense.rtf %BUILD_DIRECTORY%
 
 REM -- Copy in the plugins
-mkdir packaging\plugins
-xcopy /Y inspirebrowser\plugins\systemjs.dll packaging\plugins
-xcopy /Y inspirebrowser\plugins\browserjs.dll packaging\plugins
-xcopy /Y inspirebrowser\plugins\videojs.dll packaging\plugins
-xcopy /Y inspirebrowser\plugins\commandserver.dll packaging\plugins
+mkdir %BUILD_DIRECTORY%\plugins
+xcopy /Y inspirebrowser\plugins\systemjs.dll %BUILD_DIRECTORY%\plugins
+xcopy /Y inspirebrowser\plugins\browserjs.dll %BUILD_DIRECTORY%\plugins
+xcopy /Y inspirebrowser\plugins\videojs.dll %BUILD_DIRECTORY%\plugins
+xcopy /Y inspirebrowser\plugins\commandserver.dll %BUILD_DIRECTORY%\plugins
 
 REM -- Copy in the VLC dependencies
-xcopy /Y inspirebrowser\dependencies\win32\%VLC_VERSION%\libvlc.dll packaging
-xcopy /Y inspirebrowser\dependencies\win32\%VLC_VERSION%\libvlccore.dll packaging
-mkdir packaging\plugins\vlc_plugins
-xcopy /S /Y /I inspirebrowser\dependencies\win32\%VLC_VERSION%\plugins packaging\vlc_plugins
+xcopy /Y inspirebrowser\dependencies\win32\%VLC_VERSION%\libvlc.dll %BUILD_DIRECTORY%
+xcopy /Y inspirebrowser\dependencies\win32\%VLC_VERSION%\libvlccore.dll %BUILD_DIRECTORY%
+mkdir %BUILD_DIRECTORY%\plugins\vlc_plugins
+xcopy /S /Y /I inspirebrowser\dependencies\win32\%VLC_VERSION%\plugins %BUILD_DIRECTORY%\vlc_plugins
 
 REM -- Copy in the Ming dependencies
-xcopy /Y %QTDIR%\bin\libgcc_s_dw2-1.dll packaging
-xcopy /Y %QTDIR%\bin\mingwm10.dll packaging
+xcopy /Y %QTDIR%\bin\libgcc_s_dw2-1.dll %BUILD_DIRECTORY%
+xcopy /Y %QTDIR%\bin\mingwm10.dll %BUILD_DIRECTORY%
 
 REM -- Copy in the Qt dependencies
-xcopy /Y %QTDIR%\bin\QtCore4.dll packaging
-xcopy /Y %QTDIR%\bin\QtGui4.dll packaging
-xcopy /Y %QTDIR%\bin\QtNetwork4.dll packaging
-xcopy /Y %QTDIR%\bin\QtWebKit4.dll packaging
-xcopy /Y %QTDIR%\bin\phonon4.dll packaging
+xcopy /Y %QTDIR%\bin\QtCore4.dll %BUILD_DIRECTORY%
+xcopy /Y %QTDIR%\bin\QtGui4.dll %BUILD_DIRECTORY%
+xcopy /Y %QTDIR%\bin\QtNetwork4.dll %BUILD_DIRECTORY%
+xcopy /Y %QTDIR%\bin\QtWebKit4.dll %BUILD_DIRECTORY%
+xcopy /Y %QTDIR%\bin\phonon4.dll %BUILD_DIRECTORY%
 
 REM -- Find the path the mkspecs are stored
 for /f "delims=" %%a in ('qmake -query QMAKE_MKSPECS') do @set SPECS_PATH=%%a 
@@ -102,10 +102,10 @@ for /f "delims=" %%x in (%SPECS_PATH%\features\qxtvars.prf) do (
 
 REM -- Copy in the Qxt dependencies
 set QXT_INSTALL_LIBS=%QXT_INSTALL_LIBS:/=\%
-xcopy /Y %QXT_INSTALL_LIBS%\QxtCore.dll packaging
+xcopy /Y %QXT_INSTALL_LIBS%\QxtCore.dll %BUILD_DIRECTORY%
 
 REM -- Now use WiX to create the install package
-cd packaging
+cd %BUILD_DIRECTORY%
 candle.exe InspireBrowser.wxs
 if ERRORLEVEL 1 (
 	echo Processing WiX XML File...
@@ -135,12 +135,12 @@ if ERRORLEVEL 1 (
 REM -- move the created MSI up a level and tidy up
 move inspirebrowser.msi ../
 cd ../
-REM rmdir /Q /S packaging
+REM rmdir /Q /S %BUILD_DIRECTORY%
 
 echo.
 echo ****************************************************************
 echo *                                                              *
-echo *  Inspire Browser and tools successfully build and packaged   *
+echo *  Inspire Browser and tools successfully built and packaged   *
 echo *                                                              *
 echo ****************************************************************
 echo.

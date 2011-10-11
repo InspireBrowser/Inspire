@@ -2,6 +2,7 @@ RELEASE=nightlies
 VLC_VERSION=vlc-1.1.9
 LIBQXT_VERSION=libqxt-v0.6.1
 QT_VERSION=4.7.0
+BUILD_DIRECTORY=build
 
 # check for qmake executable
 echo -n Checking for qmake...

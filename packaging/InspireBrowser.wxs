@@ -51,7 +51,7 @@
 								<File Id='Plugin_BrowserJs_DLL' Name='browserjs.dll' DiskId='1' Source='plugins/browserjs.dll' KeyPath='yes' />
 							</Component>
 							<Component Id='Plugin_VideoJs_Vlc' Guid='F03BE394-32E4-474A-ADC4-12D4987E377B'>
-								<File Id='Plugin_VideoJs_Vlc_DLL' Name='videojs.dll' DiskId='1' Source='plugins/videojs.dll' KeyPath='yes' />
+								<File Id='Plugin_VideoJs_Vlc_DLL' Name='videojs_vlc.dll' DiskId='1' Source='plugins/videojs_vlc.dll' KeyPath='yes' />
 							</Component>
 							<Component Id='Plugin_CommandServer' Guid='AA6D2F4D-22ED-4C0A-A9C2-A8BCF575B023'>
 								<File Id='Plugin_CommandServer_DLL' Name='commandserver.dll' DiskId='1' Source='plugins/commandserver.dll' KeyPath='yes' />

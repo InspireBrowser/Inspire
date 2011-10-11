@@ -22,21 +22,21 @@ HEADERS += IVideoJSBinding.h \
     VideoJSPlugin.h \
     VLC/QVlcPlayer.h
 
-INCLUDEPATH += ../../inspirelib/
+INCLUDEPATH += ../inspirelib/
 LIBS += -linspirelib
-DESTDIR = ../../plugins
+DESTDIR = ../plugins
 	
 #define the win32 VLC includes and libs
 win32 {
-	INCLUDEPATH += ../../dependencies\\win32\\vlc-1.1.9\\sdk\\include
-	LIBS += -L../../dependencies\\win32\\vlc-1.1.9\\sdk\\lib
+	INCLUDEPATH += ../dependencies\\win32\\vlc-1.1.9\\sdk\\include
+	LIBS += -L../dependencies\\win32\\vlc-1.1.9\\sdk\\lib
 	LIBS += -lvlc
 	
 	CONFIG(debug, release|debug) {
-		LIBS += -L../../debug/
+		LIBS += -L../debug/
 	}
 	CONFIG(release, release|debug) {
-		LIBS += -L../../release/
+		LIBS += -L../release/
 	}
 }
 
@@ -47,8 +47,8 @@ unix {
 
 #define the OSX VLC includes and libs
 macx {
-	INCLUDEPATH += ../../dependencies/osx/vlc-1.1.9/Contents/MacOS/include
-	LIBS += -L../../dependencies/osx/vlc-1.1.9/Contents/MacOS/lib
+	INCLUDEPATH += ../dependencies/osx/vlc-1.1.9/Contents/MacOS/include
+	LIBS += -L../dependencies/osx/vlc-1.1.9/Contents/MacOS/lib
 	LIBS += -lvlc
 }
 

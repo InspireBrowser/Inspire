@@ -68,7 +68,7 @@ REM -- Copy in the plugins
 mkdir %BUILD_DIRECTORY%\plugins
 xcopy /Y plugins\systemjs.dll %BUILD_DIRECTORY%\plugins
 xcopy /Y plugins\browserjs.dll %BUILD_DIRECTORY%\plugins
-xcopy /Y plugins\videojs.dll %BUILD_DIRECTORY%\plugins
+xcopy /Y plugins\videojs_vlc.dll %BUILD_DIRECTORY%\plugins
 xcopy /Y plugins\commandserver.dll %BUILD_DIRECTORY%\plugins
 
 REM -- Copy in the VLC dependencies

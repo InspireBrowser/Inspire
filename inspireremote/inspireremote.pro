@@ -53,8 +53,8 @@ HEADERS += \
     CommandSendingSocket.h \
     CommandSender.h
 
-INCLUDEPATH += ../inspirebrowser/inspirelib
-LIBS += -L../inspirebrowser/
+INCLUDEPATH += ../inspirelib
+LIBS += -L../
 LIBS += -linspirelib
 
 # INSTALL INFORMATION
@@ -66,9 +66,9 @@ unix {
 
 win32 {
 	CONFIG(debug, release|debug) {
-		LIBS += -L../inspirebrowser/debug/
+		LIBS += -L../debug/
 	}
 	CONFIG(release, release|debug) {
-		LIBS += -L../inspirebrowser/release/
+		LIBS += -L../release/
 	}
 }

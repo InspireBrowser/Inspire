@@ -9,18 +9,20 @@ CONFIG   += warn_on silent qxt
 QXT      += core
 
 TEMPLATE = lib
-TARGET = $$qtLibraryTarget(browserjs)
+TARGET = $$qtLibraryTarget(commandserver)
 CONFIG += plugin
 
-SOURCES += IBrowserJSBinding.cpp \
-    BrowserJSPlugin.cpp
+SOURCES += CommandServer.cpp \
+    CommandSocket.cpp \
+    CommandServerPlugin.cpp
 
-HEADERS += IBrowserJSBinding.h \
-    BrowserJSPlugin.h
+HEADERS += CommandServer.h \
+    CommandSocket.h \
+    CommandServerPlugin.h
 
-INCLUDEPATH += ../../inspirelib/
+INCLUDEPATH += ../inspirelib/
 LIBS += -linspirelib
-DESTDIR = ../../plugins
+DESTDIR = ../plugins
 	
 # INSTALL INFORMATION
 unix {
@@ -31,9 +33,9 @@ unix {
 
 win32 {
 	CONFIG(debug, release|debug) {
-		LIBS += -L../../debug/
+		LIBS += -L../debug/
 	}
 	CONFIG(release, release|debug) {
-		LIBS += -L../../release/
+		LIBS += -L../release/
 	}
 }

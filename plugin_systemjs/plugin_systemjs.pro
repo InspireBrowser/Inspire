@@ -9,20 +9,18 @@ CONFIG   += warn_on silent qxt
 QXT      += core
 
 TEMPLATE = lib
-TARGET = $$qtLibraryTarget(commandserver)
+TARGET = $$qtLibraryTarget(systemjs)
 CONFIG += plugin
 
-SOURCES += CommandServer.cpp \
-    CommandSocket.cpp \
-    CommandServerPlugin.cpp
+SOURCES += SystemJSPlugin.cpp \
+    ISystemJSBinding.cpp
 
-HEADERS += CommandServer.h \
-    CommandSocket.h \
-    CommandServerPlugin.h
+HEADERS += SystemJSPlugin.h \
+    ISystemJSBinding.h
 
-INCLUDEPATH += ../../inspirelib/
+INCLUDEPATH += ../inspirelib/
 LIBS += -linspirelib
-DESTDIR = ../../plugins
+DESTDIR = ../plugins
 	
 # INSTALL INFORMATION
 unix {
@@ -33,9 +31,9 @@ unix {
 
 win32 {
 	CONFIG(debug, release|debug) {
-		LIBS += -L../../debug/
+		LIBS += -L../debug/
 	}
 	CONFIG(release, release|debug) {
-		LIBS += -L../../release/
+		LIBS += -L../release/
 	}
 }

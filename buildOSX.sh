@@ -2,7 +2,7 @@
 
 # Shell script to build all components
 
-source inspirebrowser/packaging/environment.sh
+source packaging/environment.sh
 
 # check for macdeployqt executable
 echo -n Checking for macdeployqt...
@@ -23,7 +23,7 @@ else
 fi
 
 # Check the dependencies are downloaded and setup
-cd inspirebrowser/dependencies/
+cd dependencies/
 ./downloadDependenciesOSX.sh
 if [ $? != 0 ]; then
 	exit 1;
@@ -49,7 +49,7 @@ mkdir ${BUILD_DIRECTORY}
 
 # Move the compiled app into the build dir
 echo -n "Copying executable to ${BUILD_DIRECTORY} directory... "
-mv inspirebrowser/inspirebrowser.app ${BUILD_DIRECTORY}/
+mv inspirebrowser.app ${BUILD_DIRECTORY}/
 if [ $? != 0 ]; then
 	exit 1;
 else
@@ -115,11 +115,11 @@ done
 echo "OK"
 
 echo -n "Copying VLC libraries to ${BUILD_DIRECTORY} directory... "
-cp -R inspirebrowser/dependencies/osx/${VLC_VERSION}/Contents/MacOS/lib ${BUILD_DIRECTORY}/inspirebrowser.app/Contents/MacOS/
+cp -R dependencies/osx/${VLC_VERSION}/Contents/MacOS/lib ${BUILD_DIRECTORY}/inspirebrowser.app/Contents/MacOS/
 if [ $? != 0 ]; then
 	exit 1;
 fi
-cp -R inspirebrowser/dependencies/osx/${VLC_VERSION}/Contents/MacOS/plugins ${BUILD_DIRECTORY}/inspirebrowser.app/Contents/MacOS
+cp -R dependencies/osx/${VLC_VERSION}/Contents/MacOS/plugins ${BUILD_DIRECTORY}/inspirebrowser.app/Contents/MacOS
 if [ $? != 0 ]; then
 	exit 1;
 fi

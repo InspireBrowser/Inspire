@@ -4,13 +4,13 @@
 REM -- Batch file to build all components
 
 REM -- Include environment settings
-cd inspirebrowser/packaging/
+cd packaging/
 call environment.bat
 if ERRORLEVEL 1 (
 	ECHO 1 | CHOICE /C:1234567890 /N > NUL
 	goto End
 )
-cd ../../
+cd ../
 
 where candle.exe > NUL
 if ERRORLEVEL 1 (
@@ -29,13 +29,13 @@ if ERRORLEVEL 1 (
 )
 
 REM -- Check the dependencies are downloaded and setup
-cd inspirebrowser/dependencies/
+cd dependencies/
 call downloadDependencies.bat
 if ERRORLEVEL 1 (
 	ECHO 1 | CHOICE /C:1234567890 /N > NUL
 	goto End
 )
-cd ../../
+cd ../
 
 REM -- Compile the programs
 echo Creating Makefile...
@@ -58,24 +58,24 @@ if exist %BUILD_DIRECTORY% (
 
 REM -- Create the %BUILD_DIRECTORY% dir and copy the created executables in
 mkdir %BUILD_DIRECTORY%
-xcopy /Y inspirebrowser\release\inspirebrowser.exe %BUILD_DIRECTORY%
-xcopy /Y inspirebrowser\release\inspirelib.dll %BUILD_DIRECTORY%
+xcopy /Y release\inspirebrowser.exe %BUILD_DIRECTORY%
+xcopy /Y release\inspirelib.dll %BUILD_DIRECTORY%
 xcopy /Y inspireremote\release\inspireremote.exe %BUILD_DIRECTORY%
-xcopy /Y inspirebrowser\packaging\InspireBrowser.wxs %BUILD_DIRECTORY%
-xcopy /Y inspirebrowser\packaging\InspireLicense.rtf %BUILD_DIRECTORY%
+xcopy /Y packaging\InspireBrowser.wxs %BUILD_DIRECTORY%
+xcopy /Y packaging\InspireLicense.rtf %BUILD_DIRECTORY%
 
 REM -- Copy in the plugins
 mkdir %BUILD_DIRECTORY%\plugins
-xcopy /Y inspirebrowser\plugins\systemjs.dll %BUILD_DIRECTORY%\plugins
-xcopy /Y inspirebrowser\plugins\browserjs.dll %BUILD_DIRECTORY%\plugins
-xcopy /Y inspirebrowser\plugins\videojs.dll %BUILD_DIRECTORY%\plugins
-xcopy /Y inspirebrowser\plugins\commandserver.dll %BUILD_DIRECTORY%\plugins
+xcopy /Y plugins\systemjs.dll %BUILD_DIRECTORY%\plugins
+xcopy /Y plugins\browserjs.dll %BUILD_DIRECTORY%\plugins
+xcopy /Y plugins\videojs.dll %BUILD_DIRECTORY%\plugins
+xcopy /Y plugins\commandserver.dll %BUILD_DIRECTORY%\plugins
 
 REM -- Copy in the VLC dependencies
-xcopy /Y inspirebrowser\dependencies\win32\%VLC_VERSION%\libvlc.dll %BUILD_DIRECTORY%
-xcopy /Y inspirebrowser\dependencies\win32\%VLC_VERSION%\libvlccore.dll %BUILD_DIRECTORY%
+xcopy /Y dependencies\win32\%VLC_VERSION%\libvlc.dll %BUILD_DIRECTORY%
+xcopy /Y dependencies\win32\%VLC_VERSION%\libvlccore.dll %BUILD_DIRECTORY%
 mkdir %BUILD_DIRECTORY%\plugins\vlc_plugins
-xcopy /S /Y /I inspirebrowser\dependencies\win32\%VLC_VERSION%\plugins %BUILD_DIRECTORY%\vlc_plugins
+xcopy /S /Y /I dependencies\win32\%VLC_VERSION%\plugins %BUILD_DIRECTORY%\vlc_plugins
 
 REM -- Copy in the Ming dependencies
 xcopy /Y %QTDIR%\bin\libgcc_s_dw2-1.dll %BUILD_DIRECTORY%

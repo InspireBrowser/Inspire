@@ -5,5 +5,10 @@
 TEMPLATE = subdirs
 
 # Directories
+SUBDIRS += inspirelib
 SUBDIRS += inspirebrowser
 SUBDIRS += inspireremote
+SUBDIRS += plugin_browserjs
+SUBDIRS += plugin_systemjs
+SUBDIRS += plugin_videojs_vlc
+SUBDIRS += plugin_commandserver

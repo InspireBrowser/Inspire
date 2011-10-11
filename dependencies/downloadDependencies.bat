@@ -63,8 +63,33 @@ if NOT EXIST win32\%VLC_VERSION% (
 	echo Checking for VLC SDK... found.
 )
 
+for /f "delims=" %%a in ('where qmake') do @set QMAKE_PATH=%%a 
+
+for %%F in (%QMAKE_PATH%) do set SIMULATOR_QMAKE_PATH=%%~dpF
+set SIMULATOR_QMAKE_PATH=%SIMULATOR_QMAKE_PATH%..\..\..\..\..\Simulator\Qt\mingw\bin\qmake.exe
+for %%F in (%SIMULATOR_QMAKE_PATH%) do set SIMULATOR_QMAKE_PATH=%%~fF
+
+call:setupLibQxt %QMAKE_PATH%
+IF EXIST %SIMULATOR_QMAKE_PATH% (
+	call:setupLibQxt %SIMULATOR_QMAKE_PATH%
+)
+
+echo.
+echo *********************************************************
+echo *                                                       *
+echo *  Dependencies downloaded and installed successfully.  *
+echo *                                                       *
+echo *********************************************************
+echo.
+
+:End
+if not defined INNER_SCRIPT pause
+GOTO:EOF
+
+:setupLibQxt
+echo Checking for libQxt with qmake executable %~1
 REM -- Find the path the mkspecs are stored
-for /f "delims=" %%a in ('qmake -query QMAKE_MKSPECS') do @set SPECS_PATH=%%a 
+for /f "delims=" %%a in ('%~1 -query QMAKE_MKSPECS') do @set SPECS_PATH=%%a 
 
 REM -- Take the last character away as it's a space or a tab or something
 set SPECS_PATH=%SPECS_PATH:~0,-1%
@@ -107,25 +132,19 @@ IF NOT EXIST %SPECS_PATH%\features\qxt.prf (
 	echo Configuring libQXT...
 	echo.
 	cd win32\libqxt
-	call configure.bat -debug_and_release -nomake berkeley -nomake designer -nomake gui -nomake network -nomake sql -nomake web -nomake zeroconf
+	IF EXIST Makefile (
+		mingw32-make distclean
+	)
+	call configure.bat -qmake-bin %~1 -debug_and_release -nomake berkeley -nomake designer -nomake gui -nomake network -nomake sql -nomake web -nomake zeroconf
 	
 	echo Compiling libQXT...
 	echo.
 	mingw32-make
 	mingw32-make install
+	cd ..\..
 	echo.
 	echo libQXT has been installed.
 ) else (
 	echo Checking if libQXT is installed... found.
 )
-
-echo.
-echo *********************************************************
-echo *                                                       *
-echo *  Dependencies downloaded and installed successfully.  *
-echo *                                                       *
-echo *********************************************************
-echo.
-
-:End
-if not defined INNER_SCRIPT pause
+GOTO:EOF

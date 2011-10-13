@@ -17,6 +17,7 @@ void PluginManager::LoadPlugins()
 {
 	QDir pluginsDir = this->GetPluginsDir();
 
+    qxtLog->info("Scanning for plugins in: " + pluginsDir.absolutePath());
 	foreach (QString fileName, pluginsDir.entryList(QDir::Files)) {
 		this->LoadPluginFromFile(pluginsDir.absoluteFilePath(fileName));
 	}
@@ -106,6 +107,12 @@ QDir PluginManager::GetPluginsDir()
 #endif
 
 	if(!pluginsDir.cd("plugins")) {
+#if defined(Q_OS_UNIX)
+        //if the local plugins dir doesn't exist try the global one
+        QDir pluginsDir("/usr/lib/" + qApp->arguments().at(0) + "/");
+        if(pluginsDir.cd("plugins"))
+            return pluginsDir;
+#endif
 		qxtLog->error("Plugins directory does not exist");
 	}
 

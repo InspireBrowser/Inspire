@@ -7,7 +7,7 @@ TEMPLATE = subdirs
 # Directories
 SUBDIRS += inspirelib
 SUBDIRS += browser
-SUBDIRS += inspireremote
+SUBDIRS += remote
 SUBDIRS += plugin_browserjs
 SUBDIRS += plugin_systemjs
 SUBDIRS += plugin_videojs_vlc

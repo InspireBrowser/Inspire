@@ -24,6 +24,7 @@ HEADERS += IVideoJSBinding.h \
 
 INCLUDEPATH += ../inspirelib/
 LIBS += -linspirelib
+LIBS += -L../
 DESTDIR = ../plugins
 	
 #define the win32 VLC includes and libs

@@ -22,6 +22,7 @@ HEADERS += CommandServer.h \
 
 INCLUDEPATH += ../inspirelib/
 LIBS += -linspirelib
+LIBS += -L../
 DESTDIR = ../plugins
 	
 # INSTALL INFORMATION

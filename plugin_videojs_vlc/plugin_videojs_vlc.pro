@@ -27,6 +27,13 @@ LIBS += -linspirelib
 LIBS += -L../
 DESTDIR = ../plugins
 	
+# INSTALL INFORMATION
+unix {
+	plugin.path = /usr/lib/inspirebrowser/plugins/
+	plugin.files = $$TARGET
+	INSTALLS += plugin
+}
+
 #define the win32 VLC includes and libs
 win32 {
 	INCLUDEPATH += ../dependencies\\win32\\vlc-1.1.9\\sdk\\include
@@ -51,11 +58,4 @@ macx {
 	INCLUDEPATH += ../dependencies/osx/vlc-1.1.9/Contents/MacOS/include
 	LIBS += -L../dependencies/osx/vlc-1.1.9/Contents/MacOS/lib
 	LIBS += -lvlc
-}
-
-# INSTALL INFORMATION
-unix {
-	plugin.path = /usr/share/inspirebrowser/plugins/
-	plugin.files = $$TARGET
-	INSTALLS += plugin
 }

@@ -23,13 +23,20 @@ VERSION_MAJOR = 0
 VERSION_MINOR = 0
 VERSION_PATCH = 1
 
-REVISION = $$system(svnversion)
 VERSION = '$${VERSION_MAJOR}.$${VERSION_MINOR}.$${VERSION_PATCH}'
-VERSTR = '\\"$${VERSION}.$${REVISION}\\"'
 
-#if we are a packaged version then there is no svn revision
-equals(REVISION, exported){
-	VERSTR = '\\"$${VERSION}\\"'
+# if we are creating nightlies append the current date to the version
+CONFIG(nightlies) {
+	win32 {
+		REVISION = $$system(%date:~10%%date:~4,2%%date:~7,2%)
+	}
+	!win32 {
+		REVISION = $$system(date +%Y%m%d)
+	}
+	VERSTR = '\\"$${VERSION}.$${REVISION}\\"'
+}
+!CONFIG(nightlies) {
+        VERSTR = '\\"$${VERSION}\\"'
 }
 
 #add the organsiation details and version info as DEFINES so they can be used by the program

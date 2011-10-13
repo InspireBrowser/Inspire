@@ -59,13 +59,10 @@ INCLUDEPATH += ../inspirelib
 LIBS += -L../
 LIBS += -linspirelib
 
-INCLUDEPATH += .
-
 # INSTALL INFORMATION
 unix {
-	executable.path = /usr/bin/
-	executable.files = $$TARGET
-	INSTALLS += executable
+	target.path = /usr/bin/
+	INSTALLS += target
 }
 
 win32 {

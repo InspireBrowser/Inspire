@@ -40,7 +40,6 @@ win32 {
 
 # INSTALL INFORMATION
 unix {
-	executable.path = /usr/lib/
-	executable.files = $$TARGET
-	INSTALLS += executable
+	target.path = /usr/lib/
+	INSTALLS += target
 }

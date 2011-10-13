@@ -27,9 +27,8 @@ DESTDIR = ../plugins
 	
 # INSTALL INFORMATION
 unix {
-	plugin.path = /usr/lib/inspirebrowser/plugins/
-	plugin.files = $$TARGET
-	INSTALLS += plugin
+	target.path = /usr/lib/inspirebrowser/plugins/
+	INSTALLS += target
 }
 
 win32 {

@@ -63,6 +63,10 @@ QString OsUtils::operatingSystemName()
             return "Mac OS X 10.5 Leopard";
         case QSysInfo::MV_10_6:
             return "Mac OS X 10.6 Snow Leopard";
+#if QT_VERSION > 0x040800
+        case QSysInfo::MV_10_7:
+            return "Mac OS X 10.7 Lion";
+#endif
         default:
             return "Unknown Mac OS";
     }

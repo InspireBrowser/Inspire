@@ -28,7 +28,7 @@ cd dependencies/
 if [ $? != 0 ]; then
 	exit 1;
 fi
-cd ../../
+cd ../
 
 # Compile the programs
 echo "Creating Makefile..."

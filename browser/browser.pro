@@ -9,6 +9,7 @@ QT       += core gui webkit
 TARGET = inspirebrowser
 TEMPLATE = app
 CONFIG += warn_on silent qxt
+CONFIG -= app_bundle
 QXT += core
 
 #define the organisation details
@@ -76,4 +77,5 @@ win32 {
 	}
 } else {
 	DESTDIR = ../
+    DESTDIR = ../
 }

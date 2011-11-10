@@ -36,6 +36,7 @@
 #include "MainWindow.h"
 #include "PluginManager.h"
 #include "CommandSystem.h"
+#include "Settings.h"
 
 /*! @brief Constructs the main window for the Inspire Browser
  *  @param parent The parent widget
@@ -149,12 +150,9 @@ void MainWindow::createToolBars()
  */
 void MainWindow::resizeWindow()
 {
-    #warning TODO: Properly implement resizing window from settings
-    QSettings settings;
-
-    if(!settings.value("application/fullscreen", false).toBool()){
-        int width = settings.value("application/width", 1280).toInt();
-        int height = settings.value("application/height", 720).toInt();
+    if(!SETTING("application/fullscreen", false).toBool()){
+        int width = SETTING("application/width", 1280).toInt();
+        int height = SETTING("application/height", 720).toInt();
 
         this->resize(width, height);
     }
@@ -190,8 +188,7 @@ void MainWindow::updateAddressBar(QUrl url)
  */
 void MainWindow::loadHomePage()
 {
-    QSettings settings;
-    loadPage(QUrl(settings.value("browser/homepages", "about:blank").toString()));
+    loadPage(QUrl(SETTING("browser/homepages", "about:blank").toString()));
 }
 
 /*! @brief Loads the URL in the address bar into the current web view

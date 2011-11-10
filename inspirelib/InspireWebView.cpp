@@ -29,10 +29,11 @@
 
 #include "InspireWebView.h"
 
-#include <QSettings>
 #include <QWebFrame>
 #include <QDesktopServices>
 #include <QxtLogger>
+
+#include "Settings.h"
 
 /*! @brief Creates an InspireWebView widget
  *  @param parent The parent widget
@@ -40,8 +41,6 @@
 InspireWebView::InspireWebView(QWidget *parent) :
         QWebView(parent)
 {
-    QSettings settings;
-
     this->settings()->setAttribute(QWebSettings::DnsPrefetchEnabled, true);
     this->settings()->setAttribute(QWebSettings::PluginsEnabled, false);
     this->settings()->setAttribute(QWebSettings::SpatialNavigationEnabled, false);
@@ -51,8 +50,7 @@ InspireWebView::InspireWebView(QWidget *parent) :
 
     this->settings()->setLocalStoragePath(QDesktopServices::storageLocation(QDesktopServices::DataLocation));
 
-    settings.setValue("browser/developerModeEnabled", true);
-    if(settings.value("browser/developerModeEnabled", false).toBool())
+    if(SETTING("browser/developerModeEnabled", false).toBool())
         this->settings()->setAttribute(QWebSettings::DeveloperExtrasEnabled, true);
 
     connect(this->page()->mainFrame(), SIGNAL(javaScriptWindowObjectCleared()), this, SLOT(addJavascriptObjectsToFrame()));
@@ -126,9 +124,7 @@ void InspireWebView::addJavascriptObjectsToFrame()
 {
     QWebFrame *frame = (QWebFrame*)sender();
 
-    QSettings settings;
-
-    if(settings.value("browser/restrictJavascriptApi", false).toBool()){
+    if(SETTING("browser/restrictJavascriptApi", false).toBool()){
         qxtLog->debug("Restrict Javascript API is enabled to check the URL");
 
         /* If we're restricting the javascript API to a list of allowed URL's then compare
@@ -137,7 +133,7 @@ void InspireWebView::addJavascriptObjectsToFrame()
         bool match = false;
 
         qxtLog->debug("Looking for " + frame->url().toString() + " in list of allowed API URLs");
-        QStringList allowedUrls = settings.value("browser/allowedApiUrls").toStringList();
+        QStringList allowedUrls = SETTING("browser/allowedApiUrls", QVariant()).toStringList();
         for(int i=0; i<allowedUrls.count(); i++){
             qxtLog->debug("Comparing to " + allowedUrls[i]);
             QRegExp exp(allowedUrls[i], Qt::CaseInsensitive, QRegExp::Wildcard);

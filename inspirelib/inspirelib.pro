@@ -17,7 +17,8 @@ SOURCES += GenericLayout.cpp \
     PluginManager.cpp \
     RemoteCommand.cpp \
     OsUtils.cpp \
-    CommandSystem.cpp
+    CommandSystem.cpp \
+    Settings.cpp
 
 HEADERS  += MainWindow.h \
     GenericLayout.h \
@@ -27,7 +28,8 @@ HEADERS  += MainWindow.h \
     RemoteCommand.h \
     OsUtils.h \
     CommandSystem.h \
-    JavascriptBinding.h
+    JavascriptBinding.h \
+    Settings.h
 
 INCLUDEPATH += .
 
@@ -43,3 +45,5 @@ unix {
 	target.path = /usr/lib/
 	INSTALLS += target
 }
+
+

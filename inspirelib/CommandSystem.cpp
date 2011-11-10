@@ -1,11 +1,11 @@
 #include "CommandSystem.h"
 
 #include <QCoreApplication>
-#include <QSettings>
 #include <QNetworkInterface>
 
 #include "RemoteCommand.h"
 #include "OsUtils.h"
+#include "Settings.h"
 
 CommandSystem::CommandSystem(QObject *parent) : QObject(parent)
 {
@@ -91,7 +91,5 @@ void CommandSystem::handleGetConfigCommand(RemoteCommand *command)
 
     QString name = command->parameter(0);
 
-    QSettings settings;
-
-    command->setResponse(true, settings.value(name).toString());
+    command->setResponse(true, SETTING(name, "").toString());
 }

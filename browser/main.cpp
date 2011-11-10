@@ -27,12 +27,12 @@
 #include <QApplication>
 
 #include <QDebug>
-#include <QSettings>
 #include <QxtLogger>
 #include <QxtBasicFileLoggerEngine>
 #include <getopt.h>
 
 #include "MainWindow.h"
+#include "Settings.h"
 
 int usage(QString errorMessage = "")
 {
@@ -61,6 +61,11 @@ int usage(QString errorMessage = "")
 int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
+
+    QCoreApplication::setOrganizationName(ORGANISATION_NAME);
+    QCoreApplication::setOrganizationDomain(ORGANISATION_DOMAIN);
+    QCoreApplication::setApplicationName(APPLICATION_NAME);
+    QCoreApplication::setApplicationVersion(VERSION);
 
     int logLevel = 2;
 
@@ -126,21 +131,9 @@ int main(int argc, char *argv[])
 
     qxtLog->info("Starting Application");
 
-    //configure the following settings so we can use the default constructor in QSettings
-    qxtLog->debug("Setting Organisation Name to " + QString(ORGANISATION_NAME));
-    QCoreApplication::setOrganizationName(ORGANISATION_NAME);
-    qxtLog->debug("Setting Organisation Domain to " + QString(ORGANISATION_DOMAIN));
-    QCoreApplication::setOrganizationDomain(ORGANISATION_DOMAIN);
-    qxtLog->debug("Setting Application Name to " + QString(APPLICATION_NAME));
-    QCoreApplication::setApplicationName(APPLICATION_NAME);
-    qxtLog->debug("Setting Version to " + QString(VERSION));
-    QCoreApplication::setApplicationVersion(VERSION);
-
-    QSettings settings;
-
     MainWindow w;
 
-    if(settings.value("application/fullscreen", false).toBool()) {
+    if(SETTING("application/fullscreen", false).toBool()) {
         qxtLog->debug("Showing full screen");
         w.showFullScreen();
     }

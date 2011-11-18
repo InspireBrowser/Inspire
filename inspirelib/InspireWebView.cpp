@@ -50,7 +50,7 @@ InspireWebView::InspireWebView(QWidget *parent) :
 
     this->settings()->setLocalStoragePath(QDesktopServices::storageLocation(QDesktopServices::DataLocation));
 
-    if(SETTING("browser/developerModeEnabled", false).toBool())
+    if(SETTING("browser-developer-mode", false).toBool())
         this->settings()->setAttribute(QWebSettings::DeveloperExtrasEnabled, true);
 
     connect(this->page()->mainFrame(), SIGNAL(javaScriptWindowObjectCleared()), this, SLOT(addJavascriptObjectsToFrame()));
@@ -124,7 +124,7 @@ void InspireWebView::addJavascriptObjectsToFrame()
 {
     QWebFrame *frame = (QWebFrame*)sender();
 
-    if(SETTING("browser/restrictJavascriptApi", false).toBool()){
+    if(SETTING("browser-restrict-js-api", false).toBool()){
         qxtLog->debug("Restrict Javascript API is enabled to check the URL");
 
         /* If we're restricting the javascript API to a list of allowed URL's then compare
@@ -133,7 +133,7 @@ void InspireWebView::addJavascriptObjectsToFrame()
         bool match = false;
 
         qxtLog->debug("Looking for " + frame->url().toString() + " in list of allowed API URLs");
-        QStringList allowedUrls = SETTING("browser/allowedApiUrls", QVariant()).toStringList();
+        QStringList allowedUrls = SETTING("browser-allowed-api-urls", QVariant()).toStringList();
         for(int i=0; i<allowedUrls.count(); i++){
             qxtLog->debug("Comparing to " + allowedUrls[i]);
             QRegExp exp(allowedUrls[i], Qt::CaseInsensitive, QRegExp::Wildcard);

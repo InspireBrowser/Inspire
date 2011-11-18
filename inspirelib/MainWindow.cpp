@@ -150,9 +150,9 @@ void MainWindow::createToolBars()
  */
 void MainWindow::resizeWindow()
 {
-    if(!SETTING("application/fullscreen", false).toBool()){
-        int width = SETTING("application/width", 1280).toInt();
-        int height = SETTING("application/height", 720).toInt();
+    if(!SETTING("application-show-fullscreen", false).toBool()){
+        int width = SETTING("application-width", 1280).toInt();
+        int height = SETTING("application-height", 720).toInt();
 
         this->resize(width, height);
     }
@@ -188,7 +188,7 @@ void MainWindow::updateAddressBar(QUrl url)
  */
 void MainWindow::loadHomePage()
 {
-    loadPage(QUrl(SETTING("browser/homepages", "about:blank").toString()));
+    loadPage(QUrl(SETTING("browser-homepage", "about:blank").toString()));
 }
 
 /*! @brief Loads the URL in the address bar into the current web view

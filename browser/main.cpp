@@ -38,16 +38,34 @@ int usage(QString errorMessage = "")
 {
     QStringList arguments = QCoreApplication::arguments();
 
-    qDebug() << "Usage: " << arguments.at(0) << " <options> <url> <url>";
-    qDebug() << "";
+    qDebug() << "Usage: " << arguments.at(0) << " <options> <url>[ <url>]";
     if(errorMessage != "") {
-        qDebug() << "Error: " << errorMessage;
         qDebug() << "";
+        qDebug() << "Error: " << errorMessage;
     }
-    qDebug() << "Options:";
-    qDebug() << "\t --help              Show this help message";
-    qDebug() << "\t --log-level <int>   Sets the log level from 0 to 7 (default 2)";
-    qDebug() << "\t --log-file <path>   Sets the file name to log to";
+
+    QVectorIterator<SettingInfo> i(Settings::Get()->settingInfo());
+    while (i.hasNext()) {
+        SettingInfo info = i.next();
+        switch(info.type) {
+            case SETTING_TITLE:
+                qDebug() << "\n" << info.description << ":";
+                break;
+            case SETTING_INT:
+                qDebug() << "\t --" << info.name << " <int>\t\t" << info.description;
+                break;
+            case SETTING_STRING:
+                qDebug() << "\t --" << info.name << " <string>\t\t" << info.description;
+                break;
+            case SETTING_STRINGLIST:
+                qDebug() << "\t --" << info.name << " <string>[,<string>]\t\t" << info.description;
+                break;
+            case SETTING_BOOL:
+                qDebug() << "\t --" << info.name << "\t\t" << info.description;
+                break;
+        }
+    }
+
     qDebug() << "";
 
     return errorMessage != "" ? 1 : 0;
@@ -67,6 +85,7 @@ int main(int argc, char *argv[])
     QCoreApplication::setApplicationName(APPLICATION_NAME);
     QCoreApplication::setApplicationVersion(VERSION);
 
+    Settings::Get()->parseInspireArguments(argc, argv);
     int logLevel = 2;
 
     while(1) {
@@ -133,7 +152,7 @@ int main(int argc, char *argv[])
 
     MainWindow w;
 
-    if(SETTING("application/fullscreen", false).toBool()) {
+    if(SETTING("application-show-fullscreen", false).toBool()) {
         qxtLog->debug("Showing full screen");
         w.showFullScreen();
     }

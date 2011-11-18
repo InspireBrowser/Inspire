@@ -35,6 +35,7 @@
 #include <QxtLogger>
 
 #include "OsUtils.h"
+#include "Settings.h"
 
 /*! @brief Constructor for creating the System Javascript Binding
  *  @param  parent  The parent object
@@ -105,8 +106,7 @@ QVariant ISystemJSBinding::GetConfig(const QString name) const
 {
     qxtLog->trace(Q_FUNC_INFO);
 
-    QSettings settings;
-    QVariant value = settings.value(name);
+    QVariant value = SETTING(name, QVariant());
 
     if(value.type() == QVariant::Bool)
         return value.toBool();

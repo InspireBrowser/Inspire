@@ -41,15 +41,14 @@
 /*! @brief Constructs the main window for the Inspire Browser
  *  @param parent The parent widget
  */
-MainWindow::MainWindow(QWidget* parent) :
-        QMainWindow(parent)
+MainWindow::MainWindow(PluginManager* manager, QWidget* parent) :
+    QMainWindow(parent), _pluginManager(manager)
 {
     //initialise the command system
     _commandSystem = new CommandSystem(this);
 
-    //create the plugin manager and load all plugins
-    _pluginManager = new PluginManager(this);
-    _pluginManager->LoadPlugins();
+    //take control of the plugin manager
+    this->_pluginManager->setParent(this);
 
     _webView = new InspireWebView(this);
     _webView->page()->setLinkDelegationPolicy(QWebPage::DelegateAllLinks);

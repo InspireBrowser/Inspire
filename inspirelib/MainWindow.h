@@ -53,7 +53,7 @@ public:
         /*! @brief Constructs the main window for the Inspire Browser
          *  @param parent The parent widget
          */
-        explicit MainWindow(QWidget* parent = 0);
+        explicit MainWindow(PluginManager* manager, QWidget* parent = 0);
 
         /*! @brief Returns the layout manager for the MainWindow
          *  @return The layout manager for the MainWindow

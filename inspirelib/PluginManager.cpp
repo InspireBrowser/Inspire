@@ -7,6 +7,7 @@
 #include "GenericPlugin.h"
 #include "MainWindow.h"
 #include "InspireWebView.h"
+#include "Settings.h"
 
 PluginManager::PluginManager(QObject* parent) :
         QObject(parent)
@@ -15,9 +16,14 @@ PluginManager::PluginManager(QObject* parent) :
 
 void PluginManager::LoadPlugins()
 {
+        if(SETTING("plugins-disable", false).toBool()) {
+                qxtLog->info("Plugin loading disabled");
+                return;
+        }
+
 	QDir pluginsDir = this->GetPluginsDir();
 
-    qxtLog->info("Scanning for plugins in: " + pluginsDir.absolutePath());
+        qxtLog->info("Scanning for plugins in: " + pluginsDir.absolutePath());
 	foreach (QString fileName, pluginsDir.entryList(QDir::Files)) {
 		this->LoadPluginFromFile(pluginsDir.absoluteFilePath(fileName));
 	}

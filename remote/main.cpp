@@ -69,6 +69,10 @@ int usage(bool extraHelp = false, QString errorMessage = "")
         qDebug() << "\t Parameters: string name";
         qDebug() << "\t Description: Returns a configuration option from the client";
         qDebug() << "";
+        qDebug() << "\t Name: SET_CONFIG";
+        qDebug() << "\t Parameters: string name, string value, boolean persist (optional)";
+        qDebug() << "\t Description: Sets a configuration option on the client";
+        qDebug() << "";
         qDebug() << "\t Name: CHANGE_PAGE";
         qDebug() << "\t Parameters: string url";
         qDebug() << "\t Description: Instructs the browser to change to that page";

@@ -10,6 +10,8 @@ class BrowserJSPlugin : public QObject, public GenericPlugin
 	Q_INTERFACES(GenericPlugin)
 
 public:
+	explicit BrowserJSPlugin(QObject* parent = 0);
+
 	bool InitialisePlugin();
 	bool DeInitialisePlugin();
 

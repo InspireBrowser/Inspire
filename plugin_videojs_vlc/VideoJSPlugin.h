@@ -10,6 +10,8 @@ class VideoJSPlugin : public QObject, public GenericPlugin
 	Q_INTERFACES(GenericPlugin)
 
 public:
+	explicit VideoJSPlugin(QObject* parent = 0);
+
 	bool InitialisePlugin();
 	bool DeInitialisePlugin();
 

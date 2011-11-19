@@ -10,6 +10,8 @@ class SystemJSPlugin : public QObject, public GenericPlugin
     Q_INTERFACES(GenericPlugin)
 
 public:
+    explicit SystemJSPlugin(QObject* parent = 0);
+
     bool InitialisePlugin();
     bool DeInitialisePlugin();
 

@@ -11,6 +11,8 @@ class CommandServerPlugin : public QObject, public GenericPlugin
 	Q_INTERFACES(GenericPlugin)
 
 public:
+	explicit CommandServerPlugin(QObject* parent = 0);
+
 	bool InitialisePlugin();
 	bool DeInitialisePlugin();
 

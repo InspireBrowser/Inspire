@@ -28,6 +28,9 @@ Settings::Settings(QObject *parent) :
     this->addSetting("browser-developer-mode", Settings::Boolean, "Whether to enable developer mode in the browser or not");
     this->addSetting("browser-restrict-js-api", Settings::Boolean, "Whether to only enable the extended JavaScript API for certain websites");
     this->addSetting("browser-allowed-api-urls", Settings::StringList, "A list of URL patterns that if matched enable the extended JavaScript API");
+
+    this->addSetting("plugins", Settings::Title, "Plugin Settings");
+    this->addSetting("plugins-disable", Settings::Boolean, "Disables the loading of plugins");
 }
 
 bool Settings::setValueFromUser(const QString &key, const QString &value, const bool persistSetting)

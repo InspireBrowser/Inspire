@@ -12,6 +12,7 @@ CommandSystem::CommandSystem(QObject *parent) : QObject(parent)
     connect(this, SIGNAL(commandReceived(RemoteCommand*)), this, SLOT(handleGetVersionCommand(RemoteCommand*)));
     connect(this, SIGNAL(commandReceived(RemoteCommand*)), this, SLOT(handleGetMacAddressCommand(RemoteCommand*)));
     connect(this, SIGNAL(commandReceived(RemoteCommand*)), this, SLOT(handleGetConfigCommand(RemoteCommand*)));
+    connect(this, SIGNAL(commandReceived(RemoteCommand*)), this, SLOT(handleSetConfigCommand(RemoteCommand*)));
     connect(this, SIGNAL(commandReceived(RemoteCommand*)), this, SLOT(handleGetOsCommand(RemoteCommand*)));
 }
 
@@ -92,4 +93,27 @@ void CommandSystem::handleGetConfigCommand(RemoteCommand *command)
     QString name = command->parameter(0);
 
     command->setResponse(true, SETTING(name, "").toString());
+}
+
+/*! @brief Handles the SET_CONFIG command
+ *  @param command The command to handle
+ */
+void CommandSystem::handleSetConfigCommand(RemoteCommand *command)
+{
+    if(command->command() != "SET_CONFIG")
+        return;
+
+    if(command->parameterCount() < 1)
+        return command->setResponse(false, "Config variable name not specified");
+    if(command->parameterCount() < 2)
+        return command->setResponse(false, "Config variable value not specified");
+    else if(command->parameterCount() > 3)
+        return command->setResponse(false, "Too many parameters");
+
+    QString name = command->parameter(0);
+    QString value = command->parameter(1);
+    bool persist = command->parameter(2) == "true";
+
+    bool completed = Settings::Get()->setValueFromUser(name, value, persist);
+    command->setResponse(completed, completed ? "Done" : "Couldn't set config value");
 }

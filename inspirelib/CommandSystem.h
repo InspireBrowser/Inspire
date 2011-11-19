@@ -43,6 +43,11 @@ private slots:
      *  @param command The command to handle
      */
     void handleGetConfigCommand(RemoteCommand* command);
+
+    /*! @brief Handles the SET_CONFIG command
+     *  @param command The command to handle
+     */
+    void handleSetConfigCommand(RemoteCommand* command);
 };
 
 #endif // COMMANDSYSTEM_H

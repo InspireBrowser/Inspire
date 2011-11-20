@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source ../packaging/environment.sh
+source ../resources/environment.sh
 
 BASE=http://www.inspirebrowser.org/files/${RELEASE}/dependencies
 

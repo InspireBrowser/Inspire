@@ -4,7 +4,7 @@
 REM -- Batch file to download and setup the Windows Dependencies --
 
 if not defined RELEASE (
-	call ../packaging/environment.bat
+	call ../resources/environment.bat
 ) else (
 	set INNER_SCRIPT=true
 )

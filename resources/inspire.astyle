@@ -1,0 +1,11 @@
+--style=k/r
+--indent=spaces=4
+--indent-switches
+--indent-namespaces
+--indent-preprocessor
+--pad-oper
+--align-pointer=type
+--add-brackets
+--lineend=linux
+--suffix=none
+--formatted

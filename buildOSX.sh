@@ -2,7 +2,7 @@
 
 # Shell script to build all components
 
-source packaging/environment.sh
+source resources/environment.sh
 
 # check for macdeployqt executable
 echo -n Checking for macdeployqt...

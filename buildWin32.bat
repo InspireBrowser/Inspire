@@ -4,7 +4,7 @@
 REM -- Batch file to build all components
 
 REM -- Include environment settings
-cd packaging/
+cd resources/
 call environment.bat
 if ERRORLEVEL 1 (
 	ECHO 1 | CHOICE /C:1234567890 /N > NUL
@@ -61,8 +61,8 @@ mkdir %BUILD_DIRECTORY%
 xcopy /Y release\inspirebrowser.exe %BUILD_DIRECTORY%
 xcopy /Y release\inspirelib.dll %BUILD_DIRECTORY%
 xcopy /Y release\inspireremote.exe %BUILD_DIRECTORY%
-xcopy /Y packaging\InspireBrowser.wxs %BUILD_DIRECTORY%
-xcopy /Y packaging\InspireLicense.rtf %BUILD_DIRECTORY%
+xcopy /Y resources\InspireBrowser.wxs %BUILD_DIRECTORY%
+xcopy /Y resources\InspireLicense.rtf %BUILD_DIRECTORY%
 
 REM -- Copy in the plugins
 mkdir %BUILD_DIRECTORY%\plugins

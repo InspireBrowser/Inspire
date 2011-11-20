@@ -5,6 +5,8 @@
 	BINDIR = /usr/local/bin
 	DATADIR = /usr/local/share
 }
+LIBDIR="$${PREFIX}/lib"
+PLUGINDIR="$${LIBDIR}/inspirebrowser/plugins"
 
 #define the organisation details
 ORGANISATION_NAME='\\"InspireSoft\\"'
@@ -36,6 +38,10 @@ DEFINES += ORGANISATION_NAME=\"$${ORGANISATION_NAME}\"
 DEFINES += ORGANISATION_DOMAIN=\"$${ORGANISATION_DOMAIN}\"
 DEFINES += APPLICATION_NAME=\"$${APPLICATION_NAME}\"
 
-# now add the dash to the version so make dist creates the dir correctly
-VERSION = '-$${VERSION}'
-
+#now add the PREFIX, BINDIR and DATADIR defines so we can find plugins and shared files
+DEFINES += PREFIX=\\\"$${PREFIX}\\\"
+DEFINES += BINDIR=\\\"$${BINDIR}\\\"
+DEFINES += DATADIR=\\\"$${DATADIR}\\\"
+DEFINES += LIBDIR=\\\"$${LIBDIR}\\\"
+DEFINES += PLUGINDIR=\\\"$${PLUGINDIR}\\\"
+#DEFINES += FOO=\\\"$${FOO}\\\"

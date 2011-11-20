@@ -3,8 +3,6 @@
  * applications, providing a JS library for easily including multimedia
  * content.
  *
- * Copyright (C) 2010  Mike
- *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
@@ -21,9 +19,6 @@
  * Filename: VideoWindow.h
  * Class: VideoWindow
  * Description: Provides the JS bindings for controlling a video window
- * Created: 17/12/2010
- * ChangeLog:
- *     17/12/2010 - Mike - Initial Creation
  */
 
 #ifndef VIDEOWINDOW_H

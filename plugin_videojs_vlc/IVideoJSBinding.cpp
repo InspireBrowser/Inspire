@@ -3,8 +3,6 @@
  * applications, providing a JS library for easily including multimedia
  * content.
  *
- * Copyright (C) 2010  Mike
- *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
@@ -21,9 +19,6 @@
  * Filename: IVideoJSBinding.cpp
  * Class: IVideoJSBinding
  * Description: Handles javascript interactions with video
- * Created: 05/12/2010
- * ChangeLog:
- *     05/12/2010 - Mike - Initial Creation
  */
 
 #include "IVideoJSBinding.h"

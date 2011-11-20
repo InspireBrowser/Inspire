@@ -3,8 +3,6 @@
  * applications, providing a JS library for easily including multimedia
  * content.
  *
- * Copyright (C) 2010  mike
- *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
@@ -21,9 +19,6 @@
  * Filename: IBrowserJSBinding.cpp
  * Class: IBrowserJSBinding
  * Description: Handles JavaScript interactions with the browser window
- * Created: 14/11/2010
- * ChangeLog:
- *     14/11/2010 - mike - Initial Creation
  */
 
 #include "IBrowserJSBinding.h"

@@ -1,9 +1,6 @@
 /*
- * InspireBrowser is an open source browser for Kiosk and STB style
- * applications, providing a JS library for easily including multimedia
- * content.
- *
- * Copyright (C) 2010  mike
+ * InspireRemote is an open source application for remote controlling
+ * the Inspire Browser
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,12 +14,9 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
-  *
+ *
  * Filename: main.cpp
  * Description: The entry point for InspireRemote
- * Created: 21/11/2010
- * ChangeLog:
- *     21/11/2010 - mike - Initial Creation
  */
 #include <QCoreApplication>
 #include <getopt.h>

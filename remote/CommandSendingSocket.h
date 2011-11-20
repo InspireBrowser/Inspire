@@ -2,8 +2,6 @@
  * InspireRemote is an open source application for remote controlling
  * the Inspire Browser
  *
- * Copyright (C) 2011  mike
- *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
@@ -21,9 +19,6 @@
  * Class: CommandSendingSocket
  * Description: Handles the sending of a remote command and handling of the
  *              response received
- * Created: 23/01/2011
- * ChangeLog:
- *     23/01/2011 - mike - Initial Creation
  */
 
 #ifndef COMMANDSENDINGSOCKET_H

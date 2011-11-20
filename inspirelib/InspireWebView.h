@@ -3,8 +3,6 @@
  * applications, providing a JS library for easily including multimedia
  * content.
  *
- * Copyright (C) 2010  mike
- *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
@@ -22,9 +20,6 @@
  * Class: InspireWebView
  * Description: The main web view in the InspireBrowser, handles the addition
  *              of extra javascript bindings.
- * Created: 13/11/2010
- * ChangeLog:
- *     13/11/2010 - mike - Initial Creation
  */
 
 #ifndef INSPIREWEBVIEW_H

@@ -3,8 +3,6 @@
  * applications, providing a JS library for easily including multimedia
  * content.
  *
- * Copyright (C) 2010  mike
- *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
@@ -18,14 +16,11 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- * Filename: %FILENAME%
- * Class: %CLASS%
- * Description: <insert description here>
- * Created: 28/12/2010
- * ChangeLog:
- *     28/12/2010 - mike - Initial Creation
+ * Filename: GenericLayout.h
+ * Class: GenericLayout
+ * Description: A UI layout class that manages 1 maximised component and
+ *              multiple floating components
  */
-
 #ifndef GENERICLAYOUT_H
 #define GENERICLAYOUT_H
 

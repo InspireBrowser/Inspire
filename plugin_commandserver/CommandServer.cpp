@@ -3,8 +3,6 @@
  * applications, providing a JS library for easily including multimedia
  * content.
  *
- * Copyright (C) 2011  mike
- *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
@@ -23,9 +21,6 @@
  * Description: Command Server listens for commands sent by InspireRemote
  *              and then emits signals when they arrive so listeners can
  *              handle them
- * Created: 26/01/2011
- * ChangeLog:
- *     26/01/2011 - mike - Initial Creation
  */
 
 #include "CommandServer.h"

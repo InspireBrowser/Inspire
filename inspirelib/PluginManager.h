@@ -30,6 +30,7 @@
 class GenericPlugin;
 class MainWindow;
 class InspireWebView;
+class QPluginLoader;
 
 class PluginManager : public QObject
 {
@@ -50,6 +51,7 @@ public:
     InspireWebView* GetWebView();
 private:
     QHash<QString, GenericPlugin*> _plugins;
+    QHash<QString, QPluginLoader*> _pluginLoaders;
 
     QDir GetPluginsDir();
     bool LoadPluginFromFile(QString fileName);

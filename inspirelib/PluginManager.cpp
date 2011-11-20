@@ -81,9 +81,18 @@ bool PluginManager::UnloadPlugin(QString id)
 {
     qxtLog->info("Trying to unload plugin " + id);
     if(this->IsPluginLoaded(id)) {
-        GenericPlugin* plugin = this->GetPlugin(id);
+        GenericPlugin* plugin = _plugins.value(id);
         if(plugin->DeInitialisePlugin()) {
-#warning TODO: Actually unload plugin
+            _plugins.remove(id);
+            plugin = NULL;
+
+            if(_pluginLoaders.value(id)->unload()) {
+                qxtLog->info("Plugin '" + id + "' unloaded");
+                _pluginLoaders.remove(id);
+            } else {
+                qxtLog->error("Plugin '" + id + "' could not be unloaded");
+            }
+
             return true;
         } else {
             qxtLog->error("Couldn't deinitialise plugin '" + id + "'. Not unloading.");
@@ -158,13 +167,13 @@ bool PluginManager::LoadPluginFromFile(QString fileName)
         return false;
     }
 
-    QPluginLoader pluginLoader(fileName);
-    if(!pluginLoader.load()) {
-        qxtLog->error("Failed to load plugin " + fileName + ": " + pluginLoader.errorString());
+    QPluginLoader* pluginLoader = new QPluginLoader(fileName);
+    if(!pluginLoader->load()) {
+        qxtLog->error("Failed to load plugin " + fileName + ": " + pluginLoader->errorString());
         return false;
     }
 
-    QObject* plugin = pluginLoader.instance();
+    QObject* plugin = pluginLoader->instance();
     if (plugin) {
         plugin->setParent(this);
         GenericPlugin* pluginInstance = qobject_cast<GenericPlugin*>(plugin);
@@ -172,6 +181,7 @@ bool PluginManager::LoadPluginFromFile(QString fileName)
         if (pluginInstance) {
             QString id = pluginInstance->GetId();
             _plugins[id] = pluginInstance;
+            _pluginLoaders[id] = pluginLoader;
             return true;
         } else {
             qxtLog->error("Plugin not a GenericPlugin object");

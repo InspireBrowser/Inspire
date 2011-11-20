@@ -57,7 +57,12 @@ public:
         return this->_mainLayout;
     }
 
-#warning TODO: Add function for getting the plugin manager
+    /*! @brief Returns the plugin manager
+     *  @return The plugin manager
+     */
+    PluginManager* pluginManager() {
+        return _pluginManager;
+    }
 
     /*! @brief Returns the Web View object used in the browser
      *  @return The Web View object used in the browser

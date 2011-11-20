@@ -31,6 +31,7 @@
 #include "GenericPlugin.h"
 #include "MainWindow.h"
 #include "PluginManager.h"
+#include "Settings.h"
 
 /*! @brief Creates the CommandServer
  *  @param parent The parent object
@@ -45,7 +46,14 @@ CommandServer::CommandServer(QObject* parent) :
  */
 bool CommandServer::startListening()
 {
-    return this->listen(QHostAddress::Any, 4774);
+    int portNumber = SETTING("commandserver-port", 4774).toInt();
+
+    if(SETTING_SET("commandserver-bind-address")) {
+        QHostAddress address(SETTING("commandserver-bind-address", "0.0.0.0").toString());
+        return this->listen(address, portNumber);
+    } else {
+        return this->listen(QHostAddress::Any, portNumber);
+    }
 }
 
 /*! @brief Instructs the CommandServer to stop listening */

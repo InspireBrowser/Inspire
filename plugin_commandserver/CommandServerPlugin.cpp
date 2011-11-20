@@ -34,6 +34,9 @@ CommandServerPlugin::CommandServerPlugin(QObject* parent) :
 {
     Settings::Get()->addSetting(this->GetId(), Settings::Title, this->GetName() + " Plugin");
     Settings::Get()->addSetting(this->GetId() + "-disable", Settings::Boolean, "Disable the " + this->GetName() + " Plugin");
+
+    Settings::Get()->addSetting("commandserver-port", Settings::Integer, "The port number to list to [default 4774]");
+    Settings::Get()->addSetting("commandserver-bind-address", Settings::String, "The address to bind to [default 0.0.0.0]");
 }
 
 bool CommandServerPlugin::InitialisePlugin()
@@ -44,8 +47,6 @@ bool CommandServerPlugin::InitialisePlugin()
     }
 
     qxtLog->info("Initialising " + this->GetName());
-
-#warning TODO: Add Config check to see if we should start listening
 
     _server = new CommandServer(this);
     _server->startListening();

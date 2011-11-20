@@ -60,7 +60,7 @@ REM -- Create the %BUILD_DIRECTORY% dir and copy the created executables in
 mkdir %BUILD_DIRECTORY%
 xcopy /Y release\inspirebrowser.exe %BUILD_DIRECTORY%
 xcopy /Y release\inspirelib.dll %BUILD_DIRECTORY%
-xcopy /Y inspireremote\release\inspireremote.exe %BUILD_DIRECTORY%
+xcopy /Y release\inspireremote.exe %BUILD_DIRECTORY%
 xcopy /Y packaging\InspireBrowser.wxs %BUILD_DIRECTORY%
 xcopy /Y packaging\InspireLicense.rtf %BUILD_DIRECTORY%
 

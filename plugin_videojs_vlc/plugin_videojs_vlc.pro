@@ -4,13 +4,15 @@
 #
 #-------------------------------------------------
 
-QT       += core webkit
-CONFIG   += warn_on silent qxt
-QXT      += core
+QT       += core webkit network
 
-TEMPLATE = lib
 TARGET = $$qtLibraryTarget(videojs_vlc)
+TEMPLATE = lib
+CONFIG += warn_on silent qxt
 CONFIG += plugin
+QXT += core
+
+include( ../shared.pri )
 
 SOURCES += IVideoJSBinding.cpp \
     VideoWindow.cpp \
@@ -22,15 +24,25 @@ HEADERS += IVideoJSBinding.h \
     VideoJSPlugin.h \
     VLC/QVlcPlayer.h
 
-INCLUDEPATH += ../inspirelib/
+INCLUDEPATH += ../inspirelib
 LIBS += -linspirelib
-LIBS += -L../
-DESTDIR = ../plugins
-	
+
 # INSTALL INFORMATION
 unix {
-	target.path = /usr/lib/inspirebrowser/plugins/
+	target.path = $$PLUGINDIR
 	INSTALLS += target
+}
+
+DESTDIR = ../plugins
+win32 {
+	CONFIG(debug, release|debug) {
+		LIBS += -L../debug/
+	}
+	CONFIG(release, release|debug) {
+		LIBS += -L../release/
+	}
+} else {
+	LIBS += -L../
 }
 
 #define the win32 VLC includes and libs
@@ -39,12 +51,6 @@ win32 {
 	LIBS += -L../dependencies\\win32\\vlc-1.1.9\\sdk\\lib
 	LIBS += -lvlc
 	
-	CONFIG(debug, release|debug) {
-		LIBS += -L../debug/
-	}
-	CONFIG(release, release|debug) {
-		LIBS += -L../release/
-	}
 }
 
 #define the unix VLC includes and libs

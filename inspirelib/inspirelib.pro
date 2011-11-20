@@ -10,6 +10,9 @@ TARGET = inspirelib
 TEMPLATE = lib
 CONFIG += warn_on silent qxt
 QXT += core
+CONFIG -= silent
+
+include( ../shared.pri )
 
 SOURCES += GenericLayout.cpp \
     MainWindow.cpp \
@@ -42,7 +45,7 @@ win32 {
 
 # INSTALL INFORMATION
 unix {
-	target.path = /usr/lib/
+	target.path = $$PREFIX/lib/
 	INSTALLS += target
 }
 

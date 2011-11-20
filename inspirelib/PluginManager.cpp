@@ -114,10 +114,10 @@ QDir PluginManager::GetPluginsDir()
 
 	if(!pluginsDir.cd("plugins")) {
 #if defined(Q_OS_UNIX)
-        //if the local plugins dir doesn't exist try the global one
-        QDir pluginsDir("/usr/lib/" + qApp->arguments().at(0) + "/");
-        if(pluginsDir.cd("plugins"))
-            return pluginsDir;
+		//if the local plugins dir doesn't exist try the global one
+		QDir pluginsDir(PLUGINDIR);
+		if(pluginsDir.exists())
+		    return pluginsDir;
 #endif
 		qxtLog->error("Plugins directory does not exist");
 	}

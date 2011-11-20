@@ -5,12 +5,14 @@
 #-------------------------------------------------
 
 QT       += core webkit network
-CONFIG   += warn_on silent qxt
-QXT      += core
 
-TEMPLATE = lib
 TARGET = $$qtLibraryTarget(commandserver)
+TEMPLATE = lib
+CONFIG += warn_on silent qxt
 CONFIG += plugin
+QXT += core
+
+include( ../shared.pri )
 
 SOURCES += CommandServer.cpp \
     CommandSocket.cpp \
@@ -20,17 +22,16 @@ HEADERS += CommandServer.h \
     CommandSocket.h \
     CommandServerPlugin.h
 
-INCLUDEPATH += ../inspirelib/
+INCLUDEPATH += ../inspirelib
 LIBS += -linspirelib
-LIBS += -L../
-DESTDIR = ../plugins
-	
+
 # INSTALL INFORMATION
 unix {
-	target.path = /usr/lib/inspirebrowser/plugins/
+	target.path = $$PLUGINDIR
 	INSTALLS += target
 }
 
+DESTDIR = ../plugins
 win32 {
 	CONFIG(debug, release|debug) {
 		LIBS += -L../debug/
@@ -38,4 +39,6 @@ win32 {
 	CONFIG(release, release|debug) {
 		LIBS += -L../release/
 	}
+} else {
+	LIBS += -L../
 }

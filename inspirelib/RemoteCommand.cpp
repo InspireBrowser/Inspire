@@ -24,6 +24,7 @@
 #include "RemoteCommand.h"
 #include <QDebug>
 #include <QCoreApplication>
+#include <QxtLogger>
 
 RemoteCommand::RemoteCommand(QObject* parent) :
     QObject(parent),
@@ -84,12 +85,12 @@ QByteArray RemoteCommand::generatePayload()
 bool RemoteCommand::verifyCommand()
 {
     if(this->organisationName() != QCoreApplication::organizationName()) {
-#warning TODO: Add logging that the command comes from a different organisation
+        qxtLog->error("Invalid organisation in remote command. Discarding");
         return false;
     }
 
     if(this->key() != this->generateKey()) {
-#warning TODO: Add logging that the commands key was incorrect
+        qxtLog->error("Invalid key in remote command. Discarding");
         return false;
     }
 

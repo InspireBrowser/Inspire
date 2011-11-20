@@ -168,7 +168,12 @@ void Settings::addSetting(QString name, SettingType type, QString description, Q
  */
 void Settings::removeSetting(QString name)
 {
-#warning TODO: Implement Settings::removeSetting
+    for(int i=0; i < _settingInfo.size(); i++) {
+        if(_settingInfo.at(i).name == name) {
+            _settingInfo.remove(i);
+            return;
+        }
+    }
 }
 
 QxtCommandOptions* Settings::getSettingInformation()

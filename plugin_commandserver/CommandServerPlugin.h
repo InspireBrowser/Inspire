@@ -7,21 +7,21 @@ class CommandServer;
 
 class CommandServerPlugin : public QObject, public GenericPlugin
 {
-	Q_OBJECT
-	Q_INTERFACES(GenericPlugin)
+    Q_OBJECT
+    Q_INTERFACES(GenericPlugin)
 
 public:
-	explicit CommandServerPlugin(QObject* parent = 0);
+    explicit CommandServerPlugin(QObject* parent = 0);
 
-	bool InitialisePlugin();
-	bool DeInitialisePlugin();
+    bool InitialisePlugin();
+    bool DeInitialisePlugin();
 
-	QString GetId();	
-	QString GetName();
-	QString GetDescription();
+    QString GetId();
+    QString GetName();
+    QString GetDescription();
 
 private:
-        CommandServer* _server;
+    CommandServer* _server;
 };
 
 #endif //COMMAND_SERVER_PLUGIN

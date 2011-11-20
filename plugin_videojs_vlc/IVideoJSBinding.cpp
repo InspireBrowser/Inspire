@@ -1,5 +1,5 @@
 /*
- * InspireBrowser is an open source browser for Kiosk and STB style 
+ * InspireBrowser is an open source browser for Kiosk and STB style
  * applications, providing a JS library for easily including multimedia
  * content.
  *
@@ -34,9 +34,9 @@
 /*! @brief Constructor for creating the Video Javascript Binding
  *  @param  parent  The parent object
  */
-IVideoJSBinding::IVideoJSBinding(QObject *parent) :
-		QObject(parent),
-        windows()
+IVideoJSBinding::IVideoJSBinding(QObject* parent) :
+    QObject(parent),
+    windows()
 {
 }
 
@@ -48,13 +48,14 @@ QVariant IVideoJSBinding::GetVideoWindow(int index)
 {
     qxtLog->trace(Q_FUNC_INFO);
 
-    if(index >= MAX_VIDEO_WINDOWS || index < 0)
+    if(index >= MAX_VIDEO_WINDOWS || index < 0) {
         throw "Invalid video window index";
+    }
 
     if(!windows[index]) {
-		windows[index] = new VideoWindow(this);
-		windows[index]->setMainWindow(this->mainWindow());
-		windows[index]->Initialise();
+        windows[index] = new VideoWindow(this);
+        windows[index]->setMainWindow(this->mainWindow());
+        windows[index]->Initialise();
     }
 
     QVariant var(QMetaType::QObjectStar);
@@ -67,9 +68,9 @@ void IVideoJSBinding::ResetAll()
 {
     qxtLog->trace(Q_FUNC_INFO);
 
-    for(int i=0; i < MAX_VIDEO_WINDOWS; i++)
-    {
-        if(windows[i])
+    for(int i = 0; i < MAX_VIDEO_WINDOWS; i++) {
+        if(windows[i]) {
             windows[i]->Reset();
+        }
     }
 }

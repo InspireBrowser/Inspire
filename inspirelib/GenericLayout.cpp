@@ -1,5 +1,5 @@
 /*
- * InspireBrowser is an open source browser for Kiosk and STB style 
+ * InspireBrowser is an open source browser for Kiosk and STB style
  * applications, providing a JS library for easily including multimedia
  * content.
  *
@@ -71,7 +71,7 @@ QLayoutItem* GenericLayout::takeAt(int index)
  *         the addWidget() function; to add a child layout, use the addLayout() function provided by
  *         the relevant QLayout subclass.
  */
-void GenericLayout::addItem(QLayoutItem *item)
+void GenericLayout::addItem(QLayoutItem* item)
 {
     list.append(item);
 }
@@ -79,12 +79,13 @@ void GenericLayout::addItem(QLayoutItem *item)
 /*! @brief Sets the geometry for the Layout and resizes and positions the first widget
  *  @param rect The bounds of the new geometry
  */
-void GenericLayout::setGeometry(const QRect &rect)
+void GenericLayout::setGeometry(const QRect& rect)
 {
     QLayout::setGeometry(rect);
 
-    if(count() > 0)
+    if(count() > 0) {
         list[0]->setGeometry(rect);
+    }
 }
 
 /*! @brief Returns the size hint for the layout
@@ -93,10 +94,11 @@ void GenericLayout::setGeometry(const QRect &rect)
  */
 QSize GenericLayout::sizeHint() const
 {
-    if(count() > 0)
+    if(count() > 0) {
         return list[0]->sizeHint();
-    else
+    } else {
         return QSize();
+    }
 }
 
 /*! @brief Returns the minimum size for the layout
@@ -105,8 +107,9 @@ QSize GenericLayout::sizeHint() const
  */
 QSize GenericLayout::minimumSize() const
 {
-    if(count() > 0)
+    if(count() > 0) {
         return list[0]->minimumSize();
-    else
+    } else {
         return QSize();
+    }
 }

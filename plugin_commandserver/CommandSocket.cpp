@@ -1,5 +1,5 @@
 /*
- * InspireBrowser is an open source browser for Kiosk and STB style 
+ * InspireBrowser is an open source browser for Kiosk and STB style
  * applications, providing a JS library for easily including multimedia
  * content.
  *
@@ -35,7 +35,7 @@
 #include "CommandServer.h"
 #include "RemoteCommand.h"
 
-CommandSocket::CommandSocket(QObject *parent) :
+CommandSocket::CommandSocket(QObject* parent) :
     QTcpSocket(parent)
 {
     connect(this, SIGNAL(readyRead()), this, SLOT(readCommand()));
@@ -52,15 +52,17 @@ void CommandSocket::readCommand()
     //if this is the first time we've been ready to read
     if(_nextBlockSize == 0) {
         //check to see if we can read the int which tells us the size
-        if(bytesAvailable() < sizeof(quint16))
+        if(bytesAvailable() < sizeof(quint16)) {
             return;
+        }
         //if so, read it in
         in >> _nextBlockSize;
     }
 
     //check to see if enough bytes are available to get the whole of the message
-    if(bytesAvailable() < _nextBlockSize)
+    if(bytesAvailable() < _nextBlockSize) {
         return;
+    }
 
     RemoteCommand* command = new RemoteCommand(this);
     command->parsePayload(in);
@@ -69,8 +71,7 @@ void CommandSocket::readCommand()
     if(command->verifyCommand()) {
         //now we have the command send it off to be processed
         this->processCommand(command);
-    }
-    else {
+    } else {
         this->sendResponse(false, "Invalid Command");
     }
     this->close();
@@ -81,8 +82,9 @@ void CommandSocket::processCommand(RemoteCommand* command)
     CommandServer* server = qobject_cast<CommandServer*>(this->parent());
     server->processCommand(command);
 
-    if(!command->hasResponse())
+    if(!command->hasResponse()) {
         command->setResponse(false, "Unknown command");
+    }
 
     this->sendResponse(command->responseSuccessfull(), command->responseText());
 }

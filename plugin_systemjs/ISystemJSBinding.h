@@ -45,7 +45,7 @@ public:
     /*! @brief Constructor for creating the System Javascript Binding
      *  @param  parent  The parent object
      */
-    explicit ISystemJSBinding(QObject *parent = 0);
+    explicit ISystemJSBinding(QObject* parent = 0);
 
     /*! @brief Returns the version of Inspire Browser running
      *  @return the version of InspireBrowser running

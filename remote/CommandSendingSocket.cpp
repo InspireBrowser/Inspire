@@ -1,5 +1,5 @@
 /*
- * InspireRemote is an open source application for remote controlling 
+ * InspireRemote is an open source application for remote controlling
  * the Inspire Browser
  *
  * Copyright (C) 2011  mike
@@ -68,8 +68,9 @@ void CommandSendingSocket::readResponse()
 
     forever {
         if(_nextBlockSize == 0) {
-            if(this->bytesAvailable() < sizeof(quint16))
+            if(this->bytesAvailable() < sizeof(quint16)) {
                 break;
+            }
 
             in >> _nextBlockSize;
         }
@@ -79,8 +80,9 @@ void CommandSendingSocket::readResponse()
             break;
         }
 
-        if(this->bytesAvailable() < _nextBlockSize)
+        if(this->bytesAvailable() < _nextBlockSize) {
             break;
+        }
 
         bool success;
         QString response;
@@ -91,10 +93,10 @@ void CommandSendingSocket::readResponse()
 
         //close socket and call the signals
         this->close();
-        if(success)
+        if(success) {
             emit completed(_clientAddress, response);
-        else
-            emit failed(_clientAddress, response);
+        } else
+            { emit failed(_clientAddress, response); }
     }
 };
 

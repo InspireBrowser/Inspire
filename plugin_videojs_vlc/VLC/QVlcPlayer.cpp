@@ -32,26 +32,28 @@
  *  @param  parent  The parent object
  */
 QVlcPlayer::QVlcPlayer(QWidget* parent) :
-        QWidget(parent),
-        _isPlaying(false)
+    QWidget(parent),
+    _isPlaying(false)
 {
     //preparation of the vlc command
-    const char * const vlc_args[] = {
-              "-I", "dummy",
-              "--ignore-config",
-              "--plugin-path=vlc_plugins",
-              "--no-osd"
+    const char* const vlc_args[] = {
+        "-I", "dummy",
+        "--ignore-config",
+        "--plugin-path=vlc_plugins",
+        "--no-osd"
     };
 
     //create a new libvlc instance
     _vlcInstance = libvlc_new(sizeof(vlc_args) / sizeof(vlc_args[0]), vlc_args);
-    if(!_vlcInstance)
+    if(!_vlcInstance) {
         throw QString(libvlc_errmsg());
+    }
 
     // Create a media player playing environement
     _vlcMediaPlayer = libvlc_media_player_new (_vlcInstance);
-    if(!_vlcMediaPlayer)
+    if(!_vlcMediaPlayer) {
         throw QString(libvlc_errmsg());
+    }
 }
 
 /*! @brief Destructor for cleaning up libVlc after use */
@@ -68,9 +70,10 @@ QVlcPlayer::~QVlcPlayer()
 float QVlcPlayer::playBackSpeed() const
 {
     // It's possible that the vlc doesn't play anything, so check before
-    libvlc_media_t *curMedia = libvlc_media_player_get_media (_vlcMediaPlayer);
-    if (curMedia == NULL)
+    libvlc_media_t* curMedia = libvlc_media_player_get_media (_vlcMediaPlayer);
+    if (curMedia == NULL) {
         return 0;
+    }
 
     return libvlc_media_player_get_rate(_vlcMediaPlayer);
 }
@@ -81,10 +84,11 @@ float QVlcPlayer::playBackSpeed() const
 void QVlcPlayer::setPlayBackSpeed(const float speed)
 {
     // It's possible that the vlc doesn't play anything, so check before
-    libvlc_media_t *curMedia = libvlc_media_player_get_media (_vlcMediaPlayer);
+    libvlc_media_t* curMedia = libvlc_media_player_get_media (_vlcMediaPlayer);
     if (curMedia != NULL) {
-        if(libvlc_media_player_set_rate(_vlcMediaPlayer, speed) == -1)
+        if(libvlc_media_player_set_rate(_vlcMediaPlayer, speed) == -1) {
             throw QString(libvlc_errmsg());
+        }
     }
 }
 
@@ -104,8 +108,9 @@ void QVlcPlayer::setVolume(const int volume)
     //clamp volume to range MIN_VOLUME >= x <= MAX_VOLUME
     int clampedVolume = volume < MIN_VOLUME ? MIN_VOLUME : (volume > MAX_VOLUME ? MAX_VOLUME : volume);
 
-    if(libvlc_audio_set_volume (_vlcMediaPlayer, clampedVolume) != 0)
+    if(libvlc_audio_set_volume (_vlcMediaPlayer, clampedVolume) != 0) {
         throw QString(libvlc_errmsg());
+    }
 }
 
 /*! @brief Returns whether audio output is currently muted or not
@@ -130,9 +135,10 @@ void QVlcPlayer::setMute(const bool muted)
 float QVlcPlayer::mediaLength() const
 {
     // It's possible that the vlc doesn't play anything, so check before
-    libvlc_media_t *curMedia = libvlc_media_player_get_media (_vlcMediaPlayer);
-    if (curMedia == NULL)
+    libvlc_media_t* curMedia = libvlc_media_player_get_media (_vlcMediaPlayer);
+    if (curMedia == NULL) {
         return -1;
+    }
 
     return libvlc_media_player_get_length(_vlcMediaPlayer);
 }
@@ -143,15 +149,17 @@ float QVlcPlayer::mediaLength() const
 float QVlcPlayer::mediaPosition() const
 {
     // It's possible that the vlc doesn't play anything, so check before
-    libvlc_media_t *curMedia = libvlc_media_player_get_media (_vlcMediaPlayer);
-    if (curMedia == NULL)
+    libvlc_media_t* curMedia = libvlc_media_player_get_media (_vlcMediaPlayer);
+    if (curMedia == NULL) {
         return -1;
+    }
 
     float position = libvlc_media_player_get_position(_vlcMediaPlayer);
-    if(position == -1)
+    if(position == -1) {
         throw QString(libvlc_errmsg());
-    else
+    } else {
         return position * POSITION_RESOLUTION;
+    }
 }
 
 /*! @brief Sets the current position in the media
@@ -160,9 +168,10 @@ float QVlcPlayer::mediaPosition() const
 void QVlcPlayer::setMediaPosition(const float position)
 {
     // It's possible that the vlc doesn't play anything, so check before
-    libvlc_media_t *curMedia = libvlc_media_player_get_media (_vlcMediaPlayer);
-    if (curMedia == NULL)
+    libvlc_media_t* curMedia = libvlc_media_player_get_media (_vlcMediaPlayer);
+    if (curMedia == NULL) {
         return;
+    }
 
     float pos = (float)(position) / (float)POSITION_RESOLUTION;
     libvlc_media_player_set_position (_vlcMediaPlayer, pos);
@@ -176,9 +185,10 @@ QVariantMap QVlcPlayer::getVideoStreamInformation() const
     QVariantMap information;
 
     // It's possible that the vlc doesn't play anything, so check before
-    libvlc_media_t *curMedia = libvlc_media_player_get_media (_vlcMediaPlayer);
-    if (curMedia == NULL)
+    libvlc_media_t* curMedia = libvlc_media_player_get_media (_vlcMediaPlayer);
+    if (curMedia == NULL) {
         return information;
+    }
 
     //get the track information
     libvlc_track_description_t* description = libvlc_video_get_track_description(_vlcMediaPlayer);
@@ -196,9 +206,10 @@ QVariantMap QVlcPlayer::getAudioStreamInformation() const
     QVariantMap information;
 
     // It's possible that the vlc doesn't play anything, so check before
-    libvlc_media_t *curMedia = libvlc_media_player_get_media (_vlcMediaPlayer);
-    if (curMedia == NULL)
+    libvlc_media_t* curMedia = libvlc_media_player_get_media (_vlcMediaPlayer);
+    if (curMedia == NULL) {
         return information;
+    }
 
     //get the track information
     libvlc_track_description_t* description = libvlc_audio_get_track_description(_vlcMediaPlayer);
@@ -216,9 +227,10 @@ QVariantMap QVlcPlayer::getSubtitleStreamInformation() const
     QVariantMap information;
 
     // It's possible that the vlc doesn't play anything, so check before
-    libvlc_media_t *curMedia = libvlc_media_player_get_media (_vlcMediaPlayer);
-    if (curMedia == NULL)
+    libvlc_media_t* curMedia = libvlc_media_player_get_media (_vlcMediaPlayer);
+    if (curMedia == NULL) {
         return information;
+    }
 
     //get the track information
     libvlc_track_description_t* description = libvlc_video_get_spu_description(_vlcMediaPlayer);
@@ -237,8 +249,7 @@ QVariantMap QVlcPlayer::getSubtitleStreamInformation() const
 QVariantList QVlcPlayer::processTrackInformation(libvlc_track_description_t* description) const
 {
     QVariantList tracks;
-    while(description)
-    {
+    while(description) {
         QVariantMap track;
         track.insert("id", description->i_id);
         track.insert("name", description->psz_name);
@@ -268,8 +279,9 @@ QVariantList QVlcPlayer::processTrackInformation(libvlc_track_description_t* des
 void QVlcPlayer::play(QString mrl)
 {
     libvlc_media_t* media = libvlc_media_new_location (_vlcInstance, mrl.toAscii());
-    if(!media)
+    if(!media) {
         throw QString(libvlc_errmsg());
+    }
 
     libvlc_media_player_set_media (_vlcMediaPlayer, media);
     libvlc_media_release(media);
@@ -283,8 +295,9 @@ void QVlcPlayer::play(QString mrl)
 #endif
 
     /* Play */
-    if(libvlc_media_player_play (_vlcMediaPlayer) != 0)
+    if(libvlc_media_player_play (_vlcMediaPlayer) != 0) {
         throw QString(libvlc_errmsg());
+    }
 
     _isPlaying = true;
 }

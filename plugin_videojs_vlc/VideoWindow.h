@@ -1,5 +1,5 @@
 /*
- * InspireBrowser is an open source browser for Kiosk and STB style 
+ * InspireBrowser is an open source browser for Kiosk and STB style
  * applications, providing a JS library for easily including multimedia
  * content.
  *
@@ -60,9 +60,9 @@ public:
     /*! @brief Destructor for tidying up the video window */
     ~VideoWindow();
 
-	/*! @brief Initialises the binding once everything has been set
-	 */
-	void Initialise();
+    /*! @brief Initialises the binding once everything has been set
+     */
+    void Initialise();
 
     /*! @brief Returns the current URL being played, blank if nothing is playing
      *  @return The current URL being played
@@ -199,7 +199,7 @@ public:
     Q_PROPERTY(unsigned int zIndex READ zIndex WRITE setZIndex STORED false);
 
 signals:
-    #warning TODO: Implement event detection and emitting
+#warning TODO: Implement event detection and emitting
     /*! @brief Emitted when an Igmp Stream starts */
     void onIgmpStreamStart();
     /*! @brief Emitted when an Igmp Stream stops */

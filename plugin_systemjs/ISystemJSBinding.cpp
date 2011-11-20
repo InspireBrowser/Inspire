@@ -40,8 +40,8 @@
 /*! @brief Constructor for creating the System Javascript Binding
  *  @param  parent  The parent object
  */
-ISystemJSBinding::ISystemJSBinding(QObject *parent) :
-        QObject(parent)
+ISystemJSBinding::ISystemJSBinding(QObject* parent) :
+    QObject(parent)
 {
 }
 
@@ -78,24 +78,25 @@ void ISystemJSBinding::SetConfig(const QString name, const QVariant value)
 
     QSettings settings;
 
-    if(value.type() == QVariant::Bool)
+    if(value.type() == QVariant::Bool) {
         settings.setValue(name, value.toBool());
-    else if(value.type() == QVariant::Date)
+    } else if(value.type() == QVariant::Date) {
         settings.setValue(name, value.toDate());
-    else if(value.type() == QVariant::DateTime)
+    } else if(value.type() == QVariant::DateTime) {
         settings.setValue(name, value.toDateTime());
-    else if(value.type() == QVariant::Double)
+    } else if(value.type() == QVariant::Double) {
         settings.setValue(name, value.toDouble());
-    else if(value.type() == QVariant::Int)
+    } else if(value.type() == QVariant::Int) {
         settings.setValue(name, value.toInt());
-    else if(value.type() == QVariant::List)
+    } else if(value.type() == QVariant::List) {
         settings.setValue(name, value.toList());
-    else if(value.type() == QVariant::Map)
+    } else if(value.type() == QVariant::Map) {
         settings.setValue(name, value.toMap());
-    else if(value.type() == QVariant::String)
+    } else if(value.type() == QVariant::String) {
         settings.setValue(name, value.toString());
-    else
+    } else {
         settings.setValue(name, value);
+    }
 }
 
 /*! @brief Returns the value of a configuration option
@@ -108,24 +109,25 @@ QVariant ISystemJSBinding::GetConfig(const QString name) const
 
     QVariant value = SETTING(name, QVariant());
 
-    if(value.type() == QVariant::Bool)
+    if(value.type() == QVariant::Bool) {
         return value.toBool();
-    else if(value.type() == QVariant::Date)
+    } else if(value.type() == QVariant::Date) {
         return value.toDate();
-    else if(value.type() == QVariant::DateTime)
+    } else if(value.type() == QVariant::DateTime) {
         return value.toDateTime();
-    else if(value.type() == QVariant::Double)
+    } else if(value.type() == QVariant::Double) {
         return value.toDouble();
-    else if(value.type() == QVariant::Int)
+    } else if(value.type() == QVariant::Int) {
         return value.toInt();
-    else if(value.type() == QVariant::List)
+    } else if(value.type() == QVariant::List) {
         return value.toList();
-    else if(value.type() == QVariant::Map)
+    } else if(value.type() == QVariant::Map) {
         return value.toMap();
-    else if(value.type() == QVariant::String)
+    } else if(value.type() == QVariant::String) {
         return value.toString();
-    else
+    } else {
         return value;
+    }
 }
 
 /*! @brief Gets an adapters name
@@ -137,7 +139,7 @@ QString ISystemJSBinding::GetAdapterName(const int adapterNumber)
     qxtLog->trace(Q_FUNC_INFO);
 
     QList<QNetworkInterface> interfaces = QNetworkInterface::allInterfaces();
-    if(adapterNumber >= 0 && adapterNumber < interfaces.count()){
+    if(adapterNumber >= 0 && adapterNumber < interfaces.count()) {
         return interfaces[adapterNumber].humanReadableName();
     }
 
@@ -153,12 +155,12 @@ QString ISystemJSBinding::GetIpV4Address(const int adapterNumber)
     qxtLog->trace(Q_FUNC_INFO);
 
     QList<QNetworkInterface> interfaces = QNetworkInterface::allInterfaces();
-    if(adapterNumber >= 0 && adapterNumber < interfaces.count()){
+    if(adapterNumber >= 0 && adapterNumber < interfaces.count()) {
         QList<QNetworkAddressEntry> addresses = interfaces[adapterNumber].addressEntries();
-        for(int i=0; i<addresses.count(); i++)
-        {
-            if(addresses[i].ip().protocol() == QAbstractSocket::IPv4Protocol)
+        for(int i = 0; i < addresses.count(); i++) {
+            if(addresses[i].ip().protocol() == QAbstractSocket::IPv4Protocol) {
                 return addresses[i].ip().toString();
+            }
         }
     }
 
@@ -174,12 +176,12 @@ QString ISystemJSBinding::GetIpV6Address(const int adapterNumber)
     qxtLog->trace(Q_FUNC_INFO);
 
     QList<QNetworkInterface> interfaces = QNetworkInterface::allInterfaces();
-    if(adapterNumber >= 0 && adapterNumber < interfaces.count()){
+    if(adapterNumber >= 0 && adapterNumber < interfaces.count()) {
         QList<QNetworkAddressEntry> addresses = interfaces[adapterNumber].addressEntries();
-        for(int i=0; i<addresses.count(); i++)
-        {
-            if(addresses[i].ip().protocol() == QAbstractSocket::IPv6Protocol)
+        for(int i = 0; i < addresses.count(); i++) {
+            if(addresses[i].ip().protocol() == QAbstractSocket::IPv6Protocol) {
                 return addresses[i].ip().toString();
+            }
         }
     }
 
@@ -195,7 +197,7 @@ QString ISystemJSBinding::GetHardwareAddress(const int adapterNumber)
     qxtLog->trace(Q_FUNC_INFO);
 
     QList<QNetworkInterface> interfaces = QNetworkInterface::allInterfaces();
-    if(adapterNumber >= 0 && adapterNumber < interfaces.count()){
+    if(adapterNumber >= 0 && adapterNumber < interfaces.count()) {
         return interfaces[adapterNumber].hardwareAddress();
     }
 

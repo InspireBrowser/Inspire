@@ -1,5 +1,5 @@
 /*
- * InspireBrowser is an open source browser for Kiosk and STB style 
+ * InspireBrowser is an open source browser for Kiosk and STB style
  * applications, providing a JS library for easily including multimedia
  * content.
  *
@@ -40,7 +40,7 @@
 /*! @brief Creates the CommandServer
  *  @param parent The parent object
  */
-CommandServer::CommandServer(QObject *parent) :
+CommandServer::CommandServer(QObject* parent) :
     QTcpServer(parent)
 {
 }
@@ -62,10 +62,10 @@ void CommandServer::stopListening()
 /*! @brief Processes a RemoteCommand
  *  @param command The command to process
  */
-void CommandServer::processCommand(RemoteCommand *command)
+void CommandServer::processCommand(RemoteCommand* command)
 {
     GenericPlugin* plugin = qobject_cast<GenericPlugin*>(this->parent());
-	plugin->pluginManager()->GetMainWindow()->commandSystem()->processCommand(command);
+    plugin->pluginManager()->GetMainWindow()->commandSystem()->processCommand(command);
 }
 
 /*! @brief Called when the server receives an incoming connection

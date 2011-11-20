@@ -11,10 +11,14 @@ private:
 public:
     virtual ~JavascriptBinding() {}
 
-	void Initialise() {}
+    void Initialise() {}
 
-	MainWindow* mainWindow() const { return this->_mainWindow; }
-    void setMainWindow(MainWindow* mainWindow) { this->_mainWindow = mainWindow; }
+    MainWindow* mainWindow() const {
+        return this->_mainWindow;
+    }
+    void setMainWindow(MainWindow* mainWindow) {
+        this->_mainWindow = mainWindow;
+    }
 };
 
 #endif // JAVASCRIPTBINDING_H

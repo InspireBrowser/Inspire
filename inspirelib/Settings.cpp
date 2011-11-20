@@ -8,7 +8,7 @@
 
 #include "Settings.h"
 
-Settings::Settings(QObject *parent) :
+Settings::Settings(QObject* parent) :
     QObject(parent)
 {
     this->addSetting("general", Settings::Title, "General Settings");
@@ -33,7 +33,7 @@ Settings::Settings(QObject *parent) :
     this->addSetting("plugins-disable", Settings::Boolean, "Disables the loading of plugins");
 }
 
-bool Settings::setValueFromUser(const QString &key, const QString &value, const bool persistSetting)
+bool Settings::setValueFromUser(const QString& key, const QString& value, const bool persistSetting)
 {
     QVectorIterator<SettingInfo> i(_settingInfo);
     while (i.hasNext()) {
@@ -47,7 +47,7 @@ bool Settings::setValueFromUser(const QString &key, const QString &value, const 
     return false;
 }
 
-bool Settings::setValueOfType(const QString &key, SettingType type, const QString &value, const bool persistSetting)
+bool Settings::setValueOfType(const QString& key, SettingType type, const QString& value, const bool persistSetting)
 {
     QString stringValue;
     int intValue;
@@ -70,8 +70,9 @@ bool Settings::setValueOfType(const QString &key, SettingType type, const QStrin
         case Settings::Integer:
             intValue = value.toInt(&isOk);
 
-            if(isOk)
+            if(isOk) {
                 this->setValue(key, intValue, persistSetting);
+            }
 
             return isOk;
 
@@ -93,25 +94,28 @@ bool Settings::setValueOfType(const QString &key, SettingType type, const QStrin
     }
 }
 
-void Settings::setValue(const QString &key, const QVariant &value, const bool persistSetting)
+void Settings::setValue(const QString& key, const QVariant& value, const bool persistSetting)
 {
     this->_settings.insert(key, value);
-    if(persistSetting)
+    if(persistSetting) {
         this->_savedSettings.setValue(key, value);
+    }
 }
 
-QVariant Settings::value(const QString &key, const QVariant &defaultValue) const
+QVariant Settings::value(const QString& key, const QVariant& defaultValue) const
 {
-    if(this->_settings.contains(key))
+    if(this->_settings.contains(key)) {
         return this->_settings.value(key);
-    else
+    } else {
         return this->_savedSettings.value(key, defaultValue);
+    }
 }
 
-bool Settings::isSet(const QString &key)
+bool Settings::isSet(const QString& key)
 {
-    if(this->_settings.contains(key))
+    if(this->_settings.contains(key)) {
         return true;
+    }
 
     return this->_savedSettings.contains(key);
 }
@@ -138,7 +142,7 @@ void Settings::addSetting(QString name, SettingType type, QString description, Q
  */
 void Settings::removeSetting(QString name)
 {
-    #warning TODO: Implement Settings::removeSetting
+#warning TODO: Implement Settings::removeSetting
 }
 
 QxtCommandOptions* Settings::getSettingInformation()
@@ -154,10 +158,11 @@ QxtCommandOptions* Settings::getSettingInformation()
                 options->addSection(info.description);
                 break;
             case Settings::Boolean:
-                if(info.aliases.count() > 0)
+                if(info.aliases.count() > 0) {
                     options->add(info.name, info.description, QxtCommandOptions::NoValue);
-                else
+                } else {
                     options->add(info.name, info.description, QxtCommandOptions::ValueOptional);
+                }
                 break;
             case Settings::Integer:
             case Settings::String:
@@ -189,13 +194,15 @@ QString Settings::parseArguments()
     while (i.hasNext()) {
         SettingInfo info = i.next();
 
-        if(info.type == Settings::Title || !options->count(info.name))
+        if(info.type == Settings::Title || !options->count(info.name)) {
             continue;
+        }
 
         QString value = options->value(info.name).toString();
 
-        if(info.type == Settings::Boolean && value == "")
+        if(info.type == Settings::Boolean && value == "") {
             value = "true";
+        }
 
         if(!this->setValueFromUser(info.name, value)) {
             QString name = QDir(QCoreApplication::applicationFilePath()).dirName();
@@ -210,8 +217,9 @@ Settings* Settings::_instance = 0;
 
 Settings* Settings::Get()
 {
-    if(_instance == 0)
+    if(_instance == 0) {
         _instance = new Settings();
+    }
 
     return _instance;
 }

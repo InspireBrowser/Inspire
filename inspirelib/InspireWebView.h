@@ -43,7 +43,7 @@ public:
     /*! @brief Creates an InspireWebView widget
      *  @param parent The parent widget
      */
-    explicit InspireWebView(QWidget *parent = 0);
+    explicit InspireWebView(QWidget* parent = 0);
 
     /*! @brief Returns whether the background of the web view is transparent or not
      *  @return Whether the background of the web view is transparent or not
@@ -54,7 +54,7 @@ public:
      */
     void setBackgroundIsTransparent(bool value);
 
-    /*! @brief Adds a Javascript Binding Object to list of binding objects that 
+    /*! @brief Adds a Javascript Binding Object to list of binding objects that
      *         the web view can add.
      *  @param name The name of the binding to add
      *  @param binding The binding object to add to the web view
@@ -73,7 +73,7 @@ public:
      */
     bool hasJavascriptBinding(QString name);
 
-    /*! @brief Returns a Javascript binding object that has been registered with 
+    /*! @brief Returns a Javascript binding object that has been registered with
      *         the web view
      *  @param name The name of the binding
      *  @return The Javascript Binding object or a null point if it doesn't exist

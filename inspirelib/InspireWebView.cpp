@@ -38,8 +38,8 @@
 /*! @brief Creates an InspireWebView widget
  *  @param parent The parent widget
  */
-InspireWebView::InspireWebView(QWidget *parent) :
-        QWebView(parent)
+InspireWebView::InspireWebView(QWidget* parent) :
+    QWebView(parent)
 {
     this->settings()->setAttribute(QWebSettings::DnsPrefetchEnabled, true);
     this->settings()->setAttribute(QWebSettings::PluginsEnabled, false);
@@ -50,8 +50,9 @@ InspireWebView::InspireWebView(QWidget *parent) :
 
     this->settings()->setLocalStoragePath(QDesktopServices::storageLocation(QDesktopServices::DataLocation));
 
-    if(SETTING("browser-developer-mode", false).toBool())
+    if(SETTING("browser-developer-mode", false).toBool()) {
         this->settings()->setAttribute(QWebSettings::DeveloperExtrasEnabled, true);
+    }
 
     connect(this->page()->mainFrame(), SIGNAL(javaScriptWindowObjectCleared()), this, SLOT(addJavascriptObjectsToFrame()));
 }
@@ -69,11 +70,11 @@ bool InspireWebView::backgroundIsTransparent()
  */
 void InspireWebView::setBackgroundIsTransparent(bool value)
 {
-    #warning TODO: Implement InspireWebView::setBackgroundIsTransparent
+#warning TODO: Implement InspireWebView::setBackgroundIsTransparent
     this->_transparentBackground = value;
 }
 
-/*! @brief Adds a Javascript Binding Object to list of binding objects that 
+/*! @brief Adds a Javascript Binding Object to list of binding objects that
 *         the web view can add.
 *  @param name The name of the binding to add
 *  @param binding The binding object to add to the web view
@@ -92,9 +93,9 @@ bool InspireWebView::removeJavascriptBinding(QString name)
     if(this->hasJavascriptBinding(name)) {
         _bindings.remove(name);
         return true;
-    }
-    else
+    } else {
         return false;
+    }
 }
 
 /*! @brief Returns whether the Javascript binding exists or not
@@ -106,25 +107,26 @@ bool InspireWebView::hasJavascriptBinding(QString name)
     return _bindings.contains(name);
 }
 
-/*! @brief Returns a Javascript binding object that has been registered with 
+/*! @brief Returns a Javascript binding object that has been registered with
 *         the web view
 *  @param name The name of the binding
 *  @return The Javascript Binding object or a null point if it doesn't exist
 */
 QObject* InspireWebView::getJavascriptBinding(QString name)
 {
-    if(this->hasJavascriptBinding(name))
+    if(this->hasJavascriptBinding(name)) {
         return _bindings.value(name);
-    else
+    } else {
         return 0;
+    }
 }
 
 /*! @brief Adds the javascript binding objects to the current webview */
 void InspireWebView::addJavascriptObjectsToFrame()
 {
-    QWebFrame *frame = (QWebFrame*)sender();
+    QWebFrame* frame = (QWebFrame*)sender();
 
-    if(SETTING("browser-restrict-js-api", false).toBool()){
+    if(SETTING("browser-restrict-js-api", false).toBool()) {
         qxtLog->debug("Restrict Javascript API is enabled to check the URL");
 
         /* If we're restricting the javascript API to a list of allowed URL's then compare
@@ -134,10 +136,10 @@ void InspireWebView::addJavascriptObjectsToFrame()
 
         qxtLog->debug("Looking for " + frame->url().toString() + " in list of allowed API URLs");
         QStringList allowedUrls = SETTING("browser-allowed-api-urls", QVariant()).toStringList();
-        for(int i=0; i<allowedUrls.count(); i++){
+        for(int i = 0; i < allowedUrls.count(); i++) {
             qxtLog->debug("Comparing to " + allowedUrls[i]);
             QRegExp exp(allowedUrls[i], Qt::CaseInsensitive, QRegExp::Wildcard);
-            if(exp.exactMatch(frame->url().toString())){
+            if(exp.exactMatch(frame->url().toString())) {
                 qxtLog->debug("URL matches, allowing JS API");
                 match = true;
                 break;

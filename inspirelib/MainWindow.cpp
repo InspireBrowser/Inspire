@@ -112,14 +112,14 @@ void MainWindow::createActions()
     _goAction->setStatusTip(tr("Load the typed page"));
     connect(_goAction, SIGNAL(triggered()), this, SLOT(loadPageInAddressBar()));
 
-    #warning TODO: Finish creating all actions
+#warning TODO: Finish creating all actions
 }
 
 /*! @brief Creates the context menu for the UI
  */
 void MainWindow::createContextMenu()
 {
-    #warning TODO: Properly implement context menu for WebView
+#warning TODO: Properly implement context menu for WebView
     _webView->addAction(_backAction);
     _webView->addAction(_forwardAction);
 }
@@ -149,7 +149,7 @@ void MainWindow::createToolBars()
  */
 void MainWindow::resizeWindow()
 {
-    if(!SETTING("application-show-fullscreen", false).toBool()){
+    if(!SETTING("application-show-fullscreen", false).toBool()) {
         int width = SETTING("application-width", 1280).toInt();
         int height = SETTING("application-height", 720).toInt();
 

@@ -10,7 +10,7 @@ class CommandSystem : public QObject
     Q_OBJECT
 
 public:
-    explicit CommandSystem(QObject *parent = 0);
+    explicit CommandSystem(QObject* parent = 0);
 
     /*! @brief Processes a RemoteCommand
      *  @param command The command to process

@@ -1,5 +1,5 @@
 /*
- * InspireRemote is an open source application for remote controlling 
+ * InspireRemote is an open source application for remote controlling
  * the Inspire Browser
  *
  * Copyright (C) 2011  mike
@@ -36,7 +36,7 @@
 /*! @brief Constructs a CommandSender with the command to send
  *  @param parent The parent object
  */
-CommandSender::CommandSender(RemoteCommand* command, QObject *parent) :
+CommandSender::CommandSender(RemoteCommand* command, QObject* parent) :
     QObject(parent),
     _command(command)
 {
@@ -44,10 +44,10 @@ CommandSender::CommandSender(RemoteCommand* command, QObject *parent) :
 
 void CommandSender::send()
 {
-    foreach(QHostAddress client, _clientAddresses){
+    foreach(QHostAddress client, _clientAddresses) {
         CommandSendingSocket* socket = new CommandSendingSocket(_command, client, this->clientPort(), this);
-        connect(socket, SIGNAL(completed(QHostAddress,QString)), this, SLOT(clientCompleted(QHostAddress,QString)));
-        connect(socket, SIGNAL(failed(QHostAddress,QString)), this, SLOT(clientFailed(QHostAddress,QString)));
+        connect(socket, SIGNAL(completed(QHostAddress, QString)), this, SLOT(clientCompleted(QHostAddress, QString)));
+        connect(socket, SIGNAL(failed(QHostAddress, QString)), this, SLOT(clientFailed(QHostAddress, QString)));
         socket->send();
         _clientSockets.append(socket);
     }
@@ -67,10 +67,10 @@ void CommandSender::clientFailed(QHostAddress client, QString error)
 
 void CommandSender::checkForCompletion()
 {
-    foreach(CommandSendingSocket* socket, _clientSockets)
-    {
-        if(socket->isOpen())
+    foreach(CommandSendingSocket * socket, _clientSockets) {
+        if(socket->isOpen()) {
             return;
+        }
     }
 
     QCoreApplication::exit(0);

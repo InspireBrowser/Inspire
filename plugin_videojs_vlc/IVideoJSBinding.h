@@ -1,5 +1,5 @@
 /*
- * InspireBrowser is an open source browser for Kiosk and STB style 
+ * InspireBrowser is an open source browser for Kiosk and STB style
  * applications, providing a JS library for easily including multimedia
  * content.
  *
@@ -50,7 +50,7 @@ public:
     /*! @brief Constructor for creating the Video Javascript Binding
      *  @param  parent  The parent object
      */
-    explicit IVideoJSBinding(QObject *parent = 0);
+    explicit IVideoJSBinding(QObject* parent = 0);
 
     /*! @brief Returns the maximum number of video windows the system is capable of showing at once
      *  @return the maximum number of video windows available

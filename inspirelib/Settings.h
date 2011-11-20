@@ -41,12 +41,12 @@ private:
 
 public:
 
-    explicit Settings(QObject *parent = 0);
+    explicit Settings(QObject* parent = 0);
 
-    bool setValueFromUser(const QString &key, const QString &value, const bool persistSetting = false);
-    void setValue(const QString &key, const QVariant &value, const bool persistSetting = false);
-    QVariant value(const QString &key, const QVariant &defaultValue = QVariant()) const;
-    bool isSet(const QString &key);
+    bool setValueFromUser(const QString& key, const QString& value, const bool persistSetting = false);
+    void setValue(const QString& key, const QVariant& value, const bool persistSetting = false);
+    QVariant value(const QString& key, const QVariant& defaultValue = QVariant()) const;
+    bool isSet(const QString& key);
 
     static Settings* Get();
 
@@ -74,7 +74,7 @@ public:
     void removeSetting(QString name);
 
 private:
-    bool setValueOfType(const QString &key, SettingType type, const QString &value, const bool persistSetting = false);
+    bool setValueOfType(const QString& key, SettingType type, const QString& value, const bool persistSetting = false);
 
 signals:
 

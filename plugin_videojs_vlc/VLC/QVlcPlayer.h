@@ -49,9 +49,9 @@ class QVlcPlayer : public QWidget
 
 private:
     /*! @brief The instance of libvlc to use */
-    libvlc_instance_t *_vlcInstance;
+    libvlc_instance_t* _vlcInstance;
     /*! @brief The vlc media player for this widget */
-    libvlc_media_player_t *_vlcMediaPlayer;
+    libvlc_media_player_t* _vlcMediaPlayer;
     /*! @brief whether something is currently being played or not */
     bool _isPlaying;
 
@@ -67,7 +67,9 @@ public:
     /*! @brief Returns whether anything is currently being played
      *  @return Whether anything is currently being played
      */
-    bool isPlaying() const {return _isPlaying;}
+    bool isPlaying() const {
+        return _isPlaying;
+    }
     /*! @brief Property for querying whether anything is being played */
     Q_PROPERTY(bool isPlaying READ isPlaying STORED false);
 

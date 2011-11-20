@@ -1,5 +1,5 @@
 /*
- * InspireRemote is an open source application for remote controlling 
+ * InspireRemote is an open source application for remote controlling
  * the Inspire Browser
  *
  * Copyright (C) 2011  mike
@@ -59,25 +59,35 @@ public:
     /*! @brief Adds a client to the list of clients to send to
      *  @param client The client address to send the command to
      */
-    void addClient(const QHostAddress client) { _clientAddresses.append(client); }
+    void addClient(const QHostAddress client) {
+        _clientAddresses.append(client);
+    }
     /*! @brief Returns a client from the list of clients
      *  @param index The index of the client to return
      *  @return The client at that index
      */
-    QHostAddress client(const int index) { return _clientAddresses.at(index); }
+    QHostAddress client(const int index) {
+        return _clientAddresses.at(index);
+    }
     /*! @brief Returns the number of clients we're sending to
      *  @return The number of clients we're sending to
      */
-    int clientCount() const { return _clientAddresses.count(); }
+    int clientCount() const {
+        return _clientAddresses.count();
+    }
 
     /*! @brief Returns the port to connect to
      *  @return The port to connect to
      */
-    int clientPort() const { return _clientPort; }
+    int clientPort() const {
+        return _clientPort;
+    }
     /*! @brief Sets the port to connect to
      *  @param port The port to connect to
      */
-    void setClientPort(const int port) { _clientPort = port; }
+    void setClientPort(const int port) {
+        _clientPort = port;
+    }
 
 private:
     void checkForCompletion();
@@ -88,7 +98,7 @@ public slots:
     /*! @brief Initiates the sending of the command to all the clients */
     void send();
 
-private slots:    
+private slots:
     void clientCompleted(QHostAddress client, QString response);
     void clientFailed(QHostAddress client, QString error);
 

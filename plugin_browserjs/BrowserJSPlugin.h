@@ -6,18 +6,18 @@
 
 class BrowserJSPlugin : public QObject, public GenericPlugin
 {
-	Q_OBJECT
-	Q_INTERFACES(GenericPlugin)
+    Q_OBJECT
+    Q_INTERFACES(GenericPlugin)
 
 public:
-	explicit BrowserJSPlugin(QObject* parent = 0);
+    explicit BrowserJSPlugin(QObject* parent = 0);
 
-	bool InitialisePlugin();
-	bool DeInitialisePlugin();
+    bool InitialisePlugin();
+    bool DeInitialisePlugin();
 
-	QString GetId();	
-	QString GetName();
-	QString GetDescription();
+    QString GetId();
+    QString GetName();
+    QString GetDescription();
 };
 
 #endif //BROWSER_JS_PLUGIN

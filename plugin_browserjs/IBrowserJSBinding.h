@@ -1,5 +1,5 @@
 /*
- * InspireBrowser is an open source browser for Kiosk and STB style 
+ * InspireBrowser is an open source browser for Kiosk and STB style
  * applications, providing a JS library for easily including multimedia
  * content.
  *
@@ -47,11 +47,11 @@ public:
     /*! @brief  Constructor for creating the Browser Javascript Binding
      *  @param  parent  The parent object
      */
-    explicit IBrowserJSBinding(QObject *parent = 0);
+    explicit IBrowserJSBinding(QObject* parent = 0);
 
-	/*! @brief Initialises the binding once everything has been set
-	 */
-	void Initialise();
+    /*! @brief Initialises the binding once everything has been set
+     */
+    void Initialise();
 
     /*! @brief  Returns whether the browser has spatial navigation enabled or not
      *  @return Whether spatial navigation is enabled or not

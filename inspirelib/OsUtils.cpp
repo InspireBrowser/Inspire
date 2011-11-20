@@ -37,7 +37,7 @@
 QString OsUtils::operatingSystemName()
 {
 #if defined(Q_OS_WIN)
-    switch(QSysInfo::WindowsVersion){
+    switch(QSysInfo::WindowsVersion) {
         case QSysInfo::WV_NT:
             return "Windows NT 4.0";
         case QSysInfo::WV_2000:
@@ -54,7 +54,7 @@ QString OsUtils::operatingSystemName()
             return "Unknown Windows OS";
     }
 #elif defined(Q_OS_MAC)
-    switch(QSysInfo::MacintoshVersion){
+    switch(QSysInfo::MacintoshVersion) {
         case QSysInfo::MV_10_3:
             return "Mac OS X 10.3 Panther";
         case QSysInfo::MV_10_4:
@@ -86,21 +86,22 @@ QString OsUtils::operatingSystemName()
     QString distro = "";
     if(lines.length() > 0) {
         distro = lines.at(0);
-    }
-    else {
+    } else {
         qxtLog->error("No output from command lsb_release");
         return "Unknown Linux OS";
     }
 
-    if(lines.length() > 1)
+    if(lines.length() > 1) {
         distro += " " + lines.at(1);
+    }
 
-    if(lines.length() > 2)
+    if(lines.length() > 2) {
         distro += " (" + lines.at(2) + ")";
+    }
 
     return distro;
 #else
-    #warning TODO: Implement ISystemJSBinding::operatingSystem does not support this OS
+#warning TODO: Implement ISystemJSBinding::operatingSystem does not support this OS
     return "Unknown OS";
 #endif
 }

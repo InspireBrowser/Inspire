@@ -1,5 +1,5 @@
 /*
- * InspireBrowser is an open source browser for Kiosk and STB style 
+ * InspireBrowser is an open source browser for Kiosk and STB style
  * applications, providing a JS library for easily including multimedia
  * content.
  *
@@ -38,7 +38,7 @@ class CommandSocket : public QTcpSocket
 {
     Q_OBJECT
 public:
-    explicit CommandSocket(QObject *parent = 0);
+    explicit CommandSocket(QObject* parent = 0);
 
 private slots:
     void readCommand();

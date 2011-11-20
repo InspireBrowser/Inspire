@@ -103,23 +103,27 @@ QList<QHostAddress> parseIpAddresses(QString ipAddresses)
     QList<QHostAddress> addresses;
 
     QStringList commaSeperated = ipAddresses.split(",", QString::SkipEmptyParts);
-    foreach(QString item, commaSeperated){
+    foreach(QString item, commaSeperated) {
         QStringList startAndEnd = item.split("-", QString::SkipEmptyParts);
-        if(startAndEnd.count() != 1 && startAndEnd.count() != 2)
+        if(startAndEnd.count() != 1 && startAndEnd.count() != 2) {
             continue;
-        else if(startAndEnd.count() == 1)
+        } else if(startAndEnd.count() == 1) {
             startAndEnd.append(startAndEnd.first());
+        }
 
         QHostAddress start;
-        if(!start.setAddress(startAndEnd.at(0)))
+        if(!start.setAddress(startAndEnd.at(0))) {
             throw QString(startAndEnd.at(0) + " is not a valid IP Address");
+        }
 
         QHostAddress end;
-        if(!end.setAddress(startAndEnd.at(1)))
+        if(!end.setAddress(startAndEnd.at(1))) {
             throw QString(startAndEnd.at(1) + " is not a valid IP Address");
+        }
 
-        for(quint32 i = start.toIPv4Address(); i <= end.toIPv4Address(); i++)
+        for(quint32 i = start.toIPv4Address(); i <= end.toIPv4Address(); i++) {
             addresses.append(QHostAddress(i));
+        }
     }
 
     //convert it to a set and then to a list so we remove all duplicates
@@ -131,7 +135,7 @@ QList<QHostAddress> parseIpAddresses(QString ipAddresses)
  *  @param argv The contents of the command line arguments
  *  @return The exit status of the application
  */
-int main(int argc, char *argv[])
+int main(int argc, char* argv[])
 {
     QCoreApplication app(argc, argv);
 
@@ -147,8 +151,7 @@ int main(int argc, char *argv[])
     int port = 4774;
 
     while(1) {
-        static struct option long_options[] =
-        {
+        static struct option long_options[] = {
             /* These options set a flag */
             {"help",        no_argument,        &help,      1},
             {"extrahelp",   no_argument,        &extraHelp, 1},
@@ -161,57 +164,60 @@ int main(int argc, char *argv[])
         int option_index = 0;
 
         int c = getopt_long (argc, argv, "", long_options, &option_index);
-        if (c == -1)
+        if (c == -1) {
             break;
+        }
 
         bool isOk = false;
         int temp = 0;
-        switch (c)
-        {
+        switch (c) {
             case 0:
                 break;
             case 'p':
                 temp = QString(optarg).toInt(&isOk);
-                if(isOk) port = temp;
+                if(isOk) {
+                    port = temp;
+                }
                 break;
         }
     }
 
-    if(help || extraHelp)
+    if(help || extraHelp) {
         return usage(extraHelp);
+    }
 
     QStringList arguments;
-    while (optind < argc)
+    while (optind < argc) {
         arguments.append(QString(argv[optind++]));
+    }
 
     if(arguments.length() < 2) {
         return usage(false, "Incorrect number of arguments");
     }
 
-    try
-    {
+    try {
         QList<QHostAddress> addresses = parseIpAddresses(arguments.takeFirst());
 
         RemoteCommand* command = new RemoteCommand();
         command->setCommand(arguments.takeFirst());
-        while(!arguments.empty())
+        while(!arguments.empty()) {
             command->addParameter(arguments.takeFirst());
+        }
 
         CommandSender sender(command);
         sender.setClientPort(port);
-        foreach(QHostAddress address, addresses){
+        foreach(QHostAddress address, addresses) {
             sender.addClient(address);
         }
 
-        if(!quiet)
+        if(!quiet) {
             qDebug() << "Sending Command: " << command->command() << command->parameters();
+        }
 
         sender.send();
 
         return app.exec();
-    }
-    catch(QString e)
-    {
+    } catch(QString e) {
         return usage(false, e);
     }
 }

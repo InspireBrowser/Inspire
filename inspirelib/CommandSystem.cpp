@@ -7,7 +7,7 @@
 #include "OsUtils.h"
 #include "Settings.h"
 
-CommandSystem::CommandSystem(QObject *parent) : QObject(parent)
+CommandSystem::CommandSystem(QObject* parent) : QObject(parent)
 {
     connect(this, SIGNAL(commandReceived(RemoteCommand*)), this, SLOT(handleGetVersionCommand(RemoteCommand*)));
     connect(this, SIGNAL(commandReceived(RemoteCommand*)), this, SLOT(handleGetMacAddressCommand(RemoteCommand*)));
@@ -19,7 +19,7 @@ CommandSystem::CommandSystem(QObject *parent) : QObject(parent)
 /*! @brief Processes a RemoteCommand
  *  @param command The command to process
  */
-void CommandSystem::processCommand(RemoteCommand *command)
+void CommandSystem::processCommand(RemoteCommand* command)
 {
     emit commandReceived(command);
 }
@@ -27,10 +27,11 @@ void CommandSystem::processCommand(RemoteCommand *command)
 /*! @brief Handles the GET_VERSION command
  *  @param command The command to handle
  */
-void CommandSystem::handleGetVersionCommand(RemoteCommand *command)
+void CommandSystem::handleGetVersionCommand(RemoteCommand* command)
 {
-    if(command->command() != "GET_VERSION")
+    if(command->command() != "GET_VERSION") {
         return;
+    }
 
     command->setResponse(true, QCoreApplication::applicationVersion());
 }
@@ -38,10 +39,11 @@ void CommandSystem::handleGetVersionCommand(RemoteCommand *command)
 /*! @brief Handles the GET_OS command
  *  @param command The command to handle
  */
-void CommandSystem::handleGetOsCommand(RemoteCommand *command)
+void CommandSystem::handleGetOsCommand(RemoteCommand* command)
 {
-    if(command->command() != "GET_OS")
+    if(command->command() != "GET_OS") {
         return;
+    }
 
     QString os = OsUtils::operatingSystemName();
     command->setResponse(true, os);
@@ -50,26 +52,28 @@ void CommandSystem::handleGetOsCommand(RemoteCommand *command)
 /*! @brief Handles the GET_MAC_ADDRESS command
  *  @param command The command to handle
  */
-void CommandSystem::handleGetMacAddressCommand(RemoteCommand *command)
+void CommandSystem::handleGetMacAddressCommand(RemoteCommand* command)
 {
-    if(command->command() != "GET_MAC_ADDRESS")
+    if(command->command() != "GET_MAC_ADDRESS") {
         return;
+    }
 
     int adapterNumber = -1;
-    if(command->parameterCount() == 0)
+    if(command->parameterCount() == 0) {
         adapterNumber = 0;
-    else if(command->parameterCount() == 1) {
+    } else if(command->parameterCount() == 1) {
         QString indexParam = command->parameter(0);
         bool isOk = false;
         adapterNumber = indexParam.toInt(&isOk);
-        if(!isOk)
+        if(!isOk) {
             return command->setResponse(false, "index parameter is not an integer");
-    }
-    else
+        }
+    } else {
         return command->setResponse(false, "Too many parameters");
+    }
 
     QList<QNetworkInterface> interfaces = QNetworkInterface::allInterfaces();
-    if(adapterNumber >= 0 && adapterNumber < interfaces.count()){
+    if(adapterNumber >= 0 && adapterNumber < interfaces.count()) {
         return command->setResponse(true, interfaces[adapterNumber].hardwareAddress());
     }
 
@@ -80,15 +84,17 @@ void CommandSystem::handleGetMacAddressCommand(RemoteCommand *command)
 /*! @brief Handles the GET_CONFIG command
  *  @param command The command to handle
  */
-void CommandSystem::handleGetConfigCommand(RemoteCommand *command)
+void CommandSystem::handleGetConfigCommand(RemoteCommand* command)
 {
-    if(command->command() != "GET_CONFIG")
+    if(command->command() != "GET_CONFIG") {
         return;
+    }
 
-    if(command->parameterCount() < 1)
+    if(command->parameterCount() < 1) {
         return command->setResponse(false, "Config variable name not specified");
-    else if(command->parameterCount() > 1)
+    } else if(command->parameterCount() > 1) {
         return command->setResponse(false, "Too many parameters");
+    }
 
     QString name = command->parameter(0);
 
@@ -98,17 +104,20 @@ void CommandSystem::handleGetConfigCommand(RemoteCommand *command)
 /*! @brief Handles the SET_CONFIG command
  *  @param command The command to handle
  */
-void CommandSystem::handleSetConfigCommand(RemoteCommand *command)
+void CommandSystem::handleSetConfigCommand(RemoteCommand* command)
 {
-    if(command->command() != "SET_CONFIG")
+    if(command->command() != "SET_CONFIG") {
         return;
+    }
 
-    if(command->parameterCount() < 1)
+    if(command->parameterCount() < 1) {
         return command->setResponse(false, "Config variable name not specified");
-    if(command->parameterCount() < 2)
+    }
+    if(command->parameterCount() < 2) {
         return command->setResponse(false, "Config variable value not specified");
-    else if(command->parameterCount() > 3)
+    } else if(command->parameterCount() > 3) {
         return command->setResponse(false, "Too many parameters");
+    }
 
     QString name = command->parameter(0);
     QString value = command->parameter(1);

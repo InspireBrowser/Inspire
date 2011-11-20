@@ -1,5 +1,5 @@
 /*
- * InspireRemote is an open source application for remote controlling 
+ * InspireRemote is an open source application for remote controlling
  * the Inspire Browser
  *
  * Copyright (C) 2011  mike
@@ -38,7 +38,7 @@ class RemoteCommand;
 class CommandSendingSocket : public QTcpSocket
 {
     Q_OBJECT
-private:    
+private:
     /*! @brief The command to send */
     RemoteCommand* _command;
 
@@ -60,20 +60,28 @@ public:
     /*! @brief Returns the address of the inspire client to connect to
      *  @return The address of the inspire client to connect to
      */
-    QHostAddress clientAddress() const { return _clientAddress; }
+    QHostAddress clientAddress() const {
+        return _clientAddress;
+    }
     /*! @brief Sets The address of the inspire client to connect to
      *  @param server The address of the inspire client to connect to
      */
-    void setClientAddress(const QHostAddress server) { _clientAddress = server; }
+    void setClientAddress(const QHostAddress server) {
+        _clientAddress = server;
+    }
 
     /*! @brief Returns the port to connect to
      *  @return The port to connect to
      */
-    int clientPort() const { return _clientPort; }
+    int clientPort() const {
+        return _clientPort;
+    }
     /*! @brief Sets the port to connect to
      *  @param port The port to connect to
      */
-    void setClientPort(const int port) { _clientPort = port; }
+    void setClientPort(const int port) {
+        _clientPort = port;
+    }
 
 signals:
     void completed(QHostAddress client, QString response);

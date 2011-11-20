@@ -1,5 +1,5 @@
 /*
- * InspireBrowser is an open source browser for Kiosk and STB style 
+ * InspireBrowser is an open source browser for Kiosk and STB style
  * applications, providing a JS library for easily including multimedia
  * content.
  *
@@ -47,7 +47,7 @@ public:
     /*! @brief Constructs a new top-level QLayout, with parent parent. parent may not be 0.
      *         There can be only one top-level layout for a widget. It is returned by QWidget::layout().
      */
-    GenericLayout(QWidget *parent = 0);
+    GenericLayout(QWidget* parent = 0);
 
     /*! @brief Returns the number of items currently in the layout
      *  @return The number of items currently in the layout
@@ -71,12 +71,12 @@ public:
      *         the addWidget() function; to add a child layout, use the addLayout() function provided by
      *         the relevant QLayout subclass.
      */
-    void addItem(QLayoutItem *item);
+    void addItem(QLayoutItem* item);
 
     /*! @brief Sets the geometry for the Layout and resizes and positions the first widget
      *  @param rect The bounds of the new geometry
      */
-    void setGeometry(const QRect &rect);
+    void setGeometry(const QRect& rect);
 
     /*! @brief Returns the size hint for the layout
      *         Just returns the size hint for the first component if there is one

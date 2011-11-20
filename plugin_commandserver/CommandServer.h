@@ -1,5 +1,5 @@
 /*
- * InspireBrowser is an open source browser for Kiosk and STB style 
+ * InspireBrowser is an open source browser for Kiosk and STB style
  * applications, providing a JS library for easily including multimedia
  * content.
  *
@@ -47,7 +47,7 @@ public:
     /*! @brief Creates the CommandServer
      *  @param parent The parent object
      */
-    explicit CommandServer(QObject *parent = 0);
+    explicit CommandServer(QObject* parent = 0);
 
     /*! @brief Instructs the CommandServer to start listening
      *  @returns Whether the command server could start listening or not
@@ -60,7 +60,7 @@ public:
     /*! @brief Processes a RemoteCommand
      *  @param command The command to process
      */
-    void processCommand(RemoteCommand *command);
+    void processCommand(RemoteCommand* command);
 
 private:
     /*! @brief Called when the server receives an incoming connection

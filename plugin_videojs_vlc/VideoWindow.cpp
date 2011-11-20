@@ -1,5 +1,5 @@
 /*
- * InspireBrowser is an open source browser for Kiosk and STB style 
+ * InspireBrowser is an open source browser for Kiosk and STB style
  * applications, providing a JS library for easily including multimedia
  * content.
  *
@@ -35,7 +35,7 @@
  *  @param parent The parent object
  */
 VideoWindow::VideoWindow(QObject* parent) :
-		QObject(parent)
+    QObject(parent)
 {
 }
 
@@ -47,9 +47,9 @@ VideoWindow::~VideoWindow()
 
 void VideoWindow::Initialise()
 {
-	MainWindow* window = this->mainWindow();
-	_player = new QVlcPlayer();
-	window->layout()->addWidget(_player);
+    MainWindow* window = this->mainWindow();
+    _player = new QVlcPlayer();
+    window->layout()->addWidget(_player);
 }
 
 /*! @brief Returns whether any media is currently being played
@@ -59,7 +59,7 @@ bool VideoWindow::isPlaying() const
 {
     qxtLog->trace(Q_FUNC_INFO);
 
-    #warning TODO: Implement VideoWindow::isPlaying()
+#warning TODO: Implement VideoWindow::isPlaying()
     return false;
 }
 
@@ -150,7 +150,7 @@ void VideoWindow::setPosition(const float position)
 {
     qxtLog->trace(Q_FUNC_INFO);
 
-    #warning TODO: Implement VideoWindow::setPosition
+#warning TODO: Implement VideoWindow::setPosition
 }
 
 /*! @brief Returns the audio track currently being played
@@ -160,7 +160,7 @@ int VideoWindow::audioTrack() const
 {
     qxtLog->trace(Q_FUNC_INFO);
 
-    #warning TODO: Implement VideoWindow::audioTrack()
+#warning TODO: Implement VideoWindow::audioTrack()
     return 0;
 }
 
@@ -171,7 +171,7 @@ void VideoWindow::setAudioTrack(const int track)
 {
     qxtLog->trace(Q_FUNC_INFO);
 
-    #warning TODO: Implement VideoWindow::setAudioTrack
+#warning TODO: Implement VideoWindow::setAudioTrack
 }
 
 /*! @brief Returns the subtitle track currently being used
@@ -181,7 +181,7 @@ int VideoWindow::subtitleTrack() const
 {
     qxtLog->trace(Q_FUNC_INFO);
 
-    #warning TODO: Implement VideoWindow::subtitleTrack()
+#warning TODO: Implement VideoWindow::subtitleTrack()
     return 0;
 }
 
@@ -192,7 +192,7 @@ void VideoWindow::setSubtitleTrack(const int track)
 {
     qxtLog->trace(Q_FUNC_INFO);
 
-    #warning TODO: Implement VideoWindow::setSubtitleTrack
+#warning TODO: Implement VideoWindow::setSubtitleTrack
 }
 
 /*! @brief Returns whether subtitles are being shown or not
@@ -202,7 +202,7 @@ bool VideoWindow::subtitlesShown() const
 {
     qxtLog->trace(Q_FUNC_INFO);
 
-    #warning TODO: Implement VideoWindow::subtitlesShown()
+#warning TODO: Implement VideoWindow::subtitlesShown()
     return false;
 }
 
@@ -213,7 +213,7 @@ void VideoWindow::setSubtitlesShown(const bool show)
 {
     qxtLog->trace(Q_FUNC_INFO);
 
-    #warning TODO: Implement VideoWindow::setSubtitlesShown
+#warning TODO: Implement VideoWindow::setSubtitlesShown
 }
 
 /*! @brief Returns whether video is shown or not
@@ -243,7 +243,7 @@ bool VideoWindow::fullscreen() const
 {
     qxtLog->trace(Q_FUNC_INFO);
 
-    #warning TODO: Implement VideoWindow::fullscreen()
+#warning TODO: Implement VideoWindow::fullscreen()
     return false;
 }
 
@@ -254,7 +254,7 @@ void VideoWindow::setFullscreen(const bool fullscreen)
 {
     qxtLog->trace(Q_FUNC_INFO);
 
-    #warning TODO: Implement VideoWindow::setFullscreen
+#warning TODO: Implement VideoWindow::setFullscreen
 }
 
 /*! @brief Returns the z-index of the video window
@@ -264,7 +264,7 @@ unsigned int VideoWindow::zIndex() const
 {
     qxtLog->trace(Q_FUNC_INFO);
 
-    #warning TODO: Implement VideoWindow::zIndex()
+#warning TODO: Implement VideoWindow::zIndex()
     return 110;
 }
 
@@ -275,7 +275,7 @@ void VideoWindow::setZIndex(const unsigned int zIndex)
 {
     qxtLog->trace(Q_FUNC_INFO);
 
-    #warning TODO: Implement VideoWindow::setZIndex
+#warning TODO: Implement VideoWindow::setZIndex
 }
 
 /*! @brief  Resets the video window back to the default state
@@ -337,14 +337,14 @@ void VideoWindow::Stop()
 void VideoWindow::Pause()
 {
     qxtLog->trace(Q_FUNC_INFO);
-    #warning: TODO Implement VideoWindow::Pause()
+#warning: TODO Implement VideoWindow::Pause()
 }
 
 /*! @brief Resumes playback of media when paused */
 void VideoWindow::Resume()
 {
     qxtLog->trace(Q_FUNC_INFO);
-    #warning: TODO Implement VideoWindow::Resume()
+#warning: TODO Implement VideoWindow::Resume()
 }
 
 /*! @brief A structure containing information about the streams in the media
@@ -375,14 +375,17 @@ QVariantMap VideoWindow::GetStreamInformation(const bool audioStreams, const boo
 
     QVariantMap information;
 
-    if(audioStreams)
+    if(audioStreams) {
         information.insert("audio", _player->getAudioStreamInformation());
+    }
 
-    if(subtitleStreams)
+    if(subtitleStreams) {
         information.insert("subtitle", _player->getSubtitleStreamInformation());
+    }
 
-    if(videoStreams)
+    if(videoStreams) {
         information.insert("video", _player->getVideoStreamInformation());
+    }
 
     return information;
 }

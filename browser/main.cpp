@@ -56,7 +56,7 @@ int usage(QString errorMessage = "")
  *  @param argv The contents of the command line arguments
  *  @return The exit status of the application
  */
-int main(int argc, char *argv[])
+int main(int argc, char* argv[])
 {
     QApplication app(argc, argv);
 
@@ -94,8 +94,9 @@ int main(int argc, char *argv[])
             break;
     }
 
-    if(SETTING_SET("log-file"))
+    if(SETTING_SET("log-file")) {
         qxtLog->addLoggerEngine("file", new QxtBasicFileLoggerEngine(SETTING("log-file", "/tmp/inspire.log").toString()));
+    }
 
     //create the plugin manager and load all plugins
     PluginManager* pluginManager = new PluginManager();
@@ -105,11 +106,13 @@ int main(int argc, char *argv[])
     // as well
     QString errorMessage = Settings::Get()->parseArguments();
 
-    if(errorMessage != "")
+    if(errorMessage != "") {
         return usage(errorMessage);
+    }
 
-    if(SETTING("help", false).toBool())
+    if(SETTING("help", false).toBool()) {
         return usage();
+    }
 
     qxtLog->info("Starting Application");
 
@@ -118,8 +121,7 @@ int main(int argc, char *argv[])
     if(SETTING("application-show-fullscreen", false).toBool()) {
         qxtLog->debug("Showing full screen");
         w.showFullScreen();
-    }
-    else {
+    } else {
         qxtLog->debug("Showing windowed");
         w.show();
     }

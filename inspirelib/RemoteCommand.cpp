@@ -2,7 +2,7 @@
 #include <QDebug>
 #include <QCoreApplication>
 
-RemoteCommand::RemoteCommand(QObject *parent) :
+RemoteCommand::RemoteCommand(QObject* parent) :
     QObject(parent),
     _hasResponse(false),
     _responseSuccess(false)
@@ -25,7 +25,7 @@ void RemoteCommand::setResponse(const bool success, const QString responseText)
  */
 QString RemoteCommand::generateKey() const
 {
-    #warning TODO: Add generation of key if configured to encrypt commands
+#warning TODO: Add generation of key if configured to encrypt commands
     return "";
 };
 
@@ -45,8 +45,9 @@ QByteArray RemoteCommand::generatePayload()
     out << quint16(0) << this->organisationName() << this->version() << this->command() << this->key()
         << this->parameterCount();
 
-    for(int i=0; i<parameterCount(); i++)
+    for(int i = 0; i < parameterCount(); i++) {
         out << parameter(i);
+    }
 
     out.device()->seek(0);
     out << quint16(block.size() - sizeof(quint16));
@@ -60,12 +61,12 @@ QByteArray RemoteCommand::generatePayload()
 bool RemoteCommand::verifyCommand()
 {
     if(this->organisationName() != QCoreApplication::organizationName()) {
-        #warning TODO: Add logging that the command comes from a different organisation
+#warning TODO: Add logging that the command comes from a different organisation
         return false;
     }
 
     if(this->key() != this->generateKey()) {
-        #warning TODO: Add logging that the commands key was incorrect
+#warning TODO: Add logging that the commands key was incorrect
         return false;
     }
 
@@ -93,8 +94,7 @@ void RemoteCommand::parsePayload(QDataStream& payload)
     this->setKey(key);
 
     //now read in paramCount's worth of string parameters
-    for(int i=0; i<paramCount; i++)
-    {
+    for(int i = 0; i < paramCount; i++) {
         QString parameter;
         payload >> parameter;
         this->addParameter(parameter);

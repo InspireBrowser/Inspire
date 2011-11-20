@@ -1,5 +1,5 @@
 /*
- * InspireBrowser is an open source browser for Kiosk and STB style 
+ * InspireBrowser is an open source browser for Kiosk and STB style
  * applications, providing a JS library for easily including multimedia
  * content.
  *
@@ -39,16 +39,16 @@
 /*! @brief  Constructor for creating the Browser Javascript Binding
  *  @param  parent  The parent object
  */
-IBrowserJSBinding::IBrowserJSBinding(QObject *parent) :
-		QObject(parent)
+IBrowserJSBinding::IBrowserJSBinding(QObject* parent) :
+    QObject(parent)
 {
 
 }
 
 void IBrowserJSBinding::Initialise()
 {
-	connect(this->mainWindow()->commandSystem(), SIGNAL(commandReceived(RemoteCommand*)), this, SLOT(handleDataCommand(RemoteCommand*)));
-	connect(this->mainWindow()->commandSystem(), SIGNAL(commandReceived(RemoteCommand*)), this, SLOT(handleChangePageCommand(RemoteCommand*)));
+    connect(this->mainWindow()->commandSystem(), SIGNAL(commandReceived(RemoteCommand*)), this, SLOT(handleDataCommand(RemoteCommand*)));
+    connect(this->mainWindow()->commandSystem(), SIGNAL(commandReceived(RemoteCommand*)), this, SLOT(handleChangePageCommand(RemoteCommand*)));
 }
 
 /*! @brief  Returns whether the browser has spatial navigation enabled or not
@@ -58,7 +58,7 @@ bool IBrowserJSBinding::spatialNavigationEnabled() const
 {
     qxtLog->trace(Q_FUNC_INFO);
 
-	QWebView *parentView = this->mainWindow()->webView();
+    QWebView* parentView = this->mainWindow()->webView();
     return parentView->settings()->SpatialNavigationEnabled;
 }
 
@@ -69,7 +69,7 @@ void IBrowserJSBinding::setSpatialNavigationEnabled(const bool enabled)
 {
     qxtLog->trace(Q_FUNC_INFO);
 
-	QWebView *parentView = this->mainWindow()->webView();
+    QWebView* parentView = this->mainWindow()->webView();
     parentView->settings()->setAttribute(QWebSettings::SpatialNavigationEnabled, enabled);
 }
 
@@ -80,11 +80,12 @@ int IBrowserJSBinding::zoomPercentage() const
 {
     qxtLog->trace(Q_FUNC_INFO);
 
-	QWebView *parentView = this->mainWindow()->webView();
-    if(parentView)
-       return (int)(parentView->zoomFactor() * 100);
-    else
+    QWebView* parentView = this->mainWindow()->webView();
+    if(parentView) {
+        return (int)(parentView->zoomFactor() * 100);
+    } else {
         return 100;
+    }
 }
 /*! @brief  Sets how much the browser should zoom the page by
  *  @param  percentage The zoom percentage that the page should be zoomed by
@@ -93,7 +94,7 @@ void IBrowserJSBinding::setZoomPercentage(const int percentage)
 {
     qxtLog->trace(Q_FUNC_INFO);
 
-	QWebView *parentView = this->mainWindow()->webView();
+    QWebView* parentView = this->mainWindow()->webView();
     if(parentView) {
         float factor = (float)percentage / 100;
         parentView->setZoomFactor(factor);
@@ -103,11 +104,11 @@ void IBrowserJSBinding::setZoomPercentage(const int percentage)
 /*! @brief  Returns the width of the browser window
  *  @return The width in pixels of the browser window
  */
-int IBrowserJSBinding::windowWidth() const 
+int IBrowserJSBinding::windowWidth() const
 {
     qxtLog->trace(Q_FUNC_INFO);
 
-	MainWindow* window = this->mainWindow();
+    MainWindow* window = this->mainWindow();
     if(!window) {
         qxtLog->fatal("IBrowserJSBinding::windowWidth() Couldn't get Main Window");
         return -1;
@@ -123,7 +124,7 @@ void IBrowserJSBinding::setWindowWidth(const int width)
 {
     qxtLog->trace(Q_FUNC_INFO);
 
-	MainWindow* window = this->mainWindow();
+    MainWindow* window = this->mainWindow();
     if(!window) {
         qxtLog->fatal("IBrowserJSBinding::windowHeight() Couldn't get Main Window");
         return;
@@ -135,11 +136,11 @@ void IBrowserJSBinding::setWindowWidth(const int width)
 /*! @brief  Returns the height of the browser window
  *  @return The height in pixels of the browser window
  */
-int IBrowserJSBinding::windowHeight() const 
+int IBrowserJSBinding::windowHeight() const
 {
     qxtLog->trace(Q_FUNC_INFO);
 
-	MainWindow* window = this->mainWindow();
+    MainWindow* window = this->mainWindow();
     if(!window) {
         qxtLog->fatal("IBrowserJSBinding::windowHeight() Couldn't get Main Window");
         return -1;
@@ -155,7 +156,7 @@ void IBrowserJSBinding::setWindowHeight(const int height)
 {
     qxtLog->trace(Q_FUNC_INFO);
 
-	MainWindow* window = this->mainWindow();
+    MainWindow* window = this->mainWindow();
     if(!window) {
         qxtLog->fatal("IBrowserJSBinding::setWindowHeight() Couldn't get Main Window");
         return;
@@ -171,26 +172,27 @@ void IBrowserJSBinding::setFullscreen(const bool isFullscreen)
 {
     qxtLog->trace(Q_FUNC_INFO);
 
-	MainWindow* window = this->mainWindow();
+    MainWindow* window = this->mainWindow();
     if(!window) {
         qxtLog->fatal("IBrowserJSBinding::setFullscreen() Couldn't get Main Window");
         return;
     }
 
-    if(isFullscreen)
+    if(isFullscreen) {
         window->showFullScreen();
-    else
+    } else {
         window->showNormal();
+    }
 }
 
 /*! @brief Sets whether the browser window is running fullscreen or not
  *  @param isFullscreen Whether the browser window should be running fullscreen or not
  */
-bool IBrowserJSBinding::fullscreen() const 
+bool IBrowserJSBinding::fullscreen() const
 {
     qxtLog->trace(Q_FUNC_INFO);
 
-	MainWindow* window = this->mainWindow();
+    MainWindow* window = this->mainWindow();
     if(!window) {
         qxtLog->fatal("IBrowserJSBinding::fullscreen() Couldn't get Main Window");
         return false;
@@ -202,11 +204,11 @@ bool IBrowserJSBinding::fullscreen() const
 /*! @brief  Returns whether the browser window is running maximized or not
  *  @return Whether the browser window is running maximized or not
  */
-bool IBrowserJSBinding::maximized() const 
+bool IBrowserJSBinding::maximized() const
 {
     qxtLog->trace(Q_FUNC_INFO);
 
-	MainWindow* window = this->mainWindow();
+    MainWindow* window = this->mainWindow();
     if(!window) {
         qxtLog->fatal("IBrowserJSBinding::maximized() Couldn't get Main Window");
         return false;
@@ -222,26 +224,27 @@ void IBrowserJSBinding::setMaximized(const bool isMaximized)
 {
     qxtLog->trace(Q_FUNC_INFO);
 
-	MainWindow* window = this->mainWindow();
+    MainWindow* window = this->mainWindow();
     if(!window) {
         qxtLog->fatal("IBrowserJSBinding::setMaximized() Couldn't get Main Window");
         return;
     }
 
-    if(isMaximized)
+    if(isMaximized) {
         window->showMaximized();
-    else
+    } else {
         window->showNormal();
+    }
 }
 
 /*! @brief  Returns whether the browser window is running minimized or not
  *  @return Whether the browser window is running minimized or not
  */
-bool IBrowserJSBinding::minimized() const 
+bool IBrowserJSBinding::minimized() const
 {
     qxtLog->trace(Q_FUNC_INFO);
 
-	MainWindow* window = this->mainWindow();
+    MainWindow* window = this->mainWindow();
     if(!window) {
         qxtLog->fatal("IBrowserJSBinding::minimized() Couldn't get Main Window");
         return false;
@@ -257,16 +260,17 @@ void IBrowserJSBinding::setMinimized(const bool isMinimized)
 {
     qxtLog->trace(Q_FUNC_INFO);
 
-	MainWindow* window = this->mainWindow();
+    MainWindow* window = this->mainWindow();
     if(!window) {
         qxtLog->fatal("IBrowserJSBinding::setMinimized() Couldn't get Main Window");
         return;
     }
 
-    if(isMinimized)
+    if(isMinimized) {
         window->showMinimized();
-    else
+    } else {
         window->showNormal();
+    }
 }
 
 /*! @brief  Returns whether the browser's tool bar is showing or not
@@ -276,10 +280,10 @@ bool IBrowserJSBinding::toolBarShowing() const
 {
     qxtLog->trace(Q_FUNC_INFO);
 
-	MainWindow* window = this->mainWindow();
-    if(window)
+    MainWindow* window = this->mainWindow();
+    if(window) {
         return window->navigationBar()->isVisible();
-    else {
+    } else {
         qxtLog->fatal("IBrowserJSBinding::toolBarShowing() Couldn't get Main Window");
         return true;
     }
@@ -292,10 +296,10 @@ void IBrowserJSBinding::setToolBarShowing(const bool isShowing)
 {
     qxtLog->trace(Q_FUNC_INFO);
 
-	MainWindow* window = this->mainWindow();
-    if(window)
+    MainWindow* window = this->mainWindow();
+    if(window) {
         window->navigationBar()->setVisible(isShowing);
-    else {
+    } else {
         qxtLog->fatal("IBrowserJSBinding::toolBarShowing() Couldn't get Main Window");
         return;
     }
@@ -309,10 +313,10 @@ void IBrowserJSBinding::SetWindowSize(const int width, const int height)
 {
     qxtLog->trace(Q_FUNC_INFO);
 
-	MainWindow* window = this->mainWindow();
-    if(window)
+    MainWindow* window = this->mainWindow();
+    if(window) {
         window->resize(width, height);
-    else {
+    } else {
         qxtLog->fatal("IBrowserJSBinding::SetWindowSize() Couldn't get Main Window");
         return;
     }
@@ -321,15 +325,17 @@ void IBrowserJSBinding::SetWindowSize(const int width, const int height)
 /*! @brief Handles the DATA command from inspireremote
  *  @param command The command to handle
  */
-void IBrowserJSBinding::handleDataCommand(RemoteCommand *command)
+void IBrowserJSBinding::handleDataCommand(RemoteCommand* command)
 {
-    if(command->command() != "DATA")
+    if(command->command() != "DATA") {
         return;
+    }
 
-    if(command->parameterCount() < 1)
+    if(command->parameterCount() < 1) {
         return command->setResponse(false, "Data not specified");
-    else if(command->parameterCount() > 1)
+    } else if(command->parameterCount() > 1) {
         return command->setResponse(false, "Too many parameters");
+    }
 
     emit onReceivedData(command->parameter(0));
     command->setResponse(true, "Sent");
@@ -338,18 +344,20 @@ void IBrowserJSBinding::handleDataCommand(RemoteCommand *command)
 /*! @brief Handles the CHANGE_PAGE command from inspireremote
  *  @param command The command to handle
  */
-void IBrowserJSBinding::handleChangePageCommand(RemoteCommand *command)
+void IBrowserJSBinding::handleChangePageCommand(RemoteCommand* command)
 {
-    if(command->command() != "CHANGE_PAGE")
+    if(command->command() != "CHANGE_PAGE") {
         return;
+    }
 
-    if(command->parameterCount() < 1)
+    if(command->parameterCount() < 1) {
         return command->setResponse(false, "URL not specified");
-    else if(command->parameterCount() > 1)
+    } else if(command->parameterCount() > 1) {
         return command->setResponse(false, "Too many parameters");
+    }
 
     QUrl url(command->parameter(0));
 
-	this->mainWindow()->loadPage(url);
+    this->mainWindow()->loadPage(url);
     return command->setResponse(true, "Done");
 }

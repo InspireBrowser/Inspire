@@ -17,19 +17,13 @@ APPLICATION_NAME='\\"Inspire Browser\\"'
 include ( version.pri )
 
 VERSION = '$${VERSION_MAJOR}.$${VERSION_MINOR}.$${VERSION_PATCH}'
+VERSTR = '$${VERSION}'
 
-# if we are creating nightlies append the current date to the version
-CONFIG(nightlies) {
-	win32 {
-		REVISION = $$system(%date:~10%%date:~4,2%%date:~7,2%)
-	}
-	!win32 {
-		REVISION = $$system(date +%Y%m%d)
-	}
-	VERSTR = '\\"$${VERSION}.$${REVISION}\\"'
+isEqual(REVISION, "git") {
+	REVISION = $$system(git rev-parse --verify HEAD)
 }
-!CONFIG(nightlies) {
-        VERSTR = '\\"$${VERSION}\\"'
+!isEqual(REVISION, "") {
+	VERSTR = '\\"$${VERSION}-git-$${REVISION}\\"'
 }
 
 #add the organsiation details and version info as DEFINES so they can be used by the program

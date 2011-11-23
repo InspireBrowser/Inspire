@@ -16,7 +16,7 @@ fi
 
 #if it's a git release append the hash to the version string
 if [ $REVISION != "" ]; then
-	VERSION="${VERSION}-git-${REVISION}"
+	VERSION="${VERSION}-git"
 fi
 
 PACKAGE_NAME="inspire-${VERSION}"

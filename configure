@@ -136,8 +136,13 @@ while [ $# -gt 0 ]; do
 			QC_VERBOSE="Y"
 			shift
 			;;
-		--help) show_usage; exit ;;
-		*) show_usage; exit ;;
+		--help) 
+			show_usage; 
+			exit 
+			;;
+		*)
+			shift
+			;;
 	esac
 done
 

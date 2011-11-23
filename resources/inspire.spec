@@ -10,7 +10,7 @@ Summary:        A web browser designed for STB and Kiosk environments
 Group:          Productivity/Networking/Web/Browsers
 License:        GPLv3
 URL:            http://www.mikeditum.co.uk
-Source0:        http://www.mikeditum.co.uk/inspire/inspire-%{version}-git.tar.gz
+Source0:        http://www.mikeditum.co.uk/inspire/inspire-%{version}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires:  qt-webkit-devel gcc-c++
@@ -100,7 +100,7 @@ systemjs, browserjs, videosjs and commandserver plugins
 
 %prep
 #%setup -q
-%setup -n inspire-%{version}-git
+%setup -n inspire-%{version}
 
 %build
 %configure

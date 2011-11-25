@@ -1,6 +1,3 @@
-%define is_mandrake %(test -e /etc/mandrake-release && echo 1 || echo 0)
-%define is_suse %(test -e /etc/SuSE-release && echo 1 || echo 0)
-%define is_fedora %(test -e /etc/fedora-release && echo 1 || echo 0)
 
 Name:           inspire
 Version:        0.0.1
@@ -13,8 +10,26 @@ URL:            http://www.mikeditum.co.uk
 Source0:        http://www.mikeditum.co.uk/inspire/inspire-%{version}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
-BuildRequires:  qt-webkit-devel gcc-c++
+BuildRequires:  libqxt-devel
+%if 0%{?suse_version} == 1140
+BuildRequires:  patterns-openSUSE-devel_C_C++
+BuildRequires:  libqt4-devel
+BuildRequires:  libQtWebKit-devel
+%endif
+%if 0%{?fedora} == 14
+BuildRequires:  qt-webkit-devel
+BuildRequires:  gcc-c++
+%endif
+
+Requires:       libqxt
+%if 0%{?suse_version} == 1140
+Requires:       libqt4
+Requires:       libQtWebKit
+%endif
+%if 0%{?fedora} == 14
 Requires:       qt-webkit
+requires:       redhat-lsb
+%endif
 
 %description
 Inspire is a Webkit based browser designed for STB and Kiosk based 
@@ -63,9 +78,14 @@ through a JavaScript API
 %package plugin-videojs
 Summary: An inspire plugin that allows playback of video through a Javascript API
 Group: Productivity/Networking/Web/Browsers
-Requires: libinspire inspire-browser
-Requires: vlc-core
 BuildRequires:  vlc-devel
+Requires: libinspire inspire-browser
+%if 0%{?suse_version} == 1140
+Requires:       libvlc5
+%endif
+%if 0%{?fedora} == 14
+Requires: vlc-core
+%endif
 %description plugin-videojs
 A plugin for the inspire browser that allows playback of video and audio from different
 sources through a JavaScript API
@@ -99,7 +119,6 @@ Meta-Package that just includes all plugins designed for a desktop machine. Incl
 systemjs, browserjs, videosjs and commandserver plugins
 
 %prep
-#%setup -q
 %setup -n inspire-%{version}
 
 %build

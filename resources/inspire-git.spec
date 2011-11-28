@@ -126,7 +126,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(-,root,root,-)
 %{_bindir}/inspireremote
 
-%files -n libinspire
+%files -n libinspire0
 %defattr(-,root,root,-)
 %{_libdir}/libinspire.so
 %{_libdir}/libinspire.so.0
@@ -151,10 +151,10 @@ rm -rf $RPM_BUILD_ROOT
 %files plugins-desktop
 %endif
 
-%post -n libinspire
+%post -n libinspire0
 /sbin/ldconfig
 
-%postun -n libinspire
+%postun -n libinspire0
 /sbin/ldconfig
 
 %changelog

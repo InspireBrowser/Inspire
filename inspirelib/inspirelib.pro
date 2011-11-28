@@ -6,7 +6,7 @@
 
 QT       += core gui webkit network
 
-TARGET = inspirelib
+TARGET = inspire
 TEMPLATE = lib
 CONFIG += warn_on silent qxt
 QXT += core

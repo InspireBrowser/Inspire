@@ -23,7 +23,7 @@ HEADERS += CommandServer.h \
     CommandServerPlugin.h
 
 INCLUDEPATH += ../inspirelib
-LIBS += -linspirelib
+LIBS += -linspire
 
 # INSTALL INFORMATION
 unix {

@@ -29,7 +29,7 @@ HEADERS += \
 
 INCLUDEPATH += ../inspirelib
 LIBS += -L../
-LIBS += -linspirelib
+LIBS += -linspire
 
 # INSTALL INFORMATION
 unix {

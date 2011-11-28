@@ -21,7 +21,7 @@ HEADERS += IBrowserJSBinding.h \
     BrowserJSPlugin.h
 
 INCLUDEPATH += ../inspirelib
-LIBS += -linspirelib
+LIBS += -linspire
 
 # INSTALL INFORMATION
 unix {

@@ -128,10 +128,10 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -n libinspire
 %defattr(-,root,root,-)
-%{_libdir}/libinspirelib.so
-%{_libdir}/libinspirelib.so.0
-%{_libdir}/libinspirelib.so.0.0
-%{_libdir}/libinspirelib.so.0.0.1
+%{_libdir}/libinspire.so
+%{_libdir}/libinspire.so.0
+%{_libdir}/libinspire.so.0.0
+%{_libdir}/libinspire.so.0.0.1
 
 %files plugin-systemjs
 %defattr(-,root,root,-)

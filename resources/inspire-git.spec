@@ -1,5 +1,4 @@
-
-Name:           inspire
+Name:           inspire-git
 Version:        0.0.1
 Release:        1%{?dist}
 Summary:        A web browser designed for STB and Kiosk environments
@@ -7,26 +6,26 @@ Summary:        A web browser designed for STB and Kiosk environments
 Group:          Productivity/Networking/Web/Browsers
 License:        GPLv3
 URL:            http://www.mikeditum.co.uk
-Source0:        http://www.mikeditum.co.uk/inspire/inspire-%{version}-git.tar.gz
+Source0:        http://www.mikeditum.co.uk/inspire/inspire-%{version}-git.tar.bz2
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires:  libqxt-devel
-%if 0%{?suse_version} == 1140
+%if 0%{?suse_version}
 BuildRequires:  patterns-openSUSE-devel_C_C++
 BuildRequires:  libqt4-devel
 BuildRequires:  libQtWebKit-devel
 %endif
-%if 0%{?fedora} == 14
+%if 0%{?fedora}
 BuildRequires:  qt-webkit-devel
 BuildRequires:  gcc-c++
 %endif
 
 Requires:       libqxt
-%if 0%{?suse_version} == 1140
+%if 0%{?suse_version}
 Requires:       libqt4
 Requires:       libQtWebKit
 %endif
-%if 0%{?fedora} == 14
+%if 0%{?fedora}
 Requires:       qt-webkit
 requires:       redhat-lsb
 %endif
@@ -41,14 +40,12 @@ including igmp and rtsp.
 %package browser
 Summary: The Inspire Browser executable
 Group: Productivity/Networking/Web/Browsers
-Requires: libinspire
 %description browser
 A Webkit based browser designed for STB and Kiosk based environments.
 
 %package remote
 Summary: The Inspire Remote executable
 Group: Productivity/Networking/Web/Browsers
-Requires: libinspire
 %description remote
 The inspireremote application that allows sending of commands across the network
 to clients running the inspirebrowser with the commandserver plugin
@@ -62,7 +59,7 @@ The inspire library that powers the inspire browser and inspire remote applicati
 %package plugin-systemjs
 Summary: An inspire plugin that allows interacting with the system from Javascript
 Group: Productivity/Networking/Web/Browsers
-Requires: libinspire inspire-browser
+Requires: inspire-browser
 %description plugin-systemjs
 A plugin for the inspire browser that allows querying and controlling of the system
 through a JavaScript API
@@ -70,23 +67,24 @@ through a JavaScript API
 %package plugin-browserjs
 Summary: An inspire plugin that allows interacting with the browser from Javascript
 Group: Productivity/Networking/Web/Browsers
-Requires: libinspire inspire-browser
+Requires: inspire-browser
 %description plugin-browserjs
 A plugin for the inspire browser that allows interaction with the browser window
 through a JavaScript API
 
 %package plugin-commandserver
-Summary: An inspire plugin that allows controlling of the inspire browser from the network
+Summary: An inspire plugin that allows controlling of the browser from the network
 Group: Productivity/Networking/Web/Browsers
-Requires: libinspire inspire-browser
+Requires: inspire-browser
 %description plugin-commandserver
 A plugin for the inspire browser that allows controlling of clients running the inspire browser
 from other networked machines
 
+%if 0%{?fedora}
 %package desktop
-Summary: Meta-Package that includes the browser and all plugins designed for a desktop machine
+Summary: Meta-Package that includes the browser and plugins designed for a desktop
 Group: Productivity/Networking/Web/Browsers
-Requires: libinspire inspire-browser 
+Requires: inspire-browser 
 Requires: inspire-plugins-desktop
 %description desktop
 Meta-Package that just includes the browser and all plugins designed for a desktop machine. Includes
@@ -102,6 +100,7 @@ Requires: inspire-plugin-commandserver
 %description plugins-desktop
 Meta-Package that just includes all plugins designed for a desktop machine. Includes
 systemjs, browserjs, videosjs and commandserver plugins
+%endif
 
 %prep
 %setup -n inspire-%{version}-git
@@ -118,29 +117,45 @@ make install INSTALL_ROOT=$RPM_BUILD_ROOT
 rm -rf $RPM_BUILD_ROOT
 
 %files browser
+%defattr(-,root,root,-)
 %{_bindir}/inspirebrowser
+%{_libdir}/inspirebrowser/
+%{_libdir}/inspirebrowser/plugins/
 
 %files remote
+%defattr(-,root,root,-)
 %{_bindir}/inspireremote
 
 %files -n libinspire
+%defattr(-,root,root,-)
 %{_libdir}/libinspirelib.so
 %{_libdir}/libinspirelib.so.0
 %{_libdir}/libinspirelib.so.0.0
 %{_libdir}/libinspirelib.so.0.0.1
 
 %files plugin-systemjs
+%defattr(-,root,root,-)
 %{_libdir}/inspirebrowser/plugins/libsystemjs.so
 
 %files plugin-browserjs
+%defattr(-,root,root,-)
 %{_libdir}/inspirebrowser/plugins/libbrowserjs.so
 
 %files plugin-commandserver
+%defattr(-,root,root,-)
 %{_libdir}/inspirebrowser/plugins/libcommandserver.so
 
+%if 0%{?fedora}
 %files desktop
 
 %files plugins-desktop
+%endif
+
+%post -n libinspire
+/sbin/ldconfig
+
+%postun -n libinspire
+/sbin/ldconfig
 
 %changelog
 * Tue Nov 22 2011 - mike (at) mikeditum.co.uk

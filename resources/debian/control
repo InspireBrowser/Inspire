@@ -2,12 +2,46 @@ Source: inspirebrowser
 Section: web
 Priority: extra
 Maintainer: Mike Ditum <mike@mikeditum.co.uk>
-Build-Depends: debhelper (>= 7.0.50~), libqtwebkit-dev
+Build-Depends: debhelper (>= 7.0.50~), libqtwebkit-dev, libqxt-dev
 Standards-Version: 3.8.4
-Homepage: http://www.mikeditum.co.uk
+Homepage: http://www.inspirebrowser.org
 
-Package: inspirebrowser
+Package: inspire-browser
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}, libqt4-webkit
-Description: A web browser designed for STB and Kiosk environments
- Inspire Browser is a Webkit based browser designed for STB and Kiosk based environments. It provides a powerful javascript API for controlling the browser and displaying video and audio content from numerous sources including igmp and rtsp.
+Depends: ${shlibs:Depends}, ${misc:Depends}, libqt4-webkit, libqxt-core
+Description: The Inspire Browser executable
+ A Webkit based browser designed for STB and Kiosk based environments.
+
+Package: inspire-remote
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, libqt4-webkit, libqxt-core
+Description: The Inspire Remote executable
+ The inspireremote application that allows sending of commands across the network
+ to clients running the inspirebrowser with the commandserver plugin
+
+Package: libinspire
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, libqt4-webkit, libqxt-core
+Description: The inspire library used by inspire-browser and inpire-remote
+ The inspire library that powers the inspire browser and inspire remote applications
+
+Package: inspire-plugin-systemjs
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, libqt4-webkit, libqxt-core
+Description: An inspire plugin that allows interacting with the system from Javascript
+ A plugin for the inspire browser that allows querying and controlling of the system
+ through a JavaScript API
+
+Package: inspire-plugin-browserjs
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, libqt4-webkit, libqxt-core
+Description: An inspire plugin that allows interacting with the browser from Javascript
+ A plugin for the inspire browser that allows interaction with the browser window
+ through a JavaScript API
+
+Package: inspire-plugin-commandserver
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, libqt4-webkit, libqxt-core
+Description: An inspire plugin that allows controlling of the browser from the network
+ A plugin for the inspire browser that allows controlling of clients running the inspire browser
+ from other networked machines

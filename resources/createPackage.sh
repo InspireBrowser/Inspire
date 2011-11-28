@@ -43,5 +43,5 @@ echo "VERSION_MINOR=${VERSION_MINOR}" >> ${PACKAGE_NAME}/version.pri
 echo "VERSION_PATCH=${VERSION_PATCH}" >> ${PACKAGE_NAME}/version.pri
 echo "REVISION=${REVISION}" >> ${PACKAGE_NAME}/version.pri
 
-tar zcf ${PACKAGE_NAME}.tar.gz ${PACKAGE_NAME}
+tar jcf ${PACKAGE_NAME}.tar.bz2 ${PACKAGE_NAME}
 rm -rf ${PACKAGE_NAME}

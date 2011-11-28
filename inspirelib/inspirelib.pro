@@ -45,7 +45,7 @@ win32 {
 
 # INSTALL INFORMATION
 unix {
-	target.path = $$PREFIX/lib/
+	target.path = $$LIBDIR
 	INSTALLS += target
 }
 

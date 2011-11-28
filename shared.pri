@@ -1,11 +1,11 @@
 #include the output of the configure script but provide
 #default is it doesn't exist
 !include ( conf.pri ) {
-	PREFIX = /usr/local
-	BINDIR = /usr/local/bin
-	DATADIR = /usr/local/share
+	PREFIX="/usr/local"
+	BINDIR="$${PREFIX}/bin"
+	DATADIR="$${PREFIX}/share"
+	LIBDIR="$${PREFIX}/lib"
 }
-LIBDIR="$${PREFIX}/lib"
 PLUGINDIR="$${LIBDIR}/inspirebrowser/plugins"
 
 #define the organisation details

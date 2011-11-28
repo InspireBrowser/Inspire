@@ -13,6 +13,7 @@ Main options:
   --prefix=[path]     Base path for build/install.  Default: /usr/local
   --bindir=[path]     Directory for binaries.  Default: PREFIX/bin
   --datadir=[path]    Directory for data.  Default: PREFIX/share
+  --libdir=[path]     Directory for library files/ Default: PREFIX/lib
   --qtdir=[path]      Directory where Qt is installed.
   --verbose           Show extra configure output.
   --help              This help text.
@@ -127,6 +128,11 @@ while [ $# -gt 0 ]; do
 			shift
 			;;
 
+		--libdir=*)
+			LIBDIR=$optarg
+			shift
+			;;
+
 		--qtdir=*)
 			EX_QTDIR=$optarg
 			shift
@@ -149,6 +155,7 @@ done
 PREFIX=${PREFIX:-/usr/local}
 BINDIR=${BINDIR:-$PREFIX/bin}
 DATADIR=${DATADIR:-$PREFIX/share}
+LIBDIR=${LIBDIR:-$PREFIX/lib}
 
 echo "Configuring inspire ..."
 
@@ -157,6 +164,7 @@ echo
 echo PREFIX=$PREFIX
 echo BINDIR=$BINDIR
 echo DATADIR=$DATADIR
+echo LIBDIR=$LIBDIR
 echo EX_QTDIR=$EX_QTDIR
 echo
 fi
@@ -1206,6 +1214,7 @@ EOT
 export PREFIX
 export BINDIR
 export DATADIR
+export LIBDIR
 export EX_QTDIR
 export QC_VERBOSE
 rm -rf .qconftemp

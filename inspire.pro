@@ -11,5 +11,4 @@ SUBDIRS += browser
 SUBDIRS += remote
 SUBDIRS += plugin_browserjs
 SUBDIRS += plugin_systemjs
-SUBDIRS += plugin_videojs_vlc
 SUBDIRS += plugin_commandserver

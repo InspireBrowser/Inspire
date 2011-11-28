@@ -11,9 +11,6 @@ if not defined RELEASE (
 
 set BASE=http://www.inspirebrowser.org/files/%RELEASE%/dependencies
 
-set VLC_ARCHIVE=%VLC_VERSION%-win32.7z
-set VLC_URL=%BASE%/win32/%VLC_ARCHIVE%
-
 set LIBQXT_ARCHIVE=%LIBQXT_VERSION%.tar.gz
 set LIBQXT_URL=%BASE%/%LIBQXT_ARCHIVE%
 
@@ -29,38 +26,6 @@ if NOT EXIST "%UNRAR_EXE%" (
 	goto End
 ) else (
 	echo Checking for unrar executable... found.
-)
-
-REM -- See if VLC SDK is extracted
-if NOT EXIST win32\%VLC_VERSION% (
-	REM -- Check if the archive exists
-	if NOT EXIST win32\%VLC_ARCHIVE% (
-		REM -- Nope then download it
-		echo Check for VLC Archive... not found. Downloading!
-		echo.
-		win32\wget.exe -O win32\%VLC_ARCHIVE% %VLC_URL%
-		if ERRORLEVEL 1 (
-			echo.
-			echo **************************** ERROR ***************************************
-			echo *   Error downloading VLC Archive.                                    *
-			echo **************************************************************************
-			echo.
-			ECHO 1 | CHOICE /C:1234567890 /N > NUL
-			goto End
-		) else (
-			echo.
-			echo VLC Archive Downloaded
-		)
-	) else (
-		echo Check for VLC Archive... found.
-	)
-
-	REM -- Now extract the VLC archive
-	echo Extract VLC Archive...
-	mkdir win32\%VLC_VERSION%
-	"%UNRAR_EXE%" X win32\%VLC_ARCHIVE% win32\
-) else (
-	echo Checking for VLC SDK... found.
 )
 
 for /f "delims=" %%a in ('where qmake') do @set QMAKE_PATH=%%a 

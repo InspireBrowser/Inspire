@@ -114,17 +114,6 @@ for i in ${LIBRARIES}; do
 done
 echo "OK"
 
-echo -n "Copying VLC libraries to ${BUILD_DIRECTORY} directory... "
-cp -R dependencies/osx/${VLC_VERSION}/Contents/MacOS/lib ${BUILD_DIRECTORY}/inspirebrowser.app/Contents/MacOS/
-if [ $? != 0 ]; then
-	exit 1;
-fi
-cp -R dependencies/osx/${VLC_VERSION}/Contents/MacOS/plugins ${BUILD_DIRECTORY}/inspirebrowser.app/Contents/MacOS
-if [ $? != 0 ]; then
-	exit 1;
-fi
-echo "OK"
-
 # Now create the dmg package
 echo -n "Creating Inspire Browser DMG... "
 ${MAC_DEPLOY_EXE} ${BUILD_DIRECTORY}/inspirebrowser.app -no-plugins -dmg

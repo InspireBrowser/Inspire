@@ -68,14 +68,7 @@ REM -- Copy in the plugins
 mkdir %BUILD_DIRECTORY%\plugins
 xcopy /Y plugins\systemjs.dll %BUILD_DIRECTORY%\plugins
 xcopy /Y plugins\browserjs.dll %BUILD_DIRECTORY%\plugins
-xcopy /Y plugins\videojs_vlc.dll %BUILD_DIRECTORY%\plugins
 xcopy /Y plugins\commandserver.dll %BUILD_DIRECTORY%\plugins
-
-REM -- Copy in the VLC dependencies
-xcopy /Y dependencies\win32\%VLC_VERSION%\libvlc.dll %BUILD_DIRECTORY%
-xcopy /Y dependencies\win32\%VLC_VERSION%\libvlccore.dll %BUILD_DIRECTORY%
-mkdir %BUILD_DIRECTORY%\plugins\vlc_plugins
-xcopy /S /Y /I dependencies\win32\%VLC_VERSION%\plugins %BUILD_DIRECTORY%\vlc_plugins
 
 REM -- Copy in the Ming dependencies
 xcopy /Y %QTDIR%\bin\libgcc_s_dw2-1.dll %BUILD_DIRECTORY%

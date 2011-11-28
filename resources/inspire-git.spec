@@ -75,21 +75,6 @@ Requires: libinspire inspire-browser
 A plugin for the inspire browser that allows interaction with the browser window
 through a JavaScript API
 
-%package plugin-videojs
-Summary: An inspire plugin that allows playback of video through a Javascript API
-Group: Productivity/Networking/Web/Browsers
-BuildRequires:  vlc-devel
-Requires: libinspire inspire-browser
-%if 0%{?suse_version} == 1140
-Requires:       libvlc5
-%endif
-%if 0%{?fedora} == 14
-Requires: vlc-core
-%endif
-%description plugin-videojs
-A plugin for the inspire browser that allows playback of video and audio from different
-sources through a JavaScript API
-
 %package plugin-commandserver
 Summary: An inspire plugin that allows controlling of the inspire browser from the network
 Group: Productivity/Networking/Web/Browsers
@@ -149,9 +134,6 @@ rm -rf $RPM_BUILD_ROOT
 
 %files plugin-browserjs
 %{_libdir}/inspirebrowser/plugins/libbrowserjs.so
-
-%files plugin-videojs
-%{_libdir}/inspirebrowser/plugins/libvideojs_vlc.so
 
 %files plugin-commandserver
 %{_libdir}/inspirebrowser/plugins/libcommandserver.so

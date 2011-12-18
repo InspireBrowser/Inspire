@@ -4,7 +4,7 @@ Release:        1%{?dist}
 Summary:        A web browser designed for STB and Kiosk environments
 
 Group:          Productivity/Networking/Web/Browsers
-License:        GPLv3
+License:        LGPLv2.1
 URL:            http://www.mikeditum.co.uk
 Source0:        http://www.mikeditum.co.uk/inspire/inspire-%{version}.tar.bz2
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)

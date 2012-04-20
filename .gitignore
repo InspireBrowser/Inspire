@@ -13,4 +13,7 @@
 /build/*
 /inspirelib/object_script.inspirelib.Debug
 /inspirelib/object_script.inspirelib.Release
-inspire.pro.user
+/inspire.pro.user
+/conf.log
+/conf.pri
+/plugins

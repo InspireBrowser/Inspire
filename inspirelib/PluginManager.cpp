@@ -59,7 +59,7 @@ void PluginManager::InitialisePlugins()
         i.next();
         qxtLog->debug("Initialising Plugin " + i.key());
         if(!i.value()->InitialisePlugin()) {
-            qxtLog->warning("Initialisation of plugin " + i.key() + "failed");
+            qxtLog->warning("Initialisation of plugin " + i.key() + " failed");
         }
     }
 }

@@ -150,6 +150,8 @@ public slots:
      */
     void SetWindowSize(const int width, const int height);
 
+    void Repaint();
+
 private slots:
     /*! @brief Handles the DATA command from inspireremote
      *  @param command The command to handle

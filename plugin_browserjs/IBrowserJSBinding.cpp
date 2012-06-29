@@ -318,6 +318,17 @@ void IBrowserJSBinding::SetWindowSize(const int width, const int height)
     }
 }
 
+void IBrowserJSBinding::Repaint()
+{
+    qxtLog->trace(Q_FUNC_INFO);
+
+    QWebView* parentView = this->mainWindow()->webView();
+    parentView->repaint();
+
+    //parentView->setVisible(false);
+    //parentView->setVisible(true);
+}
+
 /*! @brief Handles the DATA command from inspireremote
  *  @param command The command to handle
  */

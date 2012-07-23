@@ -301,6 +301,31 @@ void IBrowserJSBinding::setToolBarShowing(const bool isShowing)
     }
 }
 
+QList<int> IBrowserJSBinding::cursorPos() const
+{
+    qxtLog->trace(Q_FUNC_INFO);
+
+    QPoint point = QCursor::pos();
+
+    QList<int> list;
+    list.append(point.x());
+    list.append(point.y());
+
+    return list;
+}
+
+void IBrowserJSBinding::setCursorPos(QList<int> point) const
+{
+    qxtLog->trace(Q_FUNC_INFO);
+
+    if(point.count() != 2) {
+        qxtLog->fatal("IBrowserJSBinding::setCursorPos(...) Wasn't given the correct number of ints");
+        return;
+    }
+
+    QCursor::setPos(point.at(0), point.at(1));
+}
+
 /*! @brief Sets the size of the window
  *  @param width The width of the window
  *  @param height The height of the window

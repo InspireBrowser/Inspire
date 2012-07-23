@@ -137,6 +137,17 @@ public:
     /*! @brief Property for controlling whether the browser's tool bar is showing or not */
     Q_PROPERTY(bool toolBarShowing READ toolBarShowing WRITE setToolBarShowing STORED false);
 
+    /*! @brief  Returns the location of the mouse cursor
+     *  @return The location of the mouse cursor in the form [x, y]
+     */
+    QList<int> cursorPos() const;
+    /*! @brief Sets the location of the mouse cursor
+     *  @param point The location of the mouse cursor in the form [x, y]
+     */
+    void setCursorPos(QList<int> point) const;
+    /*! @brief Property for the location of the mouse cursor */
+    Q_PROPERTY(QList<int> cursorPos READ cursorPos WRITE setCursorPos STORED false);
+
 signals:
     /*! @brief Emitted when the browser receives data via the InspireRemote utility
      *  @param data The data received
